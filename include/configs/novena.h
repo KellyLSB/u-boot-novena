@@ -30,6 +30,7 @@
 #define CONFIG_NOVENA_LID_FEATURE
 #define CONFIG_NOVENA_LID_GPIO		IMX_GPIO_NR(4, 12)
 
+#define CONFIG_DDR_SPD
 #include <config_distro_defaults.h>
 #include "mx6_common.h"
 #include "configs/mx6_common.h"
