@@ -315,7 +315,6 @@
 	"importbootenv="						\
 		"echo Importing environment from ${bootsrc} ... ; "	\
 		"env import -t -r $loadaddr $filesize\0"		\
-	"rmlcd=fdt rm /soc/aips-bus@02000000/ldb@020e0008\0"		\
 	"novena_boot="							\
 		"if run loadbootenv; then "				\
 			"echo Loaded environment from ${bootenv} ; "	\
@@ -334,7 +333,7 @@
 		"if lcddet ; then "					\
 			"echo IT6251 bridge chip detected ; "		\
 			"setenv consdev tty0 ; "			\
-			"setenv rmlcd true ; "				\
+			"setenv keep_lcd true ; "			\
 			"setenv video true ; "				\
 		"elif hdmidet ; then "					\
 			"echo HDMI monitor detected ; "			\
@@ -376,7 +375,6 @@
 		"setenv bootargs ${bootargs} "				\
 			"root=${rootdev} "				\
 			"console=${consdev} ; "				\
-		"run rmlcd ; "						\
 		"if test -n $finalhook; then "				\
 			"echo Running finalhook ... ; "			\
 			"run finalhook ; "				\
