@@ -83,6 +83,7 @@
 /* U-Boot environment */
 #define CONFIG_ENV_OVERWRITE
 #define CONFIG_ENV_SIZE			(16 * 1024)
+
 /*
  * Environment is on MMC, starting at offset 512KiB from start of the card.
  * Please place first partition at offset 1MiB from the start of the card
@@ -132,7 +133,9 @@
 /* SPL */
 #define CONFIG_SPL_FAT_SUPPORT
 #define CONFIG_SPL_MMC_SUPPORT
+#include "configs/imx6_spl.h"			/* common IMX6 SPL configuration */
 #include "imx6_spl.h"			/* common IMX6 SPL configuration */
+
 
 #define CONFIG_CMDLINE_TAG
 #define CONFIG_SETUP_MEMORY_TAGS
