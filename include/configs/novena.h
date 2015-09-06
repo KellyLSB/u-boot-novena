@@ -36,6 +36,7 @@
 #include "configs/mx6_common.h"
 #include <asm/arch/imx-regs.h>
 #include <asm/imx-common/gpio.h>
+#include <config_defaults.h>
 #include <config_cmd_default.h>
 
 /* U-Boot Commands */

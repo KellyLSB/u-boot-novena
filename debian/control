@@ -1,22 +1,24 @@
 Source: u-boot-novena
 Section: admin
 Priority: optional
-Maintainer: Sean Cross <xobs@kosagi.com>
+Maintainer: Kelly Lauren-Summer Becker-Neuding <kbecker@kellybecker.me>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
 Homepage: http://kosagi.com
-#Vcs-Git: git://anonscm.debian.org/collab-maint/u-boot-novena.git
-#Vcs-Browser: http://anonscm.debian.org/?p=collab-maint/u-boot-novena.git;a=summary
+Vcs-Git: git://github.com/KellyLSB/u-boot-novena.git
+Vcs-Browser: https://github.com/KellyLSB/u-boot-novena
 
 Package: u-boot-novena
-Architecture: armel armhf avr32 mips sh4
+Architecture: amd64 armel armhf avr32 mips sh4
 Multi-Arch: same
 Depends: ${misc:Depends}
-Description: A boot loader for Novena
+Description: A boot loader for The Kosagi Novena.
  Das U-Boot is a cross-platform bootloader for embedded systems,
  used as the default boot loader by several board vendors.  It is
  intended to be easy to port and to debug, and runs on many
  supported architectures, including PPC, ARM, MIPS, x86, m68k,
  NIOS, and Microblaze.
+ .
+ Forked from Sean Cross' Repo at https://github.com/xobs/u-boot-novena
  .
  This build is packaged for Novena.
