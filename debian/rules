@@ -1,5 +1,15 @@
 #!/usr/bin/make -f
-#DH_VERBOSE = 1
+export DH_VERBOSE=1
+
+# Cross Building
+export ARCH=armhf
+export CROSS_COMPILE=arm-linux-gnueabihf-
+include /usr/share/dpkg/architecture.mk
+COMMON_FLAGS += MARCH=arm
+
+# Configuration
+SOURCE_DIR=`pwd`
+BUILD_DIR=$(SOURCE_DIR)/debian/build
 
 # support parallel build using DEB_BUILD_OPTIONS=parallel=N
 ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
@@ -9,26 +19,26 @@ endif
 # the upstream build passes LDFLAGS directly to ld instead of calling gcc for
 # linking; so instead of passing -Wl,foo in LDFLAGS as in automake builds, one
 # should set LDFLAGS to foo directly
-comma := ,
-LDFLAGS := $(patsubst -Wl$(comma)%,%,$(LDFLAGS))
+LDFLAGS := $(patsubst -Wl,%,%,$(LDFLAGS))
 
 # main packaging script based on dh7 syntax
 %:
-	dh $@  --parallel
+	dh $@ --parallel --package u-boot-novena
 
-override_dh_auto_build:
-	builddir=`pwd`/debian/build/; \
-	mkdir -p $$builddir; \
-	mkdir -p $$builddir/etc/kernel/postinst.d; \
-	$(MAKE) O=$$builddir novena_config; \
-	$(MAKE) -j4 O=$$builddir; \
-	install -m 644 $$builddir/u-boot.img $$builddir/u-boot.img; \
-	install -m 644 $$builddir/SPL $$builddir/u-boot.spl; \
-	install -m 755 debian/novena-kernel-install-postinst $$builddir/zz-novena-kernel-install; \
-
-override_dh_auto_test override_dh_auto_install:
-# skip tests.
+override_dh_auto_build-arch:
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/etc/kernel/postinst.d
+	$(MAKE) O=$(BUILD_DIR) novena_config
+	$(MAKE) O=$(BUILD_DIR) -j4
+	chmod 0644 $(BUILD_DIR)/u-boot.img
+	install -m 644 $(BUILD_DIR)/SPL $(BUILD_DIR)/u-boot.spl
+	install -m 755 $(BUILD_DIR)/../novena-kernel-install-postinst \
+				   $(BUILD_DIR)/zz-novena-kernel-install
 
 override_dh_clean:
-	rm -rf debian/build/
+	rm -rf $(BUILD_DIR)
 	dh_clean
+
+# Skip
+override_dh_auto_test:
+override_dh_auto_install:

@@ -1,3 +1,4034 @@
+u-boot-novena (2015.09.r1-kbeckerneuding.1) UNRELEASED; urgency=medium
+
+  [ Bhupesh Sharma ]
+  * Errata/ARM57: Add basic constructs to handle and apply A57 specific erratas
+  * configs/ls2085a: Add support for Cortex-A57 erratas
+
+  [ Simon Glass ]
+  * arm: Show relocated PC/LR in the register dump
+  * x86: Enhance the microcode tool to support header files as input
+  * pci: Add a function to find a device by class
+  * x86: pci: Add PCI IDs for Minnowboard Max
+  * x86: video: Enable video for Minnowboard Max
+  * usb: pci: Use pci_find_class() to find the device
+  * usb: pci: Add XHCI driver for PCI
+  * x86: Add an option to enabling building a ROM file
+  * x86: Rename MMCONF_BASE_ADDRESS and make it common across x86
+  * x86: video: Allow video ROM execution to fall back to the other method
+  * x86: bootstage: Add time measurement for vesa start-up
+  * x86: Move common FSP code into a common location
+  * x86: Adjust the FSP types slightly
+  * x86: Make CAR and DRAM FSP code common
+  * x86: mmc: Move common FSP functions into a common file
+  * x86: Remove unnecessary casts and fix comment typos
+  * x86: Allow FSP Kconfig settings for all x86
+  * x86: Allow a UART to be set up before the FSP is ready
+  * x86: spi: Support ValleyView in ICH SPI driver
+  * scsi: bootstage: Measure time taken to scan the bus
+  * x86: Enable bootstage features
+  * x86: Add some documentation on how to port U-Boot on x86
+  * x86: Add support for Intel Minnowboard Max
+
+  [ Bin Meng ]
+  * x86: Remove CONFIG_SATA_INTEL from x86-common.h
+  * x86: Add header files for Intel Quark SoC defines
+  * x86: quark: Add routines to access message bus registers
+  * x86: Define macros for pci configuration space access
+  * x86: quark: Add Cache-As-RAM initialization
+  * x86: Add basic Intel Quark processor support
+  * x86: Add basic Intel Galileo board support
+  * x86: Enable the Intel quark/galileo build
+  * x86: Allow overriding TSC_FREQ_IN_MHZ
+  * x86: quark: Bypass TSC calibration
+  * x86: quark: Add Memory Reference Code (MRC) main routines
+  * x86: quark: Add utility codes needed for MRC
+  * x86: quark: Add System Memory Controller support
+  * x86: quark: Enable the Memory Reference Code build
+  * fdtdec: Add compatible id and string for Intel Quark MRC
+  * dt-bindings: Add Intel Quark MRC bindings
+  * x86: quark: Call MRC in dram_init()
+  * x86: quark: Initialize non-standard BARs
+  * x86: galileo: Add GPIO support
+  * x86: pci: Add pci ids for Quark SoC
+  * x86: Add SPI support to quark/galileo
+  * x86: Add SD/MMC support to quark/galileo
+  * x86: Add Intel Galileo instructions in README.x86
+  * bootstage: Fix typos in the comment
+  * x86: Use tab instead of space to indent in PCIE_ECAM_BASE
+
+  [ Peng Fan ]
+  * pmic:pfuze implement pmic_mode_init
+
+  [ Stefano Babic ]
+  * pmic: fix missing SWITCH_SIZE
+
+  [ Peng Fan ]
+  * imx:mx6 set normal APS and standby PFM mode
+
+  [ Hans de Goede ]
+  * Add linux/compiler-gcc5.h to fix builds with gcc5
+  * sunxi: configs/sunxi-common.h: Enable CONFIG_CMD_PART
+
+  [ Michael Walle ]
+  * lsxl: use default load addresses for legacy boot
+  * lsxl: place the dtb below the inital ramdisk
+  * lsxl: switch from bootm to bootz for boot commands
+
+  [ Chris Kuethe ]
+  * RSA depends on DM
+
+  [ Peter Tyser ]
+  * dm: Prevent "demo hello" and "demo status" segfaults
+
+  [ Axel Lin ]
+  * gpio: at91: Fix getting address of private data
+  * gpio: omap: Pass correct argument to _get_gpio_direction()
+
+  [ Przemyslaw Marczak ]
+  * i2c: s3c24x0: reduce transmission status timeout
+
+  [ Hans de Goede ]
+  * malloc_simple: Return NULL on malloc failure rather then calling panic()
+
+  [ Simon Glass ]
+  * Introduce board_init_f_mem() to handle early memory layout
+  * powerpc: Permit device tree control of U-Boot (CONFIG_OF_CONTROL)
+  * powerpc: ppc4xx: canyonlands: config: Tidy up CONFIGs and config.mk
+  * powerpc: ppc4xx: Move CANYONLANDS/GLACIER/ARCHES to Kconfig
+  * powerpc: ppc4xx: Add ramboot config for glacier
+  * powerpc: ppc4xx: canyonlands: Move to generic board
+  * powerpc: ppc4xx: dts: Bring in canyonlands device tree files
+  * powerpc: ppc4xx: Call board_init_f_mem() for generic board
+  * powerpc: ppc4xx: Add a gpio.h header file
+  * powerpc: ppc4xx: Allow the end of u-boot.bin to be found
+  * powerpc: ppc4xx: Use CONFIG_OF_CONTROL for canyonlands boards
+  * ppc: amcc: Omit unneeded ns16550 CONFIG if using driver model
+  * powerpc: Add serial driver for driver model
+  * dm: powerpc: ppc4xx: Move glacier to use driver model for serial
+  * powerpc: Add linkage.h file
+
+  [ Stefan Roese ]
+  * powerpc: ppc4xx: Change from OF_SEPARATE to OF_EMBED
+  * powerpc: ppc4xx: Add defaults for DT based booting to really work
+  * powerpc: ppc4xx: Enable CONFIG_DISPLAY_BOARDINFO
+
+  [ Simon Glass ]
+  * net: Use new checksum functions
+  * dm: i2c: Add a dm_ prefix to driver model bus speed functions
+  * dm: i2c: Make API accessible even without CONFIG_DM
+  * dm: Add Kconfig for driver/demo
+  * dm: Expand and complete Kconfig in drivers/
+  * dm: Add Kconfig options for driver model SPL support
+  * dm: test: Add a Kconfig file
+  * dm: Add CMD_DM and CMD_DEMO to Kconfig
+  * dm: Move Raspberry Pi driver model CONFIGs to Kconfig
+  * dm: exynos: Move driver model CONFIGs to Kconfig
+  * dm: x86: Move driver model CONFIGs to Kconfig
+  * dm: tegra: Move driver model CONFIGs to Kconfig
+  * dm: omap3: Move driver model CONFIGs to Kconfig
+  * dm: sandbox: Move driver model CONFIGs to Kconfig
+  * dm: sunxi: Move driver model CONFIGs to Kconfig
+  * dm: mx6: Move driver model CONFIGs to Kconfig
+  * dm: socfpga: Move driver model CONFIGs to Kconfig
+
+  [ Nobuhiro Iwamatsu ]
+  * dm: sh: serial: Add support driver model
+
+  [ Simon Glass ]
+  * dm: at91: Drop use of ATMEL_PIO_PORTS in the header file
+  * dm: at91: snapper: Move driver model CONFIGs to Kconfig
+  * dm: Kconfig: Move CONFIG_SYS_MALLOC_F_LEN to Kconfig
+  * dm: Drop unused driver model config_defaults
+
+  [ Peng Fan ]
+  * dm: introduce dev_get_addr interface
+  * dm:gpio:mxc add a bank_index entry in platdata
+  * dm:gpio:mxc add DT support
+
+  [ Michal Simek ]
+  * dm: Add support for all targets which requires MANUAL_RELOC
+
+  [ Vladimir Barinov ]
+  * arm: rmobile: Add SILK board support
+  * arm: rmobile: Add missed header file for Silk board
+
+  [ Nobuhiro Iwamatsu ]
+  * arm: rmobile: r8a7794: Enable SMP mode of Auxiliary Control Register
+  * ARM: rmobile: silk: Remove initialization of ACTLR.SMP
+
+  [ Alexey Brodkin ]
+  * arc: introduce U-Boot port for ARCv2 ISA
+
+  [ Jaehoon Chung ]
+  * arm: exynos: fix the div value for set_mmc_clk
+
+  [ Joonyoung Shim ]
+  * samsung: board: support eMMC reset using DT
+  * Odroid: Add eMMC-reset node on DT
+  * Odroid-XU3: Add eMMC-reset node on DT
+  * odroid: fix g2d sclk rate
+  * EXYNOS5: Add function to enable exynos5420 usbdev phy ctrl
+
+  [ Akshay Saraswat ]
+  * Exynos5: Fix compiler warnings due to clock_get_periph_rate
+  * Exynos542x: Move exynos5420_get_pll_clk up and rename
+  * Exynos542x: Add and enable get_periph_rate support
+  * Exynos5: Fix exynos5_get_periph_rate calculations
+  * Exynos5: Use clock_get_periph_rate generic API
+  * Exynos: clock: change mask bits as per peripheral
+  * Exynos: Clock: Cleanup soc_get_periph_rate
+
+  [ Simon Glass ]
+  * dm: stv0991: Move driver model CONFIGs to Kconfig
+  * dm: mx6: sabre: Move driver model CONFIGs to Kconfig
+  * buildman: Fix incorrect arguemnt in GetUpstream()
+  * patman: Read in the git-mailrc alias file
+
+  [ Albert ARIBAUD ]
+  * buildman: allow multiple toolchains in a single path
+
+  [ Joe Hershberger ]
+  * sandbox: Return '-c command' exit value as sandbox exit code
+
+  [ Simon Glass ]
+  * sandbox: Adjust the order of the NO_SDL check
+
+  [ Michael Walle ]
+  * lsxl: add a README file
+
+  [ Egli, Samuel ]
+  * mtd, omap: fix case NAND_OMAP_GPMC_PREFETCH not defined
+
+  [ Angela Stegmaier ]
+  * ARM: DRA72x: DDR3: Fix EMIF timings for 666MHz clock
+
+  [ Lokesh Vutla ]
+  * ARM: DRA7: EMIF: Update SDRAM_REF_CTRL register value
+  * ARM: DRA7-evm: DDR3: Update leveling values
+
+  [ Steve Kipisz ]
+  * clock_am43xx:Set the MAC clock to /5 for OPP100
+
+  [ Vitaly Andrianov ]
+  * keystone2: ddr3: eliminate using global ddr3_size variable
+  * net: keystone_net: move serdes setup to initialization function
+
+  [ Andreas Bießmann ]
+  * tools/imagetool: remove linker script
+
+  [ Axel Lin ]
+  * image: Convert to use fdt_for_each_subnode macro
+
+  [ Hans de Goede ]
+  * config_distro_bootcmd.h: Enable CONFIG_CMD_PART
+
+  [ Paul Kocialkowski ]
+  * sunxi: Ampe A76 support
+
+  [ Hans de Goede ]
+  * sunxi: MAINTAINERS: drop no longer existing felconfig-s from MAINTAINERS
+  * sunxi: video: Do not use CONFIG_SYS_MEM_TOP_HIDE for the framebuffer
+  * sunxi: video: Dynamically reserve framebuffer memory
+  * sunxi: dram: Un-inline dram helper functions
+  * sunxi: otg: Fix peripheral mode
+
+  [ Siarhei Siamashka ]
+  * tools: mksunxiboot: Fix problems on big endian systems
+
+  [ Simon Glass ]
+  * arm: Allow lr to be saved by board code
+  * arm: spl: Provide for a board-specific loader
+  * sunxi: Normalise FEL support
+
+  [ Siarhei Siamashka ]
+  * sunxi: Support the FEL boot mode in the regular u-boot build
+
+  [ David Feng ]
+  * PCI: add 64-bit prefetchable memory support
+
+  [ Heiko Schocher ]
+  * .travis.yml: remove 824x builds
+  * spl, spl_nor: fix compiler warning
+
+  [ Valentin Longchamp ]
+  * KM/IVM: split the IVM reading and parsing in 2 parts
+  * kirkwood/km_arm: read the IVM eeprom earlier
+  * 85xx/kmp204x: read the IVM eeprom earlier
+  * 83xx/km83xx: read the IVM eeprom earlier
+  * 82xx/km82xx: read the IVM eeprom earlier
+  * KM/IVM: remove ivm_read_eeprom(void)
+
+  [ Vladimir Zapolskiy ]
+  * ARM: lpc3250: config: add generic board support
+
+  [ Peng Fan ]
+  * ARM: imx6: disable bandgap self-bias after boot
+  * ARM: imx6 Add WDOG3 for i.MX6SX
+
+  [ Christian Gmeiner ]
+  * cmd_eeprom: make it possible to define the used i2c bus
+  * ot1200: add eeprom command to non-SPL build
+
+  [ Eric Nelson ]
+  * ARM: i.MX: provide access to reset cause through get_imx_reset_cause()
+  * nitrogen6x: set environment variable reset_cause
+
+  [ Waldemar Brodkorb ]
+  * add example for file on VFAT filesystem usage
+
+  [ Tom Rini ]
+  * Revert "sunxi: configs/sunxi-common.h: Enable CONFIG_CMD_PART"
+  * Prepare v2015.04-rc2
+
+  [ Andreas Bießmann ]
+  * avr32: use dlmalloc for DMA buffers
+  * avr32: rename cpu_init() -> arch_cpu_init()
+  * avr32: factor out cpu_mmc_init()
+  * avr32: rename mmu.h definitions
+  * avr32: convert to dram_init()
+  * avr32: use generic gd->start_addr_sp
+  * common/board_f: factor out reserve_stacks
+  * common/board_r: allocate bootparams
+  * avr32: add generic board support
+  * grasshopper: enable generic board
+  * atstk1002: enable generic board
+
+  [ Joe Hershberger ]
+  * cmd_fdt: Actually fix fdt command in sandbox
+  * cmd_fdt: Print the control fdt in terms of virtual memory
+
+  [ Masahiro Yamada ]
+  * cmd_i2c: quit I2C commands immediately on error
+
+  [ Lubomir Popov ]
+  * cmd_i2c: Provide option for bulk 'i2c write' in one transaction
+
+  [ Simon Glass ]
+  * dm: cros_ec: Convert to Kconfig
+  * dm: Move CONFIG_I2C_COMPAT to Kconfig
+  * dm: mx6: Adjust mx6sxsabresd to use Kconfig for DM_THERMAL
+
+  [ Masahiro Yamada ]
+  * Documentation: gpio: fix bindings document
+
+  [ Simon Glass ]
+  * serial: Support an early UART for debugging
+  * serial: ns16550: Add access functions that don't need platdata
+  * serial: ns16550: Support debug UART
+
+  [ Marek Vasut ]
+  * dm: Protect device_unbind() with CONFIG_DM_DEVICE_REMOVE
+
+  [ Hans de Goede ]
+  * sunxi: video: Add support for LCD reset pin
+  * sunxi: video: Add support for LCD panels which need to be configured via i2c
+  * sunxi: video: Add support for tl059wv5c0 lcd panels
+
+  [ Masahiro Yamada ]
+  * ARM: at91: move board select menu and common settings
+  * ARM: prepare for moving SoC sources into mach-*
+  * ARM: at91: collect SoC sources into mach-at91
+  * ARM: tegra: collect SoC sources into mach-tegra
+  * ARM: davinci: move SoC sources to mach-davinci
+  * ARM: kirkwood: move SOC sources to mach-kirkwood
+  * ARM: nomadik: move SoC sources to mach-nomadik
+  * ARM: highbank: move SoC sources to mach-highbank
+  * ARM: orion5x: move SoC sources to mach-orion5x
+  * ARM: versatile: move SoC sources to mach-versatile
+  * ARM: keystone: move SoC sources to mach-keystone
+  * kbuild: prepare for moving headers into mach-*/include/mach
+  * ARM: at91: move SoC headers to mach-at91/include/mach
+  * ARM: davinci: move SoC headers to mach-davinci/include/mach
+  * ARM: kirkwood: move SoC headers to mach-kirkwood/include/mach
+  * ARM: nomadik: move SoC headers to mach-nomadik/include/mach
+  * ARM: orion5x: move SoC headers to mach-orion5x/include/mach
+  * ARM: keystone: move SoC headers to mach-keystone/include/mach
+  * ARM: prepare for including <mach/*.h>
+
+  [ Stephen Warren ]
+  * bcm2835/rpi: add SPDX license tags for some files
+  * bcm2836 SoC support (used in Raspberry Pi 2 model B)
+  * rpi: add support for Raspberry Pi 2 model B
+
+  [ Hans de Goede ]
+  * sunxi: mmc: Always declare High Capacity capability
+  * sunxi: Add support for the UTOO P66 tablet
+  * sunxi: musb: Check Vbus-det before enabling otg port power
+  * sunxi: Fix sun5i mbus speed when booting old kernels
+  * sunxi: Set the /chosen/stdout-path fdt property for sunxi boards
+
+  [ Siarhei Siamashka ]
+  * sunxi: Machine id hack to prevent loading buggy sunxi-3.4 kernels
+
+  [ Soeren Moch ]
+  * board: tbs2910: Gate clock when switching async clock muxes
+
+  [ Peng Fan ]
+  * imx:mx6sl add I2c pad settings
+  * imx:mx6slevk add pmic and i2c configuration
+  * imx:mx6slevk implement power init board
+
+  [ Otavio Salvador ]
+  * mmc: fsl_esdhc: Add CMD11 support to switch to 1.8V
+  * mmc: fsl_esdhc: Add support to force VSELECT set
+  * imx: mx6sl: Extend USDHC SD2 pins to support 8-wire use
+  * warp: Add initial WaRP Board support
+
+  [ Pantelis Antoniou ]
+  * mmc: Implement SD/MMC versioning properly
+
+  [ Jaehoon Chung ]
+  * mmc: dw_mmc: fixed the wrong bit control
+  * mmc: exynos_dw_mmc: set to clksel_val into board-init function
+  * mmc: exynos_dw_mmc: use the exynos specific data structure
+
+  [ Hans de Goede ]
+  * sunxi: mmc: Always declare High Capacity capability
+
+  [ Przemyslaw Marczak ]
+  * mmc: exynos dwmmc: check boot mode before init dwmmc
+  * mmc: print SD/eMMC type for inited mmc devices
+
+  [ Matt Reimer ]
+  * mmc: sdhci: fix bus width switching on Samsung SoCs
+
+  [ Joonyoung Shim ]
+  * exynos: usb: make dwc3_set_mode to static
+
+  [ Paul Kocialkowski ]
+  * usb: musb-new: omap2430: Reset the MUSB controller early
+
+  [ Bhupesh Sharma ]
+  * fsl-ch3/lowlevel: TZPC and TZASC programming to configure non-secure accesses
+
+  [ York Sun ]
+  * armv8/fsl-lsch3: Change normal memory shareability
+
+  [ Arnab Basu ]
+  * ARMv8/fsl-lsch3: Patch cpu node properties in DT for online cores
+
+  [ York Sun ]
+  * armv8/fsl-lsch3: Convert flushing L3 to assembly to avoid using stack
+  * armv8/ls2085a: Enable cluster timebase for all clusters
+
+  [ Bhupesh Sharma ]
+  * armv8/fsl-lsch3: Add fdt-fixup for clock frequency of the DUART nodes
+
+  [ York Sun ]
+  * driver/ddr/fsl: Adjust CAS to preamble override for emulator
+  * driver/ddr/fsl: Add workaround for A008336
+  * driver/ddr/fsl: Add workround for erratumn A008514
+  * armv8/fsl-lsch3: Add support for second DDR clock
+  * driver/ddr/fsl: Add support for multiple DDR clocks
+  * ARMv8/LS2085A: Enable auto precharge for DP-DDR
+  * driver/ddr/fsl: Fix a typo in timing_cfg_8 calculation
+
+  [ Kuldip Giroh ]
+  * ARMv8/LS2085A: HugeTLB support is required by default in LS NADK
+
+  [ York Sun ]
+  * ARMv8/LS2085A: Adjust system clock and DDR clock
+  * driver/ddr/fsl: Add sync of refresh
+
+  [ Arnab Basu ]
+  * ARMv8/ls2085a: Switch to passing earlycon to kernel
+
+  [ Stuart Yoder ]
+  * ARMv8/ls2085a: Move kernel image load address
+
+  [ Bhupesh Sharma ]
+  * ls2085/configs: Ensure right banners are printed for EMU and SIMU
+
+  [ York Sun ]
+  * armv8/fsl-lsch3: Enable workaround for A008336
+  * armv8/fsl-lsch3: Enable erratum workround for A008514
+  * armv8/ls2085a_emu: Enable sync of refresh
+
+  [ J. German Rivera ]
+  * drivers/mc: Migrated MC Flibs to 0.5.2
+
+  [ Alison Wang ]
+  * arm: ls102xa: Define default values for some CCSR macros
+
+  [ Minghuan Lian ]
+  * arm/ls102xa: create TLB to map PCIe region
+  * arm/ls102xa: use a array to define pexmscportsr
+  * arm/ls1021a: add PCIe settings
+  * driver/pci: add Layerscape PCIe driver
+
+  [ chenhui zhao ]
+  * arm: ls102xa: workaround for cache coherency problem
+
+  [ Alison Wang ]
+  * arm: ls1021x: Add support for initializing CAAM's stream id
+
+  [ Volodymyr Riazantsev ]
+  * mmc: fsl_esdhc: Add support for DDR mode
+
+  [ Enric Balletbo i Serra ]
+  * OMAP3: igep0032: Fix regression due commit f3b4bc45.
+
+  [ Masahiro Yamada ]
+  * ARM: UniPhier: set CONFIG_SYS_MALLOC_F to the global default value
+
+  [ Simon Glass ]
+  * kconfig: Adjust ordering so that defaults work as expected
+
+  [ Masahiro Yamada ]
+  * kconfig: switch to single .config configuration
+  * kconfig: remove unneeded dependency on !SPL_BUILD
+  * ARM: remove jadecpu board support
+  * ARM: remove dkb board support
+  * ARM: remove cm4008 and cm41xx board support
+  * ARM: remove a320evb board support
+  * ARM: remove tnetv107x board support
+  * ARM: davinci: remove hawkboard support
+
+  [ Fabio Estevam ]
+  * mx31ads: Convert to generic board
+  * imx31_phycore: Convert to generic board
+  * zmx25: Convert to generic board
+
+  [ Nobuhiro Iwamatsu ]
+  * arm: rmobile: koelsch: Migrate serial driver to drivers model
+  * arm: rmobile: gose: Migrate serial driver to drivers model
+  * arm: rmobile: lager: Migrate serial driver to drivers model
+  * arm: rmobile: alt: Migrate serial driver to drivers model
+  * arm: rmobile: silk: Migrate serial driver to drivers model
+  * arm: rmobile: alt: Add support SDHI
+  * arm: rmobile: koelsch: Add support SDHI
+  * arm: rmobile: gose: Add support SDHI
+  * arm: rmobile: lager: Add support SDHI
+  * serial: sh: Remove invalid UTF-8 character
+
+  [ Vladimir Barinov ]
+  * serial: sh: fix internal clock source on SCIF
+
+  [ Masahiro Yamada ]
+  * sh: rename some private libraries
+  * sh: import missing private libraries from Linux 3.19
+  * sh: enable CONFIG_USE_PRIVATE_LIBGCC by default
+
+  [ Vladimir Barinov ]
+  * arm: rmobile: Add Porter board support
+  * arm: rmobile: silk: Fix GPIO4_31 initialization
+  * arm: rmobile: silk: Disable ethernet pins pull-up
+  * arm: rmobile: silk: fix typo in device declaration
+  * arm: rmobile: silk: Add support SDHI
+
+  [ Albert ARIBAUD ]
+  * edminiv2: switch to generic board support
+  * edminiv2: fix PCIE IO base address typo
+  * edminiv2: switch to SPL
+  * edminiv2: drop CONFIG_CFI_LEGACY
+
+  [ Michael Scott ]
+  * fastboot: add "fastboot oem" command support
+
+  [ Rob Herring ]
+  * fastboot: add support for "oem format" command
+
+  [ Przemyslaw Marczak ]
+  * dfu: samsung: move call to set_dfu_alt_info() to dfu common code
+
+  [ Inha Song ]
+  * odroid: adjust get_dfu_alt_*() functions to new declarations
+
+  [ Dileep Katta ]
+  * usb: gadget: fastboot: Add fastboot erase
+
+  [ Rob Herring ]
+  * fastboot: Add USB cable detect check
+
+  [ Dileep Katta ]
+  * fastboot: OUT transaction length must be aligned to wMaxPacketSize
+  * fastboot: Correct fastboot_fail and fastboot_okay strings
+  * usb: gadget: fastboot: Set the Serial Number for Fastboot Gadget
+
+  [ gaurav rana ]
+  * crypto/fsl: Make function names consistent for blob encapsulation/decapsulation.
+  * crypto/fsl - Add progressive hashing support using hardware acceleration.
+
+  [ Lukasz Majewski ]
+  * MAINTAINERS: Add F: drivers/usb/gadget to DFU custodian responsibility
+
+  [ Akshay Saraswat ]
+  * Exynos542x: Config: Add various configs
+  * Exynos542x: CPU: Power down all secondary cores
+  * Exynos542x: Add workaround for ARM errata 798870
+  * Exynos542x: Add workaround for ARM errata 799270
+  * Exynos542x: Add workaround for exynos iROM errata
+  * Exynos542x: cache: Disable clean/evict push to external
+  * Exynos542x: add L2 control register configuration
+  * Exynos542x: Fix secondary core booting for thumb
+  * Exynos542x: Make A7s boot with thumb-mode U-Boot on warm reset
+
+  [ Doug Anderson ]
+  * Exynos: Fix L2 cache timings on Exynos5420 and Exynos5800
+
+  [ Masahiro Yamada ]
+  * ARM: UniPhier: move SoC sources to mach-uniphier
+  * ARM: UniPhier: move SoC headers to mach-uniphier/include/mach
+  * ARM: UniPhier: include <mach/*.h> instead of <asm/arch/*.h>
+  * ARM: UniPhier: update defconfigs using savedefconfig
+  * serial: UniPhier: use 32 bit register access
+  * serial: UniPhier: move LCR register setting to probe function
+  * ARM: UniPhier: fix comments in PH1-Pro4 SBC code
+  * ARM: UniPhier: fix SBC init code
+  * ARM: UniPhier: rename SC_CLKCTRL_CLK_* to SC_SCLKCTRL_CEN_*
+  * ARM: UniPhier: split clkrst_init() into two functions
+  * ARM: UniPhier: reset NAND core in SPL for non-NAND boot mode
+  * ARM: UniPhier: enable STDMAC for EHCI
+  * ARM: UniPhier: remove EHCI platform devices
+  * ARM: UniPhier: move uniphier_ehci_reset() function
+  * ARM: UniPhier: replace "usb-ehci" with "generic-ehci"
+  * ARM: UniPhier: add I/O pin settings for xHCI on PH1-Pro4
+  * ARM: UniPhier: enable xHCI and GIO cores for PH1-Pro4
+  * ARM: UniPhier: add xHCI device nodes to PH1-Pro4 device tree
+  * usb: UniPhier: add UniPhier on-chip xHCI host driver support
+  * ARM: UniPhier: switch to xHCI for PH1-Pro4
+  * ARM: UniPhier: support 1CS support card for all the UniPhier SoCs
+  * ARM: UniPhier: switch to 1CS support card
+  * ARM: UniPhier: consolidate MEMCONF setting code
+  * ARM: UniPhier: remove stop_mpll() from PH1-Pro4 PLL initialization
+  * ARM: UniPhier: remove SSC_WAY_SIZE and SSC_NUM_ENTRIES macros
+
+  [ Peng Fan ]
+  * ARM: HYP/non-sec: relocation before enable secondary cores
+
+  [ Fabio Estevam ]
+  * mc34704: Add the definition of ONOFFA bit
+  * mx25pdk: Turn on the LCD supply
+  * mx31: Fix boot hang by avoiding vector relocation
+  * mx35: Fix boot hang by avoiding vector relocation
+
+  [ Soeren Moch ]
+  * board: tbs2910: Enable USB Mass Storage support
+
+  [ Fabio Estevam ]
+  * mx6sabre: Enable User Mass Storage
+  * mx6sabre: Select CMD_EXT4 options
+
+  [ Raul Cardenas ]
+  * imx6: Added DEK blob generator command
+
+  [ Marcel Ziswiler ]
+  * pxa: fix wrong comment about vpac270 being the arch number
+  * remove nowhere used symbol CONFIG_SYS_CLKS_IN_HZ
+  * pxa: balloon3: remove nowhere used symbol CONFIG_SYS_MEM_BUF_IMP
+  * pxa: balloon3: fix comment about sdram banks
+  * pxa: balloon3/colibri_pxa270: fix environment optionally being nowhere
+  * pxa: colibri_pxa270: migrate to generic board
+  * pxa: colibri_pxa270: disable loadb/s commands and long help
+  * pxa: colibri_pxa270: avoid overwriting factory configuration block
+  * pxa: colibri_pax270: fix CONFIG_BOOTCOMMAND
+  * pxa: colibri_pxa270: fix wrong comment about voipac ethernet chip
+  * pxa: colibri_pxa270: remove CONFIG_ENV_ADDR_REDUND
+  * pxa: colibri_pxa270: integrate latest validated register settings
+
+  [ Lukasz Majewski ]
+  * MAINTAINERS: Add F: drivers/usb/gadget to DFU custodian responsibility
+
+  [ Fabio Estevam ]
+  * mx6slevk: Provide a proper pad configuration for OTG1_ID pin
+  * warp: Add USB Mass Storage support
+  * warp: Select BOUNCE_BUFFER and CMD_EXT options
+
+  [ Tom Rini ]
+  * armv7.h: Add <asm/io.h>
+  * MAINTAINERS, git-mailrc: Update my email address
+
+  [ Axel Lin ]
+  * serial: ns16550: Fix build error due to a typo
+
+  [ Masahiro Yamada ]
+  * kconfig: remove unneeded U-Boot extension code
+
+  [ Andreas Bießmann ]
+  * atngwmkii: convert to generic board
+
+  [ Michal Simek ]
+  * arm64: Add Xilinx ZynqMP support
+
+  [ Sinan Akman ]
+  * mpc837xerdb: "fix Calling __hwconfig without a buffer" warning
+
+  [ Tom Rini ]
+  * Prepare v2015.04-rc3
+
+  [ Łukasz Majewski ]
+  * samsung: board: fix: Define loop iterator as an unsigned int to suppress gcc 4.8 warning
+
+  [ Przemyslaw Marczak ]
+  * board: samsung: reserve memory for the secure firmware
+  * Odroid-XU3: enable the last dram bank and reserve 22MiB
+  * Odroid U3: use common code for dram reservation
+
+  [ Stephen Warren ]
+  * common: board: support systems with where RAM ends beyond 4GB
+  * ARM: tegra: fix variable naming in query_sdram_size()
+  * ARM: tegra: support large RAM sizes
+  * ARM: tegra: move common config defines centrally
+  * ARM: tegra: support running in non-secure mode
+  * ARM: tegra: add function to clear pinmux CLAMPING bit
+  * ARM: tegra: import latest Jetson TK1 pinmux
+  * ARM: tegra: pinmux: add note re: drive group field defines
+  * ARM: tegra: pinmux: simplify some defines
+  * ARM: tegra: pinmux: handle feature removal on newer SoCs
+  * ARM: tegra: pinmux: move some type definitions
+  * ARM: tegra: pinmux: partially handle varying register layouts
+  * ARM: tegra: pinmux: support hsm/schmitt on pins
+  * ARM: tegra: pinmux: account for different drivegroup base registers
+  * ARM: tegra: pinmux: support Tegra210's e_io_hv pin option
+  * ARM: tegra: pinmux: add Tegra210 support
+
+  [ Marcel Ziswiler ]
+  * dm: tegra: dts: add aliases for spi on apalis_t30
+  * apalis/colibri_t30: fix MMC/SD card detect GPIOs
+  * apalis_t30: enable gigabit ethernet via pcie
+  * apalis/colibri_t30: add misc cmds increase buf sizes and max args
+
+  [ Shaveta Leekha ]
+  * powerpc/mpc85xx: Add DSP side awareness for Freescale Heterogeneous SoCs
+
+  [ Ying Zhang ]
+  * powerpc: 85xx: Modify CONFIG_USB_MAX_CONTROLLER_COUNT for P1022DS
+
+  [ Simon Glass ]
+  * arm: Reduce the scope of lowlevel_init()
+  * arm: spl: Avoid setting up a duplicate global data structure
+  * dm: tegra: Enable driver model in SPL and adjust the GPIO driver
+  * arm: spl: Allow board_init_r() to run with a larger stack
+  * Make export interface support CONFIG_SYS_MALLOC_SIMPLE
+  * ti: armv7: Move SPL SDRAM init to the right place, drop unused CONFIG_SPL_STACK
+
+  [ Marek Vasut ]
+  * arm: socfpga: Minor coding style fix
+  * arm: socfpga: Sync Cyclone V DK pinmux configuration
+  * arm: socfpga: Sync Cyclone V DK PLL configuration
+  * arm: socfpga: Add USB and UDC support for Cyclone V DK
+  * arm: socfpga: Drop cyclone5 suffix from board file name
+  * arm: socfpga: Zap checkboard()
+  * arm: socfpga: Zap board_early_init_f()
+  * arm: socfpga: Add Altera Arria V DK support
+  * dt: socfpga: Import and enable Cyclone V DK DTS
+  * dt: socfpga: Import and enable Arria V DK DTS
+
+  [ Stefano Babic ]
+  * mx5: fix get_reset_cause
+
+  [ Tom Rini ]
+  * fsl_sec.h: Fix thinko
+
+  [ Stefano Babic ]
+  * flea3: Convert to generic board
+  * mx35pdk: Convert to generic board
+  * woodburn: Convert to generic board
+
+  [ Nikolaos Pasaloukos ]
+  * kconfig: common: Fix memtest bool name
+
+  [ Marcel Ziswiler ]
+  * arm: pxa: introducing cpuinfo display for marvell pxa270m
+
+  [ Heiko Schocher ]
+  * travis.yml: some adaptions
+  * arm, da8xx: convert ipam390 board to generic board support
+
+  [ Rob Herring ]
+  * gpt: fix error reporting on partition table write failures
+  * gpt: support random UUIDs without setting environment variables
+
+  [ Kim Phillips ]
+  * scripts/checkstack.pl: update to get AArch64 port from Linux
+
+  [ Sonic Zhang ]
+  * net: configure DWMAC DMA by default AXI burst length
+  * net: Support DMA threshold mode in DWMAC driver
+
+  [ vijay rai ]
+  * mpc85xx/t104xrdb : remove raw timing parameter
+
+  [ gaurav rana ]
+  * rsa : Compile Modular Exponentiation files based on CONFIG_RSA_SOFTWARE_EXP
+  * fsl_sfp : Move ccsr_sfp_regs definition to common include
+  * fsl_sec_mon: Add driver for Security Monitor block of Freescale
+  * SECURE BOOT: Add command for validation of images
+  * SECURE_BOOT : enable esbc_validate command for powerpc and arm platforms.
+
+  [ Marek Vasut ]
+  * arm: socfpga: Enable DM and DM_SPI
+
+  [ Ajay Bhargav ]
+  * arm: gplugd: convert to generic board
+  * arm: aspenite: convert to generic board
+
+  [ Chris Packham ]
+  * kwbimage: align v1 binary header to 4B
+
+  [ Ian Campbell ]
+  * dreamplug: switch to GENERIC_BOARD
+  * dreamplug: set CONFIG_BUILD_TARGET to build u-boot.kwb
+
+  [ Simon Glass ]
+  * buildman: Correct toolchain download feature
+  * buildman: Add a space before the list of boards
+
+  [ Stefan Roese ]
+  * arm: spear: Move to generic board support
+
+  [ Hannes Petermaier ]
+  * drivers/video/am335x-fb: Add possibility to wait for stable power/picture
+  * common/lcd: Add command for setting cursor within lcd-console
+  * common/lcd: Add command for writing to lcd-display
+  * board/BuR/common: Take usage of am335x LCD-Display
+  * board/BuR/common: try to setup cpsw mac-address from the devicetree
+  * board/BuR/tseries: Enable HW-Watchdog
+  * board/BuR/tseries: Enable U-Boot BOOTCOUNT feature
+  * board/BuR/tseries: Enable EXT4 support
+  * board/BuR/tseries: Change pinmux for GPIO2_28 from GPIO to PWM-Timeroutput
+  * board/BuR/tseries: Chg pinmux - use free NAND Pins in non NAND-config as GPIO
+  * board/BuR/tseries: Chg Pinmux - enable UART1 pins
+  * board/BuR/common: Introduce Network Console and common environment for it
+  * board/BuR/common: Enable CONFIG_CMD_TIME
+  * board/BuR/common: Add support for displaying BMP on LCD
+  * board/BuR/tseries: Rework default-environment settings.
+  * board/BuR/tseries: cosmetic changes
+  * board/BuR/kwb: switch to board HW-Rev3
+  * board/BuR/kwb: Support booting Linux
+  * board/BuR/kwb: Redesign default-environment
+  * board/BuR/kwb: Form a bootline for vxWorks
+  * board/BuR/kwb: Support modify bootcmd through reset-controller
+
+  [ Peter Tyser ]
+  * cmd_yaffs: Clean up command usage messages
+
+  [ Albert ARIBAUD \(3ADEV\) ]
+  * omap3: add support for QUIPOS Cairo board.
+
+  [ Gilles Gameiro ]
+  * Adding Support for BAV335x boards
+
+  [ angelo@sysam.it ]
+  * m68k: add amcore board support
+  * m68k: add mcf5307 cpu support
+  * m68k: add generic-board support
+
+  [ Alison Wang ]
+  * m68k: Add generic board support for MCF547X/8X and MCF5445X
+
+  [ Linus Walleij ]
+  * vexpress64: juno: support SMC9118 ethernet
+
+  [ Przemyslaw Marczak ]
+  * fs: ext4 write: return file len on success
+
+  [ Michal Sojka ]
+  * mtd: nand: omap_gpmc: Make ready/busy pins configurable
+
+  [ Ash Charles ]
+  * omap: gpmc: 'nandecc sw' can use HAM1 or BCH8
+
+  [ Chen Gang ]
+  * use ASM_NL instead of '; ' for assembler new line character in the macro
+
+  [ Linus Walleij ]
+  * vexpress64: juno: add NOR flash detection
+
+  [ Heiko Schocher ]
+  * spl: fix calling "spl export .." more than once
+
+  [ Alexey Brodkin ]
+  * lib/asm-offsets - make GD_RELOCADDR, GD_RELOC_OFF & GD_START_ADDR_SP available for all architectures
+  * common/board_f: implement type casting for gd structure
+
+  [ Fabio Estevam ]
+  * cmd_usb_mass_storage: Remove extra 'ums' string in the usage text
+
+  [ Alexey Brodkin ]
+  * stdio: extend "name" to 32 symbols
+
+  [ Masahiro Yamada ]
+  * fixdep: remove multiple .config support code
+
+  [ Simon Glass ]
+  * dm: i2c: Add a missing memory allocaton check
+
+  [ Masahiro Yamada ]
+  * MAINTAINERS: add Driver Model repository information
+  * README: remove description about driver model configuration options
+
+  [ Przemyslaw Marczak ]
+  * exynos: config: enable arch memcpy and arch memset
+  * arm: relocation: clear .bss section with arch memset if defined
+  * dfu: mmc: file buffer: remove static allocation
+  * dlmalloc: do memset in malloc init as new default config
+  * trats2: defconfig: disable memset at malloc init
+  * odroid: defconfig: disable memset at malloc init
+  * odroid-xu3: defconfig: disable memset at malloc init
+  * zynq-common: increase malloc pool len by dfu mmc file buffer size
+  * ti-armv7-common: increase malloc pool len by dfu mmc file buffer size
+  * tegra-common: increase malloc pool len by dfu mmc file buffer size
+
+  [ Tom Rini ]
+  * ARM: PSCI: Rework the DT handler slightly
+
+  [ Jan Kiszka ]
+  * common/board_r: Restore non-cached memory setup
+
+  [ Linus Walleij ]
+  * armv8/vexpress64: make multientry conditional
+
+  [ Siva Durga Prasad Paladugu ]
+  * common: cmd_elf: Add support to disable start of application
+
+  [ Adam Sampson ]
+  * sunxi: Make CONFIG_DRAM_TPR3 apply to sun[57]i
+
+  [ Gábor Nyers ]
+  * sunxi: Add support for the Jesurun Q5 board
+
+  [ Marcus Cooper ]
+  * sun7i: Add support for the MK808C board
+  * sun6i: Add support for the Mele I7 board
+
+  [ Jens Lucius ]
+  * sunxi: Add support for the Forfun Q88DB tablet
+
+  [ Hans de Goede ]
+  * sun7i: Add support for the Wits Pro A20 DKT board
+  * sun7i: Add support for the Orange Pi board
+  * sun7i: Add support for the Orange Pi Mini board
+
+  [ Chen-Yu Tsai ]
+  * sunxi: axp221: Add VBUS detection support
+  * sunxi: musb: Support checking VBUS using AXP221 PMIC
+  * sunxi: Ippo_q8h defconfigs: Enable otg vbus detection using AXP223 PMIC
+
+  [ Aleksei Mamlin ]
+  * sunxi: Add Wexler TAB7200 support
+
+  [ Hans de Goede ]
+  * sunxi: video: Fix VIDEO_LCD_PANEL_I2C being enabled by default
+
+  [ Fabio Estevam ]
+  * mx6sxsabresd: Use the default CONFIG_SYS_PBSIZE
+  * mx6slevk: Use the default CONFIG_SYS_PBSIZE
+  * mx6qarm2: Use the default CONFIG_SYS_PBSIZE
+  * mx53loco: Use the default CONFIG_SYS_PBSIZE
+  * mx51evk: Use the default CONFIG_SYS_PBSIZE
+  * mx35pdk: Use the default CONFIG_SYS_PBSIZE
+  * mx31pdk: Use the default CONFIG_SYS_PBSIZE
+  * mx25pdk: Use the default CONFIG_SYS_PBSIZE
+  * mxs: Use the default CONFIG_SYS_PBSIZE
+  * wandboard: Use the default CONFIG_SYS_PBSIZE
+  * hummingboard: Use the default CONFIG_SYS_PBSIZE
+  * nitrogen6x: Use the default CONFIG_SYS_PBSIZE
+  * warp: Use the default CONFIG_SYS_PBSIZE
+  * novena: Use the default CONFIG_SYS_PBSIZE
+  * warp: Add Device Firmware Upgrade support
+  * warp: Add a README file
+
+  [ maxin.john@enea.com ]
+  * mx6sabre_common.h: remove deprecated mmc open/close
+
+  [ Peng Fan ]
+  * imx:mx6 remove duplicated includes
+
+  [ Dirk Behme ]
+  * mx6: soc: Switch to cold reset
+
+  [ Stefan Roese ]
+  * common/board_f.c: Enable IMX watchdog in init_func_watchdog_init()
+
+  [ Fabio Estevam ]
+  * mx53ard: Use the standard U-boot prompt
+  * mx6_common: Do not select esdhc DDR mode for all boards
+  * warp: Select CONFIG_SYS_FSL_ESDHC_HAS_DDR_MODE
+  * mx6sabre: Do not enable UMS with SPL
+
+  [ Tom Rini ]
+  * am335x_evm_usbspl: Remove other SPL modes
+
+  [ Nishanth Menon ]
+  * ARM: Introduce erratum workaround for 798870
+  * ARM: Introduce erratum workaround for 454179
+  * ARM: Introduce erratum workaround for 430973
+  * ARM: Introduce erratum workaround for 621766
+  * ARM: OMAP: Change set_pl310_ctrl_reg to be generic
+  * ARM: OMAP3: Rename omap3.h to omap.h to be generic as all SoCs
+  * ARM: OMAP3: Get rid of omap3_gp_romcode_call and replace with omap_smc1
+
+  [ Praveen Rao ]
+  * ARM: DRA7 / OMAP5: Add workaround for ARM errata 798870
+
+  [ Nishanth Menon ]
+  * ARM: OMAP5 / DRA7: Setup L2 Aux Control Register with recommended configuration
+  * ARM: OMAP3: Enable workaround for ARM errata 454179, 430973, 621766
+  * ARM: OMAP3: rx51: Enable workaround for ARM errata 454179, 430973, 621766
+
+  [ Sekhar Nori ]
+  * beagle_x15: increase phy autoneg timeout
+
+  [ Stephen Warren ]
+  * config_distro_bootcmd.h: add note on error handling
+
+  [ Masahiro Yamada ]
+  * README: remove description about driver model configuration options (again)
+  * MAINTAINERS: update Masahiro's email address
+  * git-mailrc: update Masahiro's email address
+  * ARM: UniPhier: adjust device trees for business transfer
+
+  [ Joe Hershberger ]
+  * MAKEALL: Don't try to print size when ./u-boot is deleted
+
+  [ Masahiro Yamada ]
+  * kconfig: remove meaningless prefixes in defconfig files
+
+  [ Hannes Petermaier ]
+  * board/BuR/common: fix compiler warning
+
+  [ Przemyslaw Marczak ]
+  * odroid: defconfig: fix build break caused by missing dts
+
+  [ Peng Fan ]
+  * mmc: fsl_esdhc fix register offset
+
+  [ Hannes Petermaier ]
+  * board/BuR/common: use SYS_CONSOLE_OVERWRITE
+
+  [ Masahiro Yamada ]
+  * powerpc: mpc5xxx: remove BC3450 board support
+  * powerpc: ppc4xx: remove JSE board support
+  * powerpc: mpc5xxx: remove aev, TB5200 board support
+  * powerpc: ppc4xx: remove W7OLMC/W7OLMG board support
+  * powerpc: mpc5xxx: remove galaxy5200 board support
+  * powerpc: ppc4xx: remove korat board support
+
+  [ Heiko Schocher ]
+  * travis.yml: add more targets to build on travis
+
+  [ Kim Phillips ]
+  * mpc83xx: preempt premature board support removal by setting GENERIC_BOARD
+
+  [ Tom Rini ]
+  * Prepare v2015.04-rc4
+
+  [ Matt Reimer ]
+  * mmc: s5p: properly mask SELBASECLK
+  * mmc: sdhci: don't clobber adjacent registers
+
+  [ Rob Herring ]
+  * sdhci: fix warnings on 64-bit builds
+  * mv_sdhci: fix warnings on 64-bit builds
+  * mv_i2c: fix warnings on 64-bit builds
+
+  [ Stefan Roese ]
+  * i2c: mvtwsi: Fix problem with baud rate calculation
+
+  [ Wu, Josh ]
+  * ARM: at91: at91sam9rlek: update the default nand flash configs
+  * ARM: at91: at91sam9rlek: add mci support
+  * ARM: at91: at91sam9rlek: add mmc environment configuration
+  * ARM: at91: at91sam9rlek: add hush parser to defconfig
+
+  [ Bo Shen ]
+  * ARM: atmel: sama5d4 xplained: enable mmc power
+  * ARM: atmel: sama5d4 boards: fix spl lds location
+  * ARM: atmel: armv7: move spl lds to armv7 directory
+  * Net: macb: reset GBE bit when fallback checking
+  * ARM: atmel: sama5d4: set non-secured for peripherals
+
+  [ Tom Rini ]
+  * at91sam9rlek_mmc_defconfig: Add CONFIG_ARCH_AT91=y
+
+  [ Paul Kocialkowski ]
+  * sunxi: musb: Return early on VBUS GPIO error instead of on a positive value
+
+  [ Boris BREZILLON ]
+  * ARM: mx6: move to a standard arch/board approach
+  * ARM: iMX: define an IMX_CONFIG Kconfig option
+  * board/seco: Add mx6q-uq7 basic board support
+
+  [ Peng Fan ]
+  * imx:mx6dlsabresd fix error detecting thermal
+  * imx:mx6slevk support reading temperature
+
+  [ Masahiro Yamada ]
+  * ARM: UniPhier: remove unnecessary CONFIG_SYS_SOC
+  * ARM: UniPhier: include PH1-LD4 Makefile from PH1-sLD8
+  * ARM: UniPhier: move platform devices to SPL
+  * ARM: UniPhier: move UART pin settings to SPL
+  * ARM: UniPhier: enable CONFIG_PANIC_HANG
+  * ARM: UniPhier: enable Driver Model and UART on SPL
+  * ARM: UniPhier: use CONFIG_SPL_STACK to define SPL stack pointer
+  * ARM: UniPhier: add CONFIG_SPL_MAX_FOOTPRINT
+  * ARM: UniPhier: move init stack area just below TEXT_BASE
+  * ARM: UniPhier: add empty lowlevel_init to U-boot proper
+  * ARM: UniPhier: fix typos in comments
+  * ARM: UniPhier: optimize kicking secondary CPUs code
+  * ARM: UniPhier: disable L2 cache by lowlevel_init of U-Boot proper
+  * ARM: UniPhier: remove unnecessary ifdef conditional
+
+  [ Rob Herring ]
+  * remove unnecessary version.h includes
+
+  [ Stephen Warren ]
+  * ARM: rpi: fix RPi1 board rev detection for warranty bit
+
+  [ Gilles Gameiro ]
+  * bav335x: Update defconfigs and fix typo in EEPROM config format
+
+  [ Bin Meng ]
+  * x86: quark: MRC codes clean up
+
+  [ Tom Rini ]
+  * arch/x86/cpu/quark/mrc.c: Switch to U_BOOT_DATE / U_BOOT_TIME
+
+  [ Bin Meng ]
+  * fdtdec: Improve fdtdec_get_pci_bdf() documentation
+  * x86: Add queensbay fsp patch information in README.x86
+  * x86: quark: Enable on-chip ethernet controllers
+  * net: Add ethernet FCS length macro in net.h
+  * net: Update README.drivers.eth to mention latest APIs
+  * net: Add Intel Topcliff GMAC driver
+  * x86: crownbay: Enable Intel Topcliff GMAC support
+  * x86: crownbay: Enable saving environment in SPI flash
+  * x86: galileo: Enable saving environment in SPI flash
+  * x86: Add ramboot and nfsboot commands in x86-common.h
+
+  [ Sebastian Siewior ]
+  * watchdog/imx_watchdog: do not set WCR_WDW
+
+  [ Sjoerd Simons ]
+  * part: Add support for list filtering on bootable partitions
+  * config_cmd_default.h: Add 'env exists' command
+  * config_distro_bootcmd.h: Prefer booting from bootable paritions
+
+  [ Masahiro Yamada ]
+  * dm: serial: remove bogus include <ns16550.h>
+
+  [ Ian Campbell ]
+  * sunxi: set GMAC TX delay = 0x1 on Cubietruck.
+
+  [ Iain Paton ]
+  * sunxi: axp209: fix incorrect limits on ldo3
+
+  [ David Feng ]
+  * ARMv8: enable pre-allocation malloc
+  * ARMv8: enable DM in vexpress64 board
+
+  [ Masahiro Yamada ]
+  * ARM: move -march=* and -mtune= options to arch/arm/Makefile
+  * kbuild: remove "*_felconfig" target
+  * kbuild: remove scripts/multiconfig.sh
+  * generic-board: move __HAVE_ARCH_GENERIC_BOARD to Kconfig
+  * generic-board: select SYS_GENERIC_BOARD for some architectures
+  * m68k: remove arch/m68k/lib/board.c
+  * malloc_f: remove redundant defalut values of CONFIG_SYS_MALLOC_F_LEN
+  * malloc_f: enable SYS_MALLOC_F by default if DM is on
+  * ARM: bcm283x: merge BCM2835/BCM2836 directories into mach-bcm283x
+  * ARM: bcm283x: move SoC headers to mach-bcm283x/include/mach
+  * kbuild: merge generic-asm-offsets.h and asm-offsets.h rules
+  * kbuild: remove redundant line from (generic-)asm-offsets.h
+
+  [ Michal Marek ]
+  * kbuild: Don't reset timestamps in include/generated if not needed
+
+  [ Masahiro Yamada ]
+  * m68k: mcf52x2: move CPU type to Kconfig and refactor config.mk
+  * m68k: mcf530x: move CPU type to Kconfig and refactor config.mk
+  * m68k: mcf532x: move CPU type to Kconfig and refactor config.mk
+  * m68k: mcf5445x: move CPU type to Kconfig and refactor config.mk
+  * m68k: mcf5227x: move CPU type to Kconfig and refactor config.mk
+  * m68k: mcf523x: move CPU type to Kconfig and refactor config.mk
+  * m68k: mcf547x_8x: move CPU type to Kconfig and refactor config.mk
+  * m68k: merge per-CPU config.mk into arch/m68k/Makefile
+
+  [ maxin.john@enea.com ]
+  * ARM: omap4_panda: enable saveenv command
+
+  [ Hannes Petermaier ]
+  * board/BuR/common: move I2C initialization from common part to board-specific
+  * board/BuR/common: remove unused function 'blink'
+
+  [ Thierry Reding ]
+  * config: Use booti instead of bootz on 64-bit ARM
+  * config: Define BOOTP client architecture and VCI for ARMv8
+
+  [ Karsten Merker ]
+  * Document config_distro_bootcmd environment variables for interactive booting.
+
+  [ Linus Walleij ]
+  * armv8: semihosting: do not inline trap call
+  * armv8: semihosting: add a command to load semihosted images
+  * vexpress64: remove board late init, use smhload
+  * armv8: semihosting: delete external interface
+  * vexpress64: cut config and defaults for unclear variant
+
+  [ Alexey Brodkin ]
+  * common/board_f: move board_init_f_mem() from #else CONFIG_X86
+
+  [ angelo@sysam.it ]
+  * m68k: fix 3 broken boards
+
+  [ Brian McFarland ]
+  * Patch to mkenvimage to handle text files with length that exceed env size
+
+  [ Anatolij Gustschin ]
+  * powerpc: ppc4xx: convert AMCC boards to generic board
+
+  [ Hans de Goede ]
+  * sunxi: musb: Fix some lo speed devices not working with musb host
+
+  [ Iain Paton ]
+  * sunxi: sun4i: improve cpu clock selection method
+  * sunxi: use CONFIG_SYS_CLK_FREQ to set cpu clock
+  * sunxi: a10-LIME set the cpu clock at boot to 912MHz
+
+  [ Hans de Goede ]
+  * sunxi: UTOO_P66: Add missing MAINTAINERS entry
+
+  [ Axel Lin ]
+  * spi: cf_qspi: Fixup to_cf_qspi_slave macro
+  * spi: davinci: Remove duplicate code to set bus and cs for slave
+  * spi: ftssp010_spi: Use to_ftssp010_spi() to ensure free correct address
+
+  [ Ravi Babu ]
+  * qspi: dra7x: enable quad mode read for ti-qspi driver
+
+  [ Axel Lin ]
+  * spi: cf_spi: Use to_cf_spi_slave to resolve cfslave from slave
+  * spi: cf_spi: Staticize local functions
+  * spi: designware_spi: revisit FIFO size detection again
+
+  [ Stephen Warren ]
+  * ARM: tegra: pinctrl: move Tegra210 code to the correct dir
+  * ARM: tegra: pinctrl: minor cleanup
+  * ARM: tegra: pinctrl: add support for MIPI PAD control groups
+  * ARM: tegra: enable MIPI PAD CTRL support for Tegra124
+
+  [ Simon Glass ]
+  * tegra: seaboard: Remove unused CONFIG_UART_DISABLE_GPIO
+  * tegra: seaboard: Correct the gpio_request() call
+
+  [ Marcel Ziswiler ]
+  * ARM: tegra: get rid of colibri_t20-common
+  * ARM: tegra: rename colibri_t20 board/configuration/device-tree
+  * ARM: tegra: fix colibri_t20 machine type
+  * ARM: tegra: fix colibri_t20 asix reset
+  * ARM: tegra: update colibri_t20 configuration
+
+  [ Lucas Stach ]
+  * tegra: pinmux: fix FUNCMUX_NDFLASH_KBC_8_BIT
+
+  [ Marcel Ziswiler ]
+  * ARM: tegra: colibri_t20: fix nand pinmux
+
+  [ Luca Ellero ]
+  * mtd: nand: mxs: fix PIO_WORDs in mxs_nand_read_buf()
+  * mtd: nand: mxs: fix PIO_WORDs in mxs_nand_write_buf()
+
+  [ Peter Tyser ]
+  * nand: Remove unused CONFIG_MTD_NAND_ECC_JFFS2 option
+  * nand: Remove unused read/write structures
+  * nand: Add verification functions
+  * cmd_nand: Verify writes to NAND
+  * dfu: nand: Verify writes
+  * nand: Remove CONFIG_MTD_NAND_VERIFY_WRITE
+  * nand: yaffs: Remove the "nand write.yaffs" command
+
+  [ Stefan Agner ]
+  * mtd: vf610_nfc: mark page as dirty on block erase
+  * mtd: vf610_nfc: specify transfer size before each transfer
+
+  [ Wu, Josh ]
+  * ARM: at91: sama5d4: display the U-Boot version on LCD
+
+  [ Bo Shen ]
+  * ARM: atmel: arm9: switch to use common timer functions
+  * ARM: atmel: armv7: switch to use common timer functions
+
+  [ Tom Rini ]
+  * spl_atmel.c: Switch s_init to board_init_f
+
+  [ Heiko Schocher ]
+  * arm, at91: corvus: move MACH_TYPE to defconfig
+
+  [ David Dueck ]
+  * ARM: at91: atmel_nand: Support flash based BBT
+
+  [ Wu, Josh ]
+  * ARM: at91: at91sam9n12ek: save the environment to a fat file in MMC card
+
+  [ Bo Shen ]
+  * ARM: atmel: arm926ejs: fix clock configuration
+  * ARM: atmel: at91sam9m10g45ek: enable spl support
+  * ARM: atmel: at91sam9x5ek: enable spl support
+  * ARM: atmel: at91sam9n12ek: enable spl support
+
+  [ Wu, Josh ]
+  * ARM: at91: sama5: move the common part of configurations to at91-sama5_common.h
+
+  [ Tom Rini ]
+  * Prepare v2015.04-rc5
+
+  [ Alexey Brodkin ]
+  * serial/serial_arc: set registers address during compilation
+  * arc: cache - build invalidate_icache_all() and invalidate_dcache_all() always
+  * arc: merge common start-up code between ARC and ARCv2
+  * arc: move low-level interrupt and exception handlers in a separate file
+  * arc: clean-up init procedure
+  * arc: re-generate defconfigs
+  * arc: get rid of CONFIG_SYS_GENERIC_GLOBAL_DATA
+  * arc: minor fixes in Kconfig
+  * serial-arc: switch to DM
+  * board: Switch Abilis TB-100 board to Driver Model for serial port
+  * arc: add support for SLC (System Level Cache, AKA L2-cache)
+  * board: AXS10x - update SDIO clock value
+
+  [ Hans de Goede ]
+  * sunxi: Fix Orangepi_mini dtb filename
+
+  [ Guillaume GARDET ]
+  * Exynos: Clock: Fix exynos5_get_periph_rate for I2C.
+
+  [ Inha Song ]
+  * exynos5: add trace feature #ifdef in exynos5-common.h
+
+  [ Sjoerd Simons ]
+  * config: peach: Correct memory layout environment settings
+
+  [ Ajay Kumar ]
+  * arm: exynos: add display clocks for Exynos5800
+  * Exynos5: Fix rpll_sdiv to support both peach-pit and peach-pi panels
+  * video: exynos_fb: configure backlight GPIOs if specified in DT
+  * video: parade: configure SLP and RST GPIOs if specified in DT
+  * dts: exynos54xx: Add samsung, pwm-out-gpio property to FIMD node
+  * dts: peach_pit: Add SLP and RST GPIO properties in parade DT node
+  * dts: peach_pi: Add DT properties needed for display
+  * smdk5420: Remove GPIO enums
+
+  [ Łukasz Majewski ]
+  * config: exynos: common: Provide env variables to support Image.itb
+  * config: exynos: trats: Enable support for Image.itb at trats device
+  * config: exynos: trats2: Enable support for Image.itb at trats2 device
+
+  [ Mario Schuknecht ]
+  * env_sf: Fix recovery default
+
+  [ Tang Yuantian ]
+  * ahci: Fix a wrong parameter pass
+
+  [ Pavel Machek ]
+  * cmd_mem: cleanups, catch bad usage
+
+  [ Tom Rini ]
+  * am33xx/ddr.c: Fix regression on DDR2 platforms
+
+  [ Masahiro Yamada ]
+  * kbuild: include config.mk when auto.conf is not older than .config
+  * MAKEALL: fix get_target_arch() to adjust to '-' in Status field
+
+  [ Pavel Machek ]
+  * fix makefiles to respect DTC setting
+
+  [ Tom Rini ]
+  * cmd_mem.c: Update 'iteration_limit' to unsigned long
+
+  [ Fabio Estevam ]
+  * mx53loco: Disable printing cpuinfo
+
+  [ Ulises Cardenas ]
+  * Fix mxc_hab documenation for DEK blob generation
+
+  [ Masahiro Yamada ]
+  * ARM: zynq: disable CONFIG_SYS_MALLOC_F to fix MMC boot
+
+  [ Michal Simek ]
+  * ARM: zynq: Remove Jagan from list of maintainers
+
+  [ Andrej Rosano ]
+  * ARM: mx5: move to a standard arch/board approach
+  * ARM: mx5: add support for USB armory board
+
+  [ Alexey Brodkin ]
+  * board: axs10x - support v3 mother-board
+
+  [ Masahiro Yamada ]
+  * MAINTAINERS: fix TI DaVinci directory path and add KeyStone
+
+  [ Anatolij Gustschin ]
+  * mcx: update maintainer and convert to generic board
+
+  [ Przemyslaw Marczak ]
+  * odroid-XU3: update board maintainer
+
+  [ Grazvydas Ignotas ]
+  * omap3: pandora: use common configuration
+
+  [ Albert ARIBAUD \(3ADEV\) ]
+  * lpc32xx: add Ethernet support
+  * lpc32xx: mtd: nand: add MLC NAND controller
+  * lpc32xx: i2c: add LPC32xx I2C interface support
+  * lpc32xx: add GPIO support
+  * lpc32xx: add LPC32xx SSP support (SPI mode)
+  * dtt: add ds620 support
+  * lpc32xx: add lpc32xx-spl.bin boot image target
+  * Introduce CONFIG_SPL_PANIC_ON_RAW_IMAGE
+  * lpc32xx: add support for board work_92105
+
+  [ Simon Glass ]
+  * fdt: nios: Fix warning in ft_cpu_setup()
+
+  [ Alexey Brodkin ]
+  * arc: make sure _start is in the beginning of .text section
+
+  [ Stefan Agner ]
+  * common, ubi: use positive return values for ubi check
+
+  [ Linus Walleij ]
+  * common/armflash: Support for ARM flash images
+  * vexpress64: juno: add default NOR flash boot
+  * integrator: consolidate flash info
+
+  [ Alexey Brodkin ]
+  * arc: fix separate compilation of start.o
+
+  [ Stefan Roese ]
+  * arm: armada-xp: Fix SPL for AXP by using save_boot_params_ret
+
+  [ Masahiro Yamada ]
+  * ARM: fix arch/arm/Makefile for Tegra
+
+  [ Stephen Warren ]
+  * ARM: rpi: add a couple more revision IDs
+
+  [ Pavel Machek ]
+  * break build if it would produce broken binary
+
+  [ Tom Rini ]
+  * Prepare v2015.04
+
+  [ Franck Jullien ]
+  * usb_storage : scan all interfaces to find a storage device
+
+  [ Thierry Reding ]
+  * usb: eth: asix: Build warning fixes for 64-bit
+
+  [ Rob Herring ]
+  * usb: ci_udc: fix warnings on 64-bit builds
+  * ehci-hcd: fix warnings on 64-bit builds
+
+  [ Thierry Reding ]
+  * usb: ehci-tegra: Build warning fixes for 64-bit
+  * usb: mass-storage: Build warning fixes for 64-bit
+
+  [ Sergey Temerkhanov ]
+  * usb: Convert protocol header structures to use explicitly sized variables
+  * usb: 64-bit architectures support for xHCI
+  * usb_storage:Fix USB storage capacity detection on 64 bit architectures
+
+  [ Paul Kocialkowski ]
+  * usb: usb_new_device return codes consistency
+  * usb: Check usb_new_device for failure
+  * usb: Early failure when the first descriptor read fails or is invalid
+
+  [ Stephen Warren ]
+  * usb: fix first descriptor fetch error handling
+
+  [ Tim Harvey ]
+  * usb: hub: allow pgood_delay to be specified via env
+
+  [ Stephen Warren ]
+  * usb: dwc2: unify waiting for transfer completion
+  * usb: dwc2: refactor submit_bulk_msg to be common
+  * usb: dwc2: usb chunk_msg() for control transfers too
+  * usb: dwc2: remove control_data_toggle[]
+  * usb: dwc2: simplify wait_for_chhltd
+  * usb: dwc2: fix aligned buffer usage
+  * usb: dwc2: remove restriction on buffer length
+  * usb: dwc2: fix bulk transfers
+  * Create API to map between CPU physical and bus addresses
+  * ARM: bcm2835: implement phys_to_bus/bus_to_phys
+  * usb: dwc2: use phys_to_bus/bus_to_phys
+  * usb: dwc2: detect device speed correctly
+  * ARM: bcm2835: use phys_to_bus() for mbox
+  * usb: dwc2: correctly program hcchar for LS devices
+  * usb: dwc2: implement interrupt transfers
+  * usb: dwc2: retry NAK'd interrupt transfers
+
+  [ Kishon Vijay Abraham I ]
+  * ARM: DRA7: Enable clocks for USB OTGSS and USB PHY
+  * ARM: AM43xx: Enable clocks for USB OTGSS and USB PHY
+  * usb: gadget: udc: add udc-core from linux kernel to u-boot
+  * include: usb: modify gadget.h to include udc support
+  * usb: gadget: udc: make udc-core compile in u-boot build
+  * include: asm: dma-mapping: get rid of the compilation warning in udc-core
+  * usb: dwc3: add dwc3 folder from linux kernel to u-boot
+  * usb: dwc3: remove un-used files from dwc3 folder
+  * usb: dwc3: Modify the file headers to u-boot format
+  * usb: dwc3: remove trace_* APIs from dwc3 driver
+  * usb: dwc3: fix dwc3 header files
+  * usb: dwc3: remove pm related operations from dwc3 driver
+  * arm: asm: dma-mapping: added dma_free_coherent API
+  * usb: dwc3: linux-compat: Add header for dwc3 linux compatibiltiy
+  * usb: dwc3: gadget: make dwc3 gadget build in uboot
+  * include: asm: types: add resource_size_t type
+  * usb: dwc3: ep0: make dwc3 ep0 build in uboot
+  * include: usb: composite: add USB_GADGET_DELAYED_STATUS to avoid compilation error
+  * usb: dwc3: core: make dwc3 core build in uboot
+  * include: dwc3-uboot: add a structure for populating platform data
+  * dwc3: core: change probe and remove to uboot init and uboot exit code
+  * dwc3: core: add support for multiple dwc3 controllers
+  * dwc3: core: added an API to invoke irq handlers
+  * usb: dwc3: dwc3-omap: make dwc3-omap build in uboot
+  * include: dwc3-omap-uboot: add a structure for populating dwc3-omap platform data
+  * usb: dwc3: dwc3-omap: change probe and remove to uboot init and uboot exit code
+  * dwc3: dwc3-omap: add support for multiple dwc3-omap controllers
+  * usb: dwc3: dwc3-omap: add interrupt status API to check for interrupts
+  * usb: dwc3: TI PHY: PHY driver for dwc3 in TI platforms
+  * dwc3: flush the buffers before using it
+  * usb: dwc3: ep0: preparation for implementing chained TRB
+  * usb: dwc3: Add chained TRB support for ep0
+  * usb: dwc3: Makefile: Make dwc3 driver compile in u-boot
+  * usb: gadget: defer setting maxpacket till ->setup()
+  * common: cmd_dfu: invoke board_usb_cleanup() for cleaning up
+  * board: ti: DRA7: added USB initializtion code
+  * include: configs: Enable DWC3 and DFU in DRA7xx
+  * board: ti: AM43xx: added USB initializtion code
+  * include: configs: Enable DWC3 and DFU in AM43xx
+  * usb: modify usb_gadget_handle_interrupts to take controller index
+
+  [ Lukasz Majewski ]
+  * usb: board: samsung: Add default board_usb_cleanup() definition for Exynos SoCs
+  * usb: board: goni: Add default board_usb_cleanup() definition for Goni board
+
+  [ Inha Song ]
+  * usb: gadget: UMS: Invoke board specific USB cleanup interface
+  * usb: gadget: thor: Invoke board specific USB cleanup interface
+
+  [ Lukasz Majewski ]
+  * usb: composite: Add .reset callback to usb_gadget_driver structure
+  * usb: dwc3: Remove BIT(x) macro from DWC3's gadget code
+
+  [ Joonyoung Shim ]
+  * usb: dwc3: make dwc3_set_mode to static
+
+  [ Marek Szyprowski ]
+  * usb: dwc3: add a workaround for too small OUT requests
+  * usb: dwc3: gadget: add common endpoint configuration for dwc3 udc driver
+  * usb: dwc3: optimize interrupt loop
+
+  [ Lukasz Majewski ]
+  * usb: dwc3: gadget: Set all ctrl fields of Transfer Control Blocks (TRB) to be LST
+  * usb: dwc3: gadget: Set non EP0 max packet limit to 512B
+  * usb: dwc3: Correct clean up code for requests
+
+  [ Marek Szyprowski ]
+  * usb: gadget: thor: Claim EP after allocating it in thor gadget
+
+  [ Fabio Estevam ]
+  * cmd_usb_mass_storage: Use 'USB Mass Storage' in the help text
+
+  [ Heiko Schocher ]
+  * dfu: cmd: trigger watchdog before calling usb_gadget_handle_interrupts
+
+  [ Michael Scott ]
+  * fastboot: check for alias when looking up partition by name
+
+  [ Alexey Firago ]
+  * fastboot: add support for reboot-bootloader command
+
+  [ Paul Kocialkowski ]
+  * fastboot: Proper download gadget unregister and clear when cable is missing
+
+  [ Han Pengfei ]
+  * sun6i: Add support for the Mixtile LOFT-Q board
+
+  [ Paul Kocialkowski ]
+  * sunxi: gpio: Indentation fix
+  * power: axp221: Virtual VBUS detect and enable GPIOs to replace separate logic
+  * sunxi: usb: Drop AXP-sepcific VBUS detection and drive logic
+  * power: axp209: VBUS detection support
+  * sunxi: common VBUS detection logic in usbc
+  * sunxi: USB download gadget cable detection
+  * sunxi: Ainol AW1 support
+  * sunxi: GPIO pin mux hardware-feature-specific function index defines
+  * sunxi: Complete mmc pin mux for each supported platform, configured with Kconfig
+  * sunxi: Yones Toptech BD1078 support
+  * power: axp152: Registers definitions in header
+  * power: axp209: Registers definitions in header
+
+  [ Hans de Goede ]
+  * sunxi: usbc: Initialize vusb value on request_resources
+  * sunxi: usbc: Wait for vbus to fall after disabling it
+  * sunxi: axp221: Use vbus-available rather then vbus-usable for vbus-detect
+
+  [ Paul Kocialkowski ]
+  * sunxi: TZX-Q8-713B7 mmc0 card-detect pin
+  * sunxi: Ampe A76 mmc0 card-detect pin
+  * sunxi: Ainol AW1 mmc0 card-detect pin
+  * sunxi: Yones Toptech BD1078 mmc0 and mmc1 card-detect pins
+  * sunxi: A20-OLinuXino-Lime2 mmc0 card-detect pin
+  * sunxi: Cubieboard2 mmc0 card-detect pin
+  * sunxi: A20-OLinuXino-Lime2 USB0 VBUS detect and enable pins
+  * sunxi: Serial number support, obtained from SID bits
+  * sunxi: Removed dram files cleanup in MAINTAINERS
+  * sunxi: Proper iNet board config naming
+  * sunxi: iNet 3W support
+  * sunxi: iNet 3F support
+  * i2c: mvtwsi: Support for up to 4 different controllers
+  * sunxi: Complete i2c support for each supported platform
+
+  [ Vitaly Andrianov ]
+  * arm: implement find_next_zero_bit function
+
+  [ David Feng ]
+  * Armv8: Initializing CNTVOFF_EL2
+
+  [ Alexander Merkle ]
+  * fix ARM DCC support for ARMv7 based cores (e.g. CortexA)
+  * fix ARM DCC support for ARMv7 based cores (e.g. CortexA)
+
+  [ Valentine Barshak ]
+  * ARM: cpu: Add ARMv7 barrier operations support
+
+  [ Bryan Brinsko ]
+  * ARMv7 TLB: Fixed TTBR0 and Table Descriptors to allow caching
+
+  [ Kishon Vijay Abraham I ]
+  * ti: dwc3: Enable clocks in enable_basic_clocks() in hw_data.c
+
+  [ Simon Glass ]
+  * x86: Support machines with >4GB of RAM
+  * x86: video: Allow keyboard presence to be controlled by device tree
+  * x86: pci: Add PCI IDs for lynxpoint
+  * x86: spi: Add support for lynxpoint
+  * x86: Move common Chromebook config into a separate file
+  * x86: Add support for panther (Asus Chromebox)
+  * sandbox: Update device tree 'reg' properties for I2C and SPI
+  * fdt: Export fdtdec_get_number() for general use
+  * x86: Add a x86_ prefix to the x86-specific PCI functions
+  * dm: Add a new CPU init function which can use driver model
+  * x86: Split up arch_cpu_init()
+  * Correct map_sysmem() logic in do_mem_mw()
+  * fdt: Tighten up error handling in fdtdec_get_pci_addr()
+  * dm: core: Add dev_get_uclass_priv() to access uclass private data
+  * dm: core: Mark device as active before calling its probe() method
+  * dm: core: Add a uclass pre_probe() method for devices
+  * dm: Show both allocated and requested seq numbers in 'dm uclass'
+  * dm: pci: Move common PCI functions into their own file
+  * dm: pci: Add a uclass for PCI
+  * dm: sandbox: pci: Add PCI support for sandbox
+  * dm: sandbox: Add a simple PCI driver
+  * dm: sandbox: pci: Add a PCI emulation uclass
+
+  [ Hannes Petermaier ]
+  * common/lcd_console: cleanup lcd_drawchars/lcd_putc_xy
+  * common/lcd_console: ask only one-time for bg/fg-color per call
+  * common/lcd_console: move single static variables into common (static) structure
+  * common/lcd_console: introduce display/framebuffer rotation
+
+  [ Simon Glass ]
+  * dm: sandbox: Add a emulated PCI device as an example
+  * dm: sandbox: pci: Enable PCI for sandbox
+  * dm: x86: pci: Add a PCI driver for driver model
+  * dm: x86: pci: Convert coreboot to use driver model for pci
+  * dm: x86: pci: Convert chromebook_link to use driver model for pci
+  * dm: pci: Add driver model tests for PCI
+
+  [ Joe Hershberger ]
+  * test: dm: Reorder the objects to build
+  * common: Make sure arch-specific map_sysmem() is defined
+  * net: Provide a function to get the current MAC address
+  * net: Rename helper function to be more clear
+  * net: Remove unneeded "extern" in net.h
+  * net: Refactor in preparation for driver model
+  * net: Change return codes from net/eth.c to use errorno constants
+  * net: Use int instead of u8 for boolean flag
+  * net: Remove the bd* parameter from net stack functions
+  * net: Make netretry actually do something
+  * net: Access mapped physmem in net functions
+  * cmd: net: Clean up return codes
+  * dm: eth: Add basic driver model support to Ethernet stack
+  * net: Clean up network stack names used in DM drivers
+  * dm: eth: Pass the packet pointer as a parameter to recv
+  * sandbox: eth: Add network support to sandbox
+  * sandbox: eth: Add ARP and PING response to sandbox driver
+  * test: dm: eth: Add tests for the eth dm implementation
+  * dm: eth: Add support for aliases
+  * dm: eth: Add support for ethprime env var
+  * test: dm: eth: Add testing for ethrotate env var
+  * sandbox: eth: Add ability to disable ping reply in sandbox eth driver
+  * test: dm: net: Add a test of the netretry behavior
+  * sandbox: eth: Add a bridge to a real network for sandbox
+  * sandbox: Enable DHCP and IP defrag
+  * sandbox: eth: Add support for using the 'lo' interface
+  * net: Improve error handling
+
+  [ Simon Glass ]
+  * dm: sf: Add driver model read/write/erase methods
+  * dm: x86: spi: Convert ICH SPI driver to driver model
+  * dm: x86: Add a uclass for a Platform Controller Hub
+  * dm: x86: Add a uclass for an Low Pin Count (LPC) device
+  * x86: chromebook_link: dts: Add PCH and LPC devices
+  * dm: cros_ec: Convert cros_ec LPC driver to driver model
+  * cros_ec: Reinit the cros_ec device when 'crosec init' is used
+  * cros_ec: Drop unused CONFIG_DM_CROS_EC
+  * sandbox: cros_ec: Drop unnecessary init
+  * x86: cros_ec: Drop unnecessary init
+  * exynos: cros_ec: Drop unnecessary init
+  * cros_ec: Remove unused cros_ec_board_init() function
+  * fdt: cros_ec: Drop compatible string in fdtdec
+  * fdt: Drop LPC compatible string in fdtdec
+  * cros_ec: exynos: Match up device tree with kernel version
+  * sandbox: cros_ec: Add Kconfig for sandbox EC config
+  * i8042: Add keyboard enable logic in kbd_reset()
+
+  [ Przemyslaw Marczak ]
+  * dm: gpio: request list: return the count if requests max_count reached
+  * Kconfig: i2c: fix help message related to dm i2c
+  * dm: i2c: add i2c-gpio driver
+
+  [ Haikun.Wang@freescale.com ]
+  * dm: arm: Bring in skeleton64 device tree file from Linux
+
+  [ haikun ]
+  * dm: ls1021a: Bring in ls1021a dts files from linux kernel
+  * dm: ls1021a: dts: Change address_cells and size_cells from 2 to 1
+
+  [ Haikun.Wang@freescale.com ]
+  * dm: ls1021a: dts: Update DSPI node to support DM SPI
+  * dm: ls1021a: dts: Add QSPI dts node
+  * dm: spi: Convert Freescale DSPI driver to driver model
+  * dm: spi: Convert Freescale QSPI driver to driver model
+
+  [ Joe Hershberger ]
+  * dm: eth: Provide a way for drivers to manage packet buffers
+
+  [ Simon Glass ]
+  * linker_lists: Add a function to access a linker list entry
+  * sandbox: Fix comment for os_open()
+  * dm: test: bus: Use a local variable to simplify code
+  * dm: core: Support allocating driver-private data for DMA
+  * dm: core: Convert driver_bind() to use const
+  * dm: core: Rename driver data function to dev_get_driver_data()
+  * dm: core: Mark device as active before calling uclass probe() methods
+  * dm: core: Add device children and sibling functions
+  * dm: gpio: Add an implementation for gpio_get_number()
+  * dm: usb: Add a uclass for USB controllers
+  * dm: usb: Adjust usb command to prepare for driver model
+  * dm: usb: Adjust usb_alloc_new_device() to return an error
+  * dm: usb: Convert 'usb' command to support driver model
+  * dm: usb: Drop the legacy USB init sequence
+  * dm: usb: Refactor port resets
+  * dm: usb: Move descriptor setup code into its own function
+  * dm: usb: Split out more code from usb_new_device()
+  * dm: usb: Complete the splitting up of usb_new_device()
+  * dm: usb: Convert core usb.c file to support driver model
+  * dm: usb: Split hub detection into its own function
+  * dm: usb: Add driver model support for hubs
+  * dm: usb: Move USB storage definitions to usb_defs.h
+  * dm: usb: Fix type problems in usb_stor_get_info()
+  * dm: usb: Simply device finding code in usb_storage
+  * dm: usb: Adjust usb_storage to work with sandbox
+  * Revert "usb_storage : scan all interfaces to find a storage device"
+  * dm: usb: Move storage device scanning into its own function
+  * dm: usb: Convert usb_storage to driver model
+  * dm: usb: Move all the EHCI weak functions together and declare them
+  * dm: usb: Pass EHCI controller pointer to ehci_get_port_speed()
+  * dm: usb: Allow ECHI to hold private data for the controller
+  * dm: usb: tegra: Store the controller type explicitly
+  * dm: usb: Pass EHCI controller pointer to ehci_powerup_fixup()
+  * dm: usb: tegra: Drop use of global controller variable
+  * dm: usb: Pass EHCI controller pointer to ehci_set_usbmode()
+  * dm: usb: Pass EHCI controller pointer to ehci_get_portsc_register()
+  * dm: usb: ehci: Use a function to find the controller from struct udevice
+  * dm: usb: Refactor EHCI init
+  * dm: usb: Drop the EHCI weak functions
+  * dm: usb: Change ehci_reset() to use a pointer
+  * dm: usb: Add driver model support to EHCI
+  * dm: usb: Allow USB drivers to be declared and auto-probed
+  * dm: usb: Bind generic USB devices when there is no driver
+  * dm: usb: Allow setting up a USB controller as a device/gadget
+  * dm: usb: Split out the keyboard probe into its own function
+  * dm: usb: Support driver model with USB keyboards
+  * dm: usb: tegra: Add vbus GPIOs for nyan
+  * dm: usb: Move struct usb_string to a common place
+  * dm: usb: sandbox: Add a uclass for USB device emulation
+  * dm: usb: sandbox: Reset emulation devices in usb stop()
+  * dm: usb: sandbox: Add an emulator for USB flash devices
+  * dm: usb: sandbox: Add an emulator for USB hub emulation
+  * dm: usb: sandbox: Add a driver for sandbox
+  * dm: usb: dts: sandbox: Add some sample USB devices to sandbox
+  * dm: usb: Add support for USB ethernet devices with driver model
+  * dm: usb: exynos: Add driver model support to exynos EHCI
+  * dm: usb: tegra: Remove the port_addr_clear_csc variable
+  * dm: usb: tegra: Tidy up error handling and a static function
+  * dm: usb: tegra: Move most of init/uninit into a function
+  * dm: usb: tegra: Add driver model support to tegra EHCI
+  * dm: usb: xhci: Use a function to get xhci_ctrl
+  * dm: usb: xhci: Use explicit parameters for xhci_alloc_virt_device()
+  * dm: usb: xhci: Use explicit parameters for xhci_setup_addressable_virt_dev()
+  * dm: usb: xhci: Factor out common init/uninit
+  * dm: usb: Support driver model in XHCI
+  * dm: usb: Rename the XHCI HCD to U-Boot
+  * dm: usb: exynos: Adjust XHCI driver to support driver model
+  * dm: usb: exynos: Use driver model for USB
+  * dm: usb: exynos: Enable both USB ports on snow
+  * dm: usb: exynos: Enable both EHCI and XHCI on snow
+  * dm: usb: Add a generic descriptor struct
+  * dm: usb: Tidy up pipe value decoding
+  * dm: usb: sandbox: Enable USB
+  * dm: test: Correct printf() output nit in 'dm uclass'
+  * dm: test: Allow 'dm test' to select a particular test to run
+  * dm: usb: Add tests for the USB uclass
+  * dm: usb: Add a README for driver model
+
+  [ Masahiro Yamada ]
+  * dm: spi_flash: fix wrong dependency
+  * dm: select CONFIG_DM* options
+  * ARM: UniPhier: use "select" instead of default value in defconfig
+  * ARM: zynq: use "select" instead of default value in defconfig
+  * ARM: rmobile: use "select" instead of default value in defconfig
+  * ARM: snapper9260: use "select" instead of default value in defconfig
+  * ARM: mx6: use "select" instead of default value in defconfig
+  * ARM: socfpga: use "select" instead of default value in defconfig
+  * ARM: bav335x: use "select" instead of default value in defconfig
+  * ARM: stv0991: use "select" instead of default value in defconfig
+  * ARM: cm_fx6: use "select" instead of default value in defconfig
+  * powerpc: ids8313: use "select" instead of default value in defconfig
+
+  [ Joe Hershberger ]
+  * net: cosmetic: Change IPaddr_t to struct in_addr
+  * net: cosmetic: Fixup var names related to boot file
+  * net: cosmetic: Fixup var names for DHCP strings
+  * net: cosmetic: Name ethaddr variables consistently
+  * net: cosmetic: Cleanup internal packet buffer names
+  * net: cosmetic: Fix var naming net <-> eth drivers
+  * net: cosmetic: Clean up TFTP variables and functions
+  * net: cosmetic: Clean up ARP variables and functions
+  * net: cosmetic: Clean up DHCP variables and functions
+  * net: cosmetic: Clean up NFS variables and functions
+  * net: cosmetic: Clean up RARP variables and functions
+  * net: cosmetic: Clean up SNTP variables and functions
+  * net: cosmetic: Clean up ping variables and functions
+  * net: cosmetic: Clean up CDP variables and functions
+  * net: cosmetic: Clean up DNS variables and functions
+  * net: cosmetic: Clean up netconsole variables and functions
+  * net: cosmetic: Clean up cmd_net variables and functions
+  * net: cosmetic: Fix checkpatch.pl failures in linklocal
+  * net: cosmetic: Fix checkpatch.pl failures in eth.c
+  * net: cosmetic: Fix checkpatch.pl failures in net.h
+  * net: cosmetic: Fix checkpatch.pl failures in net.c
+
+  [ Sergey Temerkhanov ]
+  * net: Fix incorrect DHCP/BOOTP packets on 64-bit systems
+  * net: Convert protocol structures to use explicit sizes
+
+  [ Joe Hershberger ]
+  * net: Fix compile errors when SNTP enabled and not DATE
+  * sandbox: Enable more network features for sandbox
+
+  [ Simon Glass ]
+  * sunxi: Replace the pcDuino3 config with FDT version
+  * Kconfig: Move CONFIG_DESIGNWARE_ETH to Kconfig
+  * dts: sunxi: Bring in Ethernet device tree bindings
+  * dm: net: Use existing Ethernet init for driver model
+  * Avoid calling print_eths() with driver model
+  * dm: net: Adjust PHY interface to work with CONFIG_DM_ETH
+  * dm: net: Tidy up designware driver ready for driver model
+  * dm: net: Adjust designware driver to support driver model
+  * dm: sunxi: Support driver model for Ethernet
+  * dm: sunxi: Use driver model for Ethernet on Linksprite pcDuino3
+  * Kconfig: Move CONFIG_BOOTSTAGE to Kconfig
+  * sandbox: Move GPIO CONFIGs to Kconfig
+  * sandbox: Move CONFIG_SYS_VSNPRINTF to Kconfig
+  * sandbox: Move CONFIG_SYS_I2C_SANDBOX to Kconfig
+  * sandbox: Move CONFIG_SANDBOX_SPI to Kconfig
+  * sandbox: Move CONFIG_SPI_FLASH_SANDBOX to Kconfig
+  * sandbox: Move CONFIG_TPM_TIS_SANDBOX to Kconfig
+  * sandbox: exynos: Move CONFIG_SOUND to Kconfig
+  * sandbox: exynos: Move CONFIG_CMD_SOUND to Kconfig
+  * sandbox: exynos: Move CONFIG_I2S to Kconfig
+  * sandbox: exynos: Move CONFIG_I2S_SAMSUNG to Kconfig
+  * sandbox: exynos: Move CONFIG_SOUND_MAX98095 to Kconfig
+  * sandbox: exynos: Move CONFIG_SOUND_WM8994 to Kconfig
+  * sandbox: exynos: Move CONFIG_SOUND_SANDBOX to Kconfig
+
+  [ Scott Wood ]
+  * ahci: mmio_base is a virtual address
+
+  [ Simon Glass ]
+  * Create a .cfg file containing the CONFIG options used to build
+  * buildman: Show 'make' command line when -V is used
+  * buildman: Adjust the 'aborted' heuristic for writing output
+  * buildman: Store build config files
+  * buildman: Allow comparison of build configuration
+
+  [ Tom Rini ]
+  * buildman: Keep more outputs with the --keep-outputs flag
+  * buildman: Make -V (verbose_build) really be verbose
+
+  [ Wu, Josh ]
+  * patman: cover letter shows like 00/xx if more than 10 patches
+
+  [ Sjoerd Simons ]
+  * sandbox: only do sandboxfs for hostfs interface
+  * sandbox: Split bootm code out into lib/bootm
+  * sandbox: Add support for bootz
+  * sandbox: Renamed sb command to host
+  * sandbox: Implement host dev [device]
+  * config_distro_bootcmd.h: Add shared block definition for the host interface
+  * pxe: Ensure all memory access is to mapped memory
+  * config: Add default client arch defines for intel architectures
+  * sandbox: add config_distro_defaults and config_distro_bootcmd
+
+  [ Heiko Schocher ]
+  * video, ipu: make ldb_clock configurable
+  * video, ipu: make ldb clock frequency overwritable through board code
+  * video, lg4573: add support for the lg4573 display
+
+  [ Curt Brune ]
+  * MPC8541/MPC8555: Enable SS_EN in DDR_SDRAM_CLK_CNLT register
+
+  [ Alexander Graf ]
+  * qemu-ppce500: Add support for 64bit CCSR map
+
+  [ Shengzhou Liu ]
+  * powerpc/t2080: enable erratum_a007186 for t2080 rev1.1
+
+  [ Ying Zhang ]
+  * board/t208xrdb: VID support
+
+  [ Chunhe Lan ]
+  * T4240RDB: Enable CONFIG_SYS_CORTINA_FW_IN_NOR config
+
+  [ Shengzhou Liu ]
+  * powerpc/t2080rdb: update ddr to support 1866MT/s
+
+  [ Scott Wood ]
+  * powerpc/mpc85xx: Don't relocate exception vectors
+  * powerpc/mpc85xx: Remove some dead code
+
+  [ Shengzhou Liu ]
+  * board/t2080rdb: enable CONFIG_PHY_AQUANTIA
+
+  [ Scott Wood ]
+  * powerpc/mpc8641hpcn: Move environment to avoid conflict
+
+  [ Codrin Ciubotariu ]
+  * net: phy: realtek: Disable interrupt on Realtek Ethernet PHY drivers
+
+  [ Thierry Reding ]
+  * net: rtl8169: Build warning fixes for 64-bit
+
+  [ Joe Hershberger ]
+  * Update MAINTAINERS and git-mailrc for net
+
+  [ Tim James ]
+  * mii: add read-modify-write option to mii command
+
+  [ Luca Ellero ]
+  * net: phy: micrel: add support for KSZ8081MNX
+
+  [ Shengzhou Liu ]
+  * net/phy: fixup for get_phy_id
+
+  [ Michal Simek ]
+  * net: gem: Use correct type for casting
+
+  [ Bin Meng ]
+  * net: pch_gbe: Fix pch_gbe device name
+
+  [ Dinh Nguyen ]
+  * arm: socfpga: spl: Add CONFIG_SPL_MAX_SIZE to be 64KB
+  * arm: socfpga: add functions to bring sdram, timer, and uart out of reset
+  * arm: socfpga: spl: enable sdram, timer and uart
+  * arm: socfpga: spl: Add call to timer_init
+  * arm: socfpga: spl: allow bootrom to enable IOs after warm reset
+  * arm: socfpga: spl: add sdram init and calibration
+  * arm: socfpga: spl: printout sdram size
+  * arm: socfpga: spl: Use common lowlevel_init
+  * arm: socfpga: spl: add CONFIG_SPL_STACK to socfpga_common.h
+  * arm: socfpga: spl: Adjust the SYS_INIT_RAM_SIZE to have room for the spl malloc
+  * arm: socfpga: spl: Add SDRAM check
+  * arm: socfpga: fix uart0 pin mux configuration
+  * arm: socfpga: spl: Add s_init stub
+  * arm: socfpga: spl: add board_init_f to SPL
+  * arm: socfpga: spl: update peripheral pll for dev kit
+
+  [ Marek Vasut ]
+  * spi: Add Designware SPI controller Kconfig entry
+  * spi: Add Cadence QSPI controller Kconfig entry
+  * arm: socfpga: spl: Add stub sdram.h
+
+  [ Andrey Skvortsov ]
+  * kconfig: remove duplicated CMD_DNS option
+
+  [ Linus Walleij ]
+  * serial: pl01x: fix PL010 regression
+
+  [ Alison Wang ]
+  * arm/ls102xa:Add support of conditional workaround implementation as per SoC ver
+
+  [ Yao Yuan ]
+  * ls1021atwr: add hwconfig setting to do pin mux
+
+  [ Alison Wang ]
+  * ls102xa: ddr4: Use LPUART as console output to verify DCU driver
+
+  [ gaurav rana ]
+  * Add bootscript support to esbc_validate.
+
+  [ Nikhil Badola ]
+  * drivers:usb: Add device-tree fixup to identify socs having dual phy
+  * drivers:usb:fsl: Add affected SOCs for USB Erratum A007792
+
+  [ Minghuan Lian ]
+  * pci/layerscape: remove unnecessary pcie_layerscape.h
+  * pci/layerscape: fix link and class issues to support ls2085a
+
+  [ Nikhil Badola ]
+  * drivers:usb: Check if USB Erratum A005697 is applicable on BSC913x
+
+  [ Zhao Qiang ]
+  * QE/DeepSleep: add QE deepsleep support for mpc85xx
+  * QE/DeepSleep: add QE deepsleep support for arm
+
+  [ Bhupesh Sharma ]
+  * armv8/fsl-lsch3: Add Freescale Debug Server driver
+  * fsl-ch3/README: Add description for NOR flash layout (firmware images)
+
+  [ Prabhakar Kushwaha ]
+  * driver/fsl-mc: Add support of MC Flibs
+
+  [ Siva Durga Prasad Paladugu ]
+  * sf: Correct the macros as per new array fast read command
+  * sf: Poll both the read status and flag status
+  * zynq: spi: Remove unnecessary error condition
+
+  [ Pavel Machek ]
+  * spi flash: fix trivial problems
+
+  [ Stefan Roese ]
+  * cmd_sf: Fix problem with "sf update" and unaligned length
+
+  [ Peng Fan ]
+  * mtd: spi: check return value of spi_setup_slave
+
+  [ Jörg Krause ]
+  * ARM: mxs: Get boot mode from OCRAM
+
+  [ Tim Harvey ]
+  * arm: mx6: ddr: add pd_fast_exit flag to system information
+  * fdt: add new fdt_fixup_display function to configure display
+
+  [ Fabio Estevam ]
+  * mx6: Add initial SPL support for HummingBoard-i2eX
+
+  [ Tim Harvey ]
+  * imx: ventana: disable 4k tftp/nfs packets
+  * imx: ventana: add i210 support
+  * imx: ventana: assign default ethprime dynamically
+  * imx: ventana: remove unused GPIO configuration
+  * imx: ventana: add usb_pcisel hwconfig support
+  * imx: ventana: enable precharge power-down fast-exit mode
+  * imx: ventana: add support for 4Gb density mem devices with IMX6DL
+  * imx: ventana: set LTC3676 PMIC to appropriate values per datasheet
+  * imx: ventana: config: add USB Mass Storage (ums) support
+  * imx: ventana: config: Support ramdisk
+  * imx: ventana: config: enable edid support
+  * imx: ventana: config: enable EXT4 filesystem read/write support
+  * imx: ventana: fix various sparse warnings
+  * imx: ventana: disable IMX6 watchdogs on GW51xx RevA and RevB
+  * imx: ventana: Add support for GW551x
+  * imx: ventana: add usb_pgood_delay 2sec default
+  * imx: ventana: add wdis config for GW5520
+  * imx: ventana: only pinmux FEC enet signals for boards using it
+  * imx: ventana: update boot scripts to support ubifs boot vol
+  * imx: ventana: remove GSC hwmon voltage rail min/max test
+  * imx: ventana: add mem_mb dynamic env var
+  * imx: ventana: gsc: add new hwmon rails
+  * imx: ventana: added DT fixup for GW551x-A video input
+  * imx: ventana: updated 16bit DDR calibration
+  * imx: ventana: remove 128x16 calibration (share with 128x32)
+  * imx: ventana: add DT fixup for GW54xx compatibility with older kernels
+  * imx: ventana: add support for DLC-700JMGT4 and DLC-800FIGT3 LCD displays
+  * imx: ventana: added device-tree display configuration for LVDS displays
+  * imx: ventana: add 'gsc wd' command for enabling and disabling GSC watchdog
+
+  [ Pushpal Sidhu ]
+  * imx: ventana: add DT fixup for GW522x to change PCIE_RST# GPIO
+
+  [ Tim Harvey ]
+  * imx: ventana: use hdmiinfmt env var to override HDMI capture format
+  * imx: ventana: set HDMI video in to yuv422bt656 for GW551x-A
+
+  [ Pushpal Sidhu ]
+  * imx: ventana: Add new memory configuration
+  * imx: ventana: Update missing memory/calib handling
+
+  [ Tim Harvey ]
+  * power: pfuze100: fix LDO_EN bit value
+
+  [ Stefan Roese ]
+  * arm: mx6: tqma6: Extract baseboard configs into separate config file
+
+  [ gaurav rana ]
+  * iMX: Fix compilation error when enabling SECURE_BOOT
+
+  [ Eric Nelson ]
+  * nitrogen6x: allow gzipped bitmap display
+
+  [ Fabio Estevam ]
+  * mx6sabresd: Fix SPL memory description
+  * mx6sabresd: Remove uneeded ifdef
+
+  [ Eric Nelson ]
+  * gunzip: add gzwrite routine for extracting compresed images to block device
+  * unzip: add gzwrite command to write compressed image to block device
+
+  [ rev13@wp.pl ]
+  * ARM: Add ARMv7-M support
+  * ARMv7M: Add STM32F4 support
+  * stm32f4: Add serial driver
+  * stm32f4: Add support for stm32f429-discovery board
+
+  [ tang yuantian ]
+  * cmd_scsi: Enable SoC AHCI device on platforms with PCI
+
+  [ Przemyslaw Marczak ]
+  * dm: core: add internal functions for getting the device without probe
+  * dm: core: Extend struct udevice by '.uclass_platdata' field.
+  * dm: test: Add tests for device's uclass platform data
+  * dm: test: Add tests for get/find uclass devices
+  * dm: core: uclass: add function: uclass_find_device_by_name()
+  * dm: core: uclass: add function: uclass_get_device_by_name()
+  * dm: core: device: add function: dev_get_driver_ops()
+  * dm: core: device: add function: dev_get_uclass_name()
+  * dm: core: remove type 'static' of function uclass_get_device_tail()
+  * dm: test: Add tests for get/find uclass's device by name
+  * dm: core: precise comments for get/find device by name
+
+  [ Simon Glass ]
+  * dm: core: Handle recursive unbinding of uclass devices
+  * dm: usb: Add a terminator to the string destructor list
+  * dm: Update the README to reflect the current test output
+  * dm: test: Don't clear global_data in dm_test_uclass_before_ready()
+  * exynos: sandbox: ti: Add SPDX license identifiers and notes
+  * serial: ns16550: Add an option to specify the debug UART register shift
+  * dm: ns16550: Support non-byte register spacing with driver model
+  * serial: ns16550: Remove unnecessary init on UART setup
+  * dm: spi: Correct SPI claim/release_bus() methods
+
+  [ Hannes Petermaier ]
+  * board/BuR/common: simplify access to devicetree
+  * board/BuR/tseries: reactivate NAND-board
+  * board/BuR/tseries: change pinmux
+
+  [ Linus Walleij ]
+  * vexpress64: use DM for all vexpress64 boards
+
+  [ Masahiro Yamada ]
+  * Licenses: fix a typo in README
+  * SPDX: add X11 SPDX-License-Identifier
+  * ARM: ARM720t: remove empty asm/arch/hardware.h
+  * ARM: integrator: move board select into mach-integrator/Kconfig
+  * ARM: integrator: split board select into AP/CP select and CM select
+  * ARM: integrator: abolish CONFIG_INTEGRATOR
+  * ARM: integrator: move CONFIG_ARCH_CINTEGRATOR to Kconfig
+
+  [ Linus Walleij ]
+  * integrator: stop zeroing the gd flags
+
+  [ Stefan Roese ]
+  * cmd_led: Extend led command to support blinking and more leds
+
+  [ Jagannadha Sutradharudu Teki ]
+  * Revert "spi: add config option to enable the WP pin function on st micron flashes"
+
+  [ Simon Glass ]
+  * dm: core: Allow sequence alias support to be removed for SPL
+  * dm: core: Remove unbind operations when not required
+  * dm: Add a panic_str() function to reduce code size
+  * dm: core: Drop device removal error path when not supported
+  * fdt: sandbox: Move setup code from board_f to fdtdec
+  * fdt: Rename setup_fdt() and make it prepare also
+  * Move initf_malloc() to a common place
+  * Correct malloc_limit value for pre-relocation malloc()
+  * fdt: Add an option to disable device tree in SPL
+  * fdt: Allow FDT functions to be built for SPL
+  * dm: core: Select device tree control correctly for SPL
+  * dm: Init device tree as well as driver model in SPL
+
+  [ Prabhakar Kushwaha ]
+  * driver/ldpaa_eth: Add LDPAA Ethernet driver
+  * board/ls2085_common: Increase malloc length
+  * driver/fsl_ifc: Add support to finalize CS1, CS3 address binding
+
+  [ Scott Wood ]
+  * nand/fsl_ifc: Increase eccstat[] for IFC 2.0
+
+  [ York Sun ]
+  * driver/i2c/mxc: Enable I2C bus 3 and 4
+  * drivers/ddr/fsl: Update DDR driver for DDR4
+  * driver/ddr/fsl: Fix driver to support empty first slot
+  * driver/ddr/fsl: Add built-in memory test for DDR4 driver
+  * driver/ddr/fsl: Add workaround for DDR erratum A008511
+
+  [ Scott Wood ]
+  * cmd_mem: Store last address/size/etc as ulong
+
+  [ Minghuan Lian ]
+  * drivers/net/e1000.c: Cleanup whitespace
+
+  [ York Sun ]
+  * armv8/fsl-lsch3: Implement workaround for erratum A008585
+
+  [ Prabhakar Kushwaha ]
+  * armv8/ls2085a: Update common header file
+
+  [ York Sun ]
+  * armv8/fsl-lsch3: Fix platform clock calculation
+  * armv8/ls2085a: Fix generic timer clock source
+
+  [ pankaj chauhan ]
+  * armv8/ls2085a: Add support for reset request
+
+  [ Scott Wood ]
+  * armv8/fsl-lsch3: Set nodes in DVM domain
+
+  [ York Sun ]
+  * armv8/fsl-lsch3: Update early MMU table
+
+  [ Scott Wood ]
+  * fsl-lsch3: Introduce place for common early SoC init
+  * armv8/ls2085a: Add workaround for USB erratum A-008751
+  * armv8/fsl-lsch3: Use correct compatible for serial clock fixup
+
+  [ Prabhakar Kushwaha ]
+  * driver/ldpaa_eth: Update ldpaa ethernet driver
+
+  [ Minghuan Lian ]
+  * armv8: Add SerDes framework for Layerscape Architecture
+
+  [ pankaj chauhan ]
+  * net/phy/cortina: Fix compilation warning
+
+  [ J. German Rivera ]
+  * drivers/fsl-mc: Changed MC firmware loading for new boot architecture
+
+  [ Shaohui Xie ]
+  * net/memac_phy: reuse driver for little endian SoCs
+
+  [ Bhupesh Sharma ]
+  * armv8/fsl-ch3: Add support to print RCW configuration
+
+  [ Prabhakar Kushwaha ]
+  * driver/ldpaa: Add support of WRIOP static data structure
+
+  [ York Sun ]
+  * armv8/ls2085aqds: Add support of LS2085AQDS platform
+  * armv8/ls2085ardb: Add support of LS2085ARDB platform
+
+  [ Peter Howard ]
+  * davinci: add support for omapl138-lcdk board
+
+  [ Xiang Wang ]
+  * gpio: mvmfp: support newer MFP bit definitions
+
+  [ Zhou Zhu ]
+  * mvgpio: remove CONFIG_SHEEVA_88SV331xV5 dependency
+
+  [ Dileep Katta ]
+  * ARM: DRA7XX: Enable Fastboot
+  * ARM: DRA7: Set serial number environment variable
+
+  [ Michal Simek ]
+  * buildman: Add gcc 4.9.0 with Microblaze toolchain
+
+  [ Wu, Josh ]
+  * patman: check git format.subjectprefix setting when generate patches prefix
+
+  [ Dileep Katta ]
+  * fastboot: ARM: OMAP5: Enable reboot-bootloader
+
+  [ angelo@sysam.it ]
+  * m68k: add architecture-specific u-boot.lds
+
+  [ Bryan De Faria ]
+  * arm: am437x: mux: Update mux names
+
+  [ Marek Vasut ]
+  * rtc: Set valid date after reset
+
+  [ Heiko Schocher ]
+  * cmd, nand: add more info to "nand info"
+
+  [ Sanchayan Maity ]
+  * ARM: vf610: Move DDR3 initialization to imx-common
+
+  [ Stefan Agner ]
+  * ARM: vf610: Enable external 32KHz oscillator
+
+  [ Sanchayan Maity ]
+  * ARM: vf610: Add SoC and CPU type detection
+
+  [ Stefan Agner ]
+  * ARM: vf610: Enable caches
+
+  [ Sanchayan Maity ]
+  * ARM: vf610: Initial integration for Colibri VF50/VF61
+  * usb: host: Add ehci-vf USB driver for ARM Vybrid SoC's
+  * colibri_vf: Enable USB support for Colibri Vybrid
+
+  [ Prabhakar Kushwaha ]
+  * board/ls2085qds: Add support ethernet
+
+  [ Jaiprakash Singh ]
+  * driver/ifc: Add 64KB page support
+
+  [ Scott Wood ]
+  * armv8/ls2085aqds: NAND boot support
+  * freescale/qixis: Add support for booting from NAND
+  * armv8/ls2085ardb: Enable NAND SPL support
+
+  [ Yangbo Lu ]
+  * ls2085a: esdhc: Add esdhc support for ls2085a
+
+  [ York Sun ]
+  * armv8/fsl-lsch3: Implement workaround for I2C erratum A009203
+
+  [ Pavel Machek ]
+  * socfpga: implement socdk SPI flash config in dts
+
+  [ Hans de Goede ]
+  * fdt: Fix handling of paths with options in them
+
+  [ Daniel Schwierzeck ]
+  * MIPS: implement device-tree handover to Linux kernel
+
+  [ Pavel Machek ]
+  * socfpga: implement arria V socdk SPI flash config in dts
+
+  [ Fabio Estevam ]
+  * mx6cuboxi: Fix the defconfig name
+  * mx6cuboxi: Prepare for multi SoC support
+  * mx6cuboxi: Introduce multi-SoC support
+  * mx6cuboxi: Differentiate Cubox-i and Hummingboard
+  * mx6cuboxi: Use more standard namings for fdt variables
+  * mx6cuboxi: Load the correct 'fdtfile' variable
+
+  [ David Dueck ]
+  * spi: omap3: Fix timeout handling
+
+  [ Bin Meng ]
+  * dm: sf: Save flash flags to struct spi_flash
+  * dm: sf: Make SST flash write op work again
+
+  [ Jagannadha Sutradharudu Teki ]
+  * sf: Fix to compute proper sector_size
+
+  [ Masahiro Yamada ]
+  * dm: core: drop device removal error path correctly
+
+  [ Axel Lin ]
+  * serial: ns16550: Remove hard-coded baud_divisor setting
+
+  [ Simon Glass ]
+  * dm: core: Correct bug introduced in uclass_first/next_device()
+
+  [ Nathan Rossi ]
+  * microblaze: Fix EMAC Lite initialization
+
+  [ Andrea Scian ]
+  * gpio: add Xilinx Zynq PS GPIO driver
+
+  [ Michal Simek ]
+  * zynq: Enable GPIO driver and GPIO commands
+  * serial: zynq: Add support for slow emulation platform
+
+  [ Nathan Rossi ]
+  * zynq: Add Zynq PicoZed board support
+
+  [ Masahiro Yamada ]
+  * ARM: zynq: drop legacy ps7_init.c/h support
+
+  [ Siva Durga Prasad Paladugu ]
+  * zynq: slcr: Disable all level shifters
+  * zynqmp: caches: Enable dcache for zynqmp
+
+  [ Michal Simek ]
+  * zynqmp: Add support for R5 sw loading
+
+  [ Siva Durga Prasad Paladugu ]
+  * zynqmp: sdhci: Remove the quirk SDHCI_QUIRK_NO_CD
+  * zynq: timer: Fix wrong timer calculation
+
+  [ Michal Simek ]
+  * zynqmp: Add support for emulation platform - Veloce
+  * zynqmp: Add support for EMMC bootmode
+
+  [ Siva Durga Prasad Paladugu ]
+  * zynqmp: i2c: Enable i2c driver for zynqMP
+  * zynqmp: Add SPI driver support for ZynqMP
+  * zynqmp: Enable FS_GENERIC option
+
+  [ Michal Simek ]
+  * zynqmp: Enable SDHCI0 options
+
+  [ Masahiro Yamada ]
+  * ARM: zynq: pass "-mfpu=neon" only to lowlevel_init.S
+  * ARM: zynq: move SoC sources to mach-zynq
+  * ARM: zynq: move SoC headers to mach-zynq/include/mach
+  * ARM: zynq: rename CONFIG_ZYNQ to CONFIG_ARCH_ZYNQ
+
+  [ Bin Meng ]
+  * x86: minnowmax: Remove CONFIG_VIDEO_X86 in the defconfig
+  * x86: Remove the old VGA driver
+  * x86: queensbay: Avoid using PCH prefix
+  * x86: Move CONFIG_ENV_IS_IN_SPI_FLASH to x86-common.h
+  * x86: Set serial port IRQ for SMSC LPC47M
+  * x86: Add alias for SPI node in the board dts
+  * x86: Clean up arch/x86/include/asm/e820.h
+  * x86: Install a default e820 table in the __weak install_e820_map()
+  * x86: Add a function to assign IRQ numbers to PCI device
+  * x86: Write configuration tables in last_stage_init()
+  * x86: Support platform PIRQ routing
+  * x86: queensbay: Implement PIRQ routing
+  * pci: Option rom class is a 24-bit number
+  * pci: Remove parameter 'class' of pci_rom_load()
+  * biosemu: Do not free vga_info->BIOSImage when it is 0xc0000
+
+  [ Simon Glass ]
+  * x86: Correct Minnowboard instructions to use the right descriptor
+
+  [ Gabriel Huau ]
+  * x86: baytrail: fix the GPIOBASE address
+  * x86: minnowmax: add GPIO banks in the device tree
+
+  [ Bin Meng ]
+  * x86: Check PIRQ routing table sanity in the F segment
+  * x86: quark: Turn on legacy segments decode
+  * x86: Kconfig: Divide the target selection to vendor/model
+  * x86: Kconfig: Move platform options forward
+  * x86: Kconfig: MARK_GRAPHICS_MEM_WRCOMB cosmetics
+  * x86: Kconfig: Move DM_SPI & DM_SPI_FLASH to arch/Kconfig
+  * x86: Kconfig: Remove deprecated CONFIG_SYS_EXTRA_OPTIONS
+  * x86: Correct the typo in write_tables()
+
+  [ Gabriel Huau ]
+  * x86: minnowmax: use the correct NOR in the configuration
+
+  [ Simon Glass ]
+  * x86: Update chromebook_link instructions for binary blob
+  * x86: link: Add PCH driver to support SPI Flash
+  * x86: Implement reset_cpu() correctly for modern CPUs
+  * x86: ivybridge: Use reset_cpu()
+  * x86: quark: Use reset_cpu()
+  * x86: fsp: Use reset_cpu()
+  * Fix comment nits in board_f.c
+  * dm: core: Add a function to bind a driver for a device tree node
+  * x86: Remove unwanted MMC debugging
+  * x86: Disable -Werror
+  * Move display_options functions to their own header
+  * Add print_freq() to display frequencies nicely
+  * dm: Implement a CPU uclass
+  * x86: Add support for the Simple Firmware Interface (SFI)
+  * Add a 'cpu' command to print CPU information
+  * x86: Add atomic operations
+  * x86: Add defines for fixed MTRRs
+  * x86: Add an mfence macro
+  * x86: Store the GDT pointer in global_data
+  * x86: Provide access to the IDT
+  * x86: Add multi-processor init
+  * x86: Add functions to set and clear bits on MSRs
+  * x86: Allow CPUs to be set up after relocation
+  * x86: Add a CPU driver for baytrail
+  * x86: Enable multi-core init for Minnowboard MAX
+
+  [ Jan Kiszka ]
+  * sun7i: Remove duplicate call to psci_arch_init
+
+  [ Hans de Goede ]
+  * sunxi: Also set Auxiliary Ctl SMP bit in SPL
+  * sunxi: usbc: Remove unused irq field
+  * sunxi: Introduce a hidden SUNXI_GEN_SUNxI Kconfig bool
+  * sunxi: s/sun8i/sun8i_a23/
+  * sunxi: Add support for A33 PLL11 (second DRAM pll)
+
+  [ Vishnu Patekar ]
+  * sunxi: Add a33 dram init code
+  * sunxi: Add basic A33 basic support
+  * sunxi: Add softwinner astar mid756 A33 tablet board defconfig
+
+  [ Hans de Goede ]
+  * sunxi: Add Ippo_q8h_v1_2_a33_1024x600 defconfig
+  * sunxi: Do not build i2c support when we've no i2c controllers
+  * sunxi: mmc: Fix card-detect gpio handling to work with the driver-model
+  * sunxi: usbc: Fix vbus gpio handling to work with the driver-model
+  * sunxi: display: Fix gpio handling to work with the driver-model
+  * sunxi: soft-i2c: Fix gpio handling to work with the driver-model
+
+  [ Simon Glass ]
+  * sunxi: gpio: Rename GPIOs to include a 'P' prefix
+  * sunxi: gpio: Add temporary implementation of name_to_gpio()
+
+  [ Hans de Goede ]
+  * sunxi: gpio: Add compatible strings for all supported SoCs
+  * sunxi: gpio: Build sunxi_name_to_gpio_bank for driver-model code too
+  * sunxi: axp: Change axp_gpio_foo prototypes to match gpio uclass ops
+  * sunxi: axp: Move axp pmic register helpers to a separate file
+  * sunxi: axp: Add support for i2c based PMICs to the pmic-bus helpers
+  * sunxi: axp: Move axp gpio code to a separate axpi-gpio driver
+  * sunxi: axp: Add driver-model support to the axp_gpio code
+  * sunxi: gmac: Move sunxi_gmac_initialize proto out of netdev.h
+  * sunxi: emac: port to phylib
+  * sunxi: emac: Prepare for driver-model support
+  * sunxi: emac: Rename DMA_CPU_TRRESHOLD to EMAC_RX_BUFSIZE
+  * sunxi: emac: Add driver model support
+  * sunxi: dts: Sync all dts files with upstream kernel
+  * sunxi: dts: Add dts files which have been submitted but not yet merged upstream
+  * sunxi: dts: Add minimal dts files for board which lack a dts sofar
+  * sunxi: dts: Add a CONFIG_DEFAULT_DEVICE_TREE setting to all sunxi boards
+  * sunxi: Move all boards to the driver-model
+  * sunxi: emac: Remove non driver-model code
+  * sunxi: axp: Remove non driver-model support from the axp gpio code
+  * sunxi: usb: Move setup of host controller clocks to the host controller drivers
+  * sunxi: usb: Remove sunxi_usbc_get_io_base function
+  * sunxi: usb: Rename sunxi_usbc_foo functions to sunxi_usb_phy_bar
+  * sunxi: usb: Rename the usbc.? files to usb_phy.?
+  * sunxi: usb: Do not call phy_probe from hcd code
+  * sunxi: usb: Protect phy-init and phy-power-on against multiple calls
+
+  [ Scott Wood ]
+  * powerpc/mpc85xx: Use GOT when loading IVORs post-relocation
+
+  [ York Sun ]
+  * mpc85xx/T4240EMU: Remove T4240EMU board
+
+  [ Nikhil Badola ]
+  * drivers: usb: fsl: Workaround for Erratum A004477
+
+  [ Chunhe Lan ]
+  * powerpc/t4rdb: Add SD boot support for T4240RDB board
+
+  [ Zhao Qiang ]
+  * T2080QDS/PCIe: Soft Reset PCIe on T2080QDS for down-training issue
+
+  [ Minghuan Lian ]
+  * fsl/pci: Set CFG_READY for PCIe v3.0 and later
+
+  [ Shengzhou Liu ]
+  * powerpc/t1023rdb: Add T1023 RDB board support
+
+  [ Valentin Longchamp ]
+  * powerpc: add 2 common dcache assembly functions
+
+  [ Shengzhou Liu ]
+  * board/t102x: use fdt_setprop_string instead of fdt_setprop
+
+  [ Scott Wood ]
+  * powerpc/mpc85xx: Don't deref NULL if qman portal lacks cell-index
+
+  [ Tang Yuantian ]
+  * fsl/deepsleep: avoid the DDR restore from being optimized out
+
+  [ Shengzhou Liu ]
+  * board/t2080rdb: reset cs4315 phy
+
+  [ Yangbo Lu ]
+  * mmc: fsl_esdhc: Add adapter card type identification support
+  * powerpc/t2080qds: enable eSDHC adapter card type identification
+  * mmc: fsl_esdhc: Add peripheral clock support
+  * powerpc/t2080qds: enable eSDHC peripheral clock support
+
+  [ Shengzhou Liu ]
+  * t2080rdb/rcw: update ddr frequency from 1600MT/s to 1867MT/s
+
+  [ Shaohui Xie ]
+  * powerpc/t4240qds: Update RCW, defconfig and maintainer
+
+  [ Oleksandr G Zhadan ]
+  * powerpc/mpc85xx: Fix compiling error for common/cmd_gpio.c
+  * powerpc/mpc85xx: Add board support for ucp1020
+
+  [ Andrew Gabbasov ]
+  * mmc: Fix typo in MMC type checking macro
+  * mmc: Avoid extra duplicate entry in mmc device structure
+  * mmc: Do not pass external mmc_cmd structure to mmc_send_op_cond_iter()
+  * mmc: Continue polling MMC card for OCR only if it is still not ready
+  * mmc: Restructure polling loops to avoid extra delays
+  * mmc: Fix splitting device initialization
+
+  [ Rob Herring ]
+  * mmc: remove the MMC_MODE_HC flag
+
+  [ Kevin Liu ]
+  * mmc: sdhci: add timeout setting for response busy command
+
+  [ Yangbo Lu ]
+  * mmc: fsl_esdhc: update eMMC44 adapter card erase timeout
+
+  [ Alexander Stein ]
+  * mmc: bcm2835_sdhci: Use calloc to allocate bcm2835_sdhci_host
+
+  [ Simon Glass ]
+  * tegra: mmc: Set the removable flag correctly
+
+  [ Marek Vasut ]
+  * ARM: mmc: bcm283x: Remove get_timer_us() from mmc driver
+
+  [ Stefan Roese ]
+  * arm: armada-xp: Move SoC sources to mach-mvebu
+  * arm: armada-xp: Move SoC headers to mach-mvebu/include/mach
+  * arm: mvebu: Move mvebu-common into mach-mvebu
+  * arm: mvebu: Change header macros from ARMADA_XP to MVEBU
+  * arm: mvebu: Remove unreferenced define
+  * arm: mvebu: Only define MV88F78X60 for Armada XP
+  * arm: mvebu: Move CONFIG_SPL_LDSCRIPT to common header
+  * arm: mvebu: Add basic Armada 38x support
+  * arm: mvebu: Change network init code to allow a more flexible setup
+  * arm: mvebu: Remove coherency configuration
+  * arm: mvebu: mv-common.h: Add CONFIG_PREBOOT
+  * arm: mvebu: Add d-cache invalidate before enabling the d-cache
+  * arm: mvebu: Add Armada A38x DB-88F6820-GP board support
+  * arm: mvebu: db-mv784mp-gp: Fix ECC I2C address
+  * arm: mvebu: Remove "u-boot.kwb" CONFIG_BUILD_TARGET for non-SPL targets
+
+  [ Max Krummenacher ]
+  * fw_env.h: include autoconf.h
+
+  [ Tom Rini ]
+  * Prepare v2015.07-rc1
+
+  [ Joe Hershberger ]
+  * sandbox: Add test function to advance time
+  * sandbox: eth: Add a function to skip ping timeouts
+  * test: dm: eth: Skip timeouts on ping tests
+
+  [ Simon Glass ]
+  * dm: spi: Avoid setting the speed with every transfer
+  * cros_ec: Show the protocol version in the debug message
+  * cros_ec: Handle the single duplex requirement in cros_ec
+  * dm: spi: Correct the comment on spi_get_ops()
+  * dm: i2c: sandbox: Add debugging to the speed limit
+  * dm: i2c: Add functions to read and write a register
+  * dm: i2c: Add an explicit test mode to the sandbox I2C driver
+  * fdt: Correct warning in fdt_setup_simplefb_node()
+  * dm: rtc: Rename gregorian day function
+  * dm: rtc: Rename to_tm() to rtc_to_tm() and add error code
+  * dm: rtc: Rename mktime() and reduce the number of parameters
+  * dm: Remove unnecessary types in bcd.h
+  * dm: rtc: Split structure definition into its own file
+  * dm: sandbox: Add os_localtime() to obtain the system time
+  * dm: rtc: Add a uclass for real-time clocks
+  * dm: rtc: sandbox: Add an emulated I2C RTC device
+  * dm: rtc: sandbox: Add a driver for the sandbox I2C RTC
+  * dm: rtc: Convert 'date' command to support driver model
+  * dm: net: rtc: Support using driver model for rtc in sntp
+  * dm: sandbox: dts: Add a real-time clock attached to I2C
+  * dm: rtc: sandbox: Enable real-time clock support
+  * dm: test: dts: Sort the aliases in the test device tree file
+  * dm: rtc: Add tests for real-time clocks
+
+  [ Axel Lin ]
+  * dm: i2c-gpio: Remove redundant dm_gpio_set_value() call
+
+  [ Hans de Goede ]
+  * dm: usb: Do not use bus->seq before device_probe(bus)
+  * dm: usb: Make usb_get_bus easier to use for callers
+  * dm: usb: Copy over usb_device values from usb_scan_device() to final usb_device
+  * dm: usb: Use usb_get_bus in dm ehci code
+  * dm: usb: Fix finding of first upstream usb-2 hub in the ehci dm code
+  * dm: usb: Set desc_before_addr from ehci dm code
+
+  [ Marek Vasut ]
+  * i2c: s3c: Implant support for S3C2440
+  * gpio: s3c: Fix the GPIO driver
+
+  [ Hans de Goede ]
+  * usb: Fix maxpacketsize for first descriptor read for low-speed usb devs
+  * usb: ohci: Remove unused devgone global variable
+  * usb: ohci: Pass around a pointer to ohci_t rather then accessing global vars
+  * usb: ohci: Move the ohci_dev struct to inside the main ohci struct
+  * usb: ohci: Move the td array struct to inside the ohci_dev struct
+  * usb: ohci: Remove unnecessary phcca variable
+  * usb: ohci: Move static func and var declarations from ohci.h to ohci-hcd.c
+  * usb: ohci: Fix ctrl in messages with a data-len of 0
+  * usb: ohci: Add proper cache flushing / invalidating for non cache coherent cpus
+  * usb: ohci: Don't log an error on interrupt packet timeout
+
+  [ Sjoerd Simons ]
+  * sandbox: Don't try distro_bootcmd by default
+
+  [ Simon Glass ]
+  * test: Add a simple time test
+  * sandbox: Enable time unit test command
+  * dm: usb: exynos: Drop legacy USB code
+
+  [ Haikun.Wang@freescale.com ]
+  * dm: sf: Update default name of spi flash in structure udevice
+
+  [ Masahiro Yamada ]
+  * ARM: socfpga: do not add board directory to header search path
+  * ARM: socfpga: remove redundant config.mk
+  * ARM: socfpga: move board select into mach-socfpga/Kconfig
+  * ARM: socfpga: move SoC sources to mach-socfpga
+  * ARM: socfpga: move SoC headers to mach-socfpga/include/mach
+  * ARM: socfpga: abolish CONFIG_SOCFPGA
+  * git-mailrc: add Marek as SOCFPGA maintainer
+
+  [ Dinh Nguyen ]
+  * git-mailrc: add Dinh Nguyen as a contact for SoCFPGA
+
+  [ Cooper Jr., Franklin ]
+  * ti: am335x/am437x/omap5 devices: Unify network environment variables
+
+  [ Fabio Estevam ]
+  * README: fix typo in 'currently'
+
+  [ Stefan Roese ]
+  * misc: led: Add PCA9551 LED driver
+
+  [ Jörg Krause ]
+  * Fix musl build
+
+  [ Pavel Machek ]
+  * Remove non-working address from MAINTAINER
+
+  [ Maxime Ripard ]
+  * image: android: handle default kernel address
+
+  [ Hannes Petermaier ]
+  * board/BuR/tseries: take usage of CONFIG_LCD_ROTATION
+  * board/BuR/tseries: remove unnary CONFIG_LCD_NOSTDOUT
+  * board/BuR/tseries: Add simplefb support
+  * board/BuR/common: remove BMP_DISPLAY from tseries board
+  * board/BuR/common: rename "usbupdate" environment to "usbscript"
+
+  [ Axel Lin ]
+  * gpio: stm32_gpio: Use clrsetbits_le32() at appropriate places
+
+  [ Paul Kocialkowski ]
+  * spl: spl_mmc: Clearer structure in spl_mmc_load_image and cosmetics
+  * spl: spl_mmc: Partition raw boot mode for eMMC
+
+  [ kunhuahuang ]
+  * stm32f4: fix serial output
+  * stm32f4: add serial print port
+
+  [ maxin.john@enea.com ]
+  * cmd_part: fix usage text
+
+  [ Peter Howard ]
+  * davinci: restore CONFIG_SPL=y to configs/omapl138_lcdk_defconfig
+
+  [ Ash Charles ]
+  * omap3: overo: Set the Arbor43C 'expansionname'
+
+  [ Arun Bharadwaj ]
+  * omap3: overo: Add DTS support for TobiDuo expansion
+
+  [ Ash Charles ]
+  * overo: Add support for Palo35 expansion board
+  * omap3: overo: Use software BCH8 ECC for NAND
+  * omap3: overo: Allow boot with kernel in UBI rootfs
+
+  [ Arun Bharadwaj ]
+  * overo: Split overo.c into spl.c, common.c and overo.c
+  * overo: Fix regression introduced in a6b541b
+
+  [ Vikas Manocha ]
+  * stv0991: fdt: add stv0991 device tree
+  * stv0991: use fdt for serial port platform data
+
+  [ Du Huanpeng ]
+  * Makefile: add a symbol link tags for ctags
+
+  [ Joe Hershberger ]
+  * Fix inconsistency of VERIFY defines in cmd_mem
+  * Fix broken verify functionality in crc32 command
+
+  [ Vikas Manocha ]
+  * serial: fdt: add device tree support for pl01x
+
+  [ Stefan Roese ]
+  * ppc4xx: Remove sc3 board
+
+  [ Joe Hershberger ]
+  * kconfig: Move REGEX to Kconfig
+
+  [ Tom Rini ]
+  * Revert "stm32f4: fix serial output"
+
+  [ Joe Hershberger ]
+  * arch: Make board selection choices optional
+  * Clean all defconfigs with savedefconfig
+
+  [ Masahiro Yamada ]
+  * arc: use more universal prefix for default CROSS_COMPILE
+  * ARM: at91: remove non-generic boards
+
+  [ Wu, Josh ]
+  * ARM: at91: trival: fix typo for the nand partition name
+
+  [ Alexey Brodkin ]
+  * arc: remove dummy target
+
+  [ Simon Glass ]
+  * dm: core: Sort the uclasses
+  * dm: gpio: Add error handling and a function to claim vector GPIOs
+  * fdt: Add binding decode function for display-timings
+  * tegra: Move the pwm into tegra-common
+  * tegra: pwm: Allow the clock rate to be left as is
+  * tegra: Move checkboard() into the board code
+  * tegra: Add a board ID function
+  * power: Export register access functions from as3722
+  * tegra: Provide a function to allow LCD PMIC setup
+  * tegra: Add support for setting up a as3722 PMIC
+  * tegra: nyan-big: Add LCD PMIC init and board ID
+  * tegra124: dts: Add host1x node to provide display information
+  * tegra: config: Use CONFIG_LCD to detect LCD presence
+  * tegra: clock: Add checking for invalid clock IDs
+  * tegra: clock: Split the clock source code into a separate function
+  * tegra124: clock: Add display clocks and functions
+  * tegra: Move display controller header into common
+  * video: Add drm_dp_helper.h
+  * edid: Add a function to read detailed monitor timings
+  * dm: video: Add a uclass for display port
+  * tegra: dts: nyan-big: Add definitions for eDP display
+  * tegra: video: Support serial output resource (SOR) on tegra124
+  * tegra: video: Add Embedded DisplayPort driver
+  * tegra: video: support eDP displays on Tegra124 devices
+  * tegra: config: nyan-big: Enable LCD
+  * tegra124: video: Add full link training for eDP
+
+  [ Stephen Warren ]
+  * ARM: tegra: CONFIG_{SYS_, }LOAD{_, }ADDR rationalization
+  * ARM: tegra: enable STDIO deregistration
+
+  [ Jan Kiszka ]
+  * ARM: Clean up CONFIG_ARMV7_NONSEC/VIRT/PSCI conditions
+  * ARM: Factor out common psci_get_cpu_id
+  * ARM: Factor out reusable psci_cpu_off_common
+  * ARM: Factor out reusable psci_cpu_entry
+  * ARM: Factor out reusable psci_get_cpu_stack_top
+  * ARM: Put target PC for PSCI CPU_ON on per-CPU stack
+
+  [ Ian Campbell ]
+  * tegra124: Add more registers to struct mc_ctlr
+
+  [ Jan Kiszka ]
+  * virt-dt: Allow reservation of secure region when in a RAM carveout
+  * tegra: Make tegra_powergate_power_on public
+  * ARM: Add board-specific initialization hook for PSCI
+  * tegra124: Add PSCI support for Tegra124
+
+  [ Ian Campbell ]
+  * tegra124: Reserve secure RAM using MC_SECURITY_CFG{0, 1}_0
+
+  [ Jan Kiszka ]
+  * tegra: Set CNTFRQ for secondary CPUs
+
+  [ Thierry Reding ]
+  * ARM: tegra: Enable SMMU when going non-secure
+
+  [ Jan Kiszka ]
+  * tegra: Boot in non-secure mode by default
+
+  [ Ian Campbell ]
+  * jetson-tk1: Add PSCI configuration options and reserve secure code
+
+  [ Masahiro Yamada ]
+  * ARM: tegra: move NVIDIA common files to arch/arm/mach-tegra
+
+  [ Simon Glass ]
+  * spl: Correct address in spl_relocate_stack_gd()
+
+  [ Joe Hershberger ]
+  * Use map_sysmem when accessing memory in setexpr
+
+  [ Tom Rini ]
+  * arch/arm/lib/bootm-fdt.c: Guard the include of <asm/armv7.h>
+
+  [ Hans de Goede ]
+  * usb: Fix handover of full-speed devices from ehci to companion
+  * usb: usb_control_msg() propagate controller error code
+  * usb: legacy_hub_port_reset() check and propagate usb_set_port_feature() errors
+  * usb: Stop reset procedure when a dev is handed over to a companion hcd
+  * dm: usb: Prefix ehci interrupt-queue functions with _ehci_
+  * dm: usb: Add support for interrupt queues to the dm usb code
+  * dm: usb: Move printing of usb scan status to usb_scan_bus()
+  * dm: usb: Add support for companion controllers
+  * dm: usb: Do not scan companion buses if no devices where handed over
+  * usb: ohci: Do not resubmit and leak urbs for interrupt packets
+  * usb: ohci: Remove unnecessary delays from hc_start and power power-on paths
+  * usb: ohci: Skip unnecessary mdelay(1) calls in various places
+  * usb: ohci: Add dm support
+  * sunxi: ehci: Convert to the driver-model
+  * sunxi: ohci: Add ohci usb host controller support
+
+  [ Vincent Palatin ]
+  * usb: add device connection/disconnection detection
+
+  [ Simon Glass ]
+  * bootstage: Add IDs for SPI flash reading and decompression
+  * dm: i2c: Implement 'i2c bus' command for driver model
+  * dm: i2c: Add a function to find out the chip offset length
+  * tpm: Support using driver model with I2C
+  * tpm: Rename Infineon TPM to slb9645tt
+  * dm: gpio: Fix comment typo in GPIOD_IS_IN
+  * arm: Include the .got section in the binary
+  * arm: Add a prototype for save_boot_params_ret()
+  * sandbox: Correct error handling in state_read_file()
+  * sandbox: Add missing errno.h includes in a few files
+  * sandbox: cros_ec: Support EC_CMD_ENTERING_MODE emulation
+  * sandbox: spi: Add newline to printf() in sandbox_sf_probe
+  * sandbox: Fix warning in display_options
+  * sandbox: Support wide-screen LCD emulation
+
+  [ Hans de Goede ]
+  * usb: ohci: Do not reuse ed for interrupt endpoints of different devices
+  * usb: ohci: Add an ohci_alloc_urb() function
+  * usb: ohci: Add support for interrupt queues
+  * sunxi: Change usb-kbd interrupt polling to use an usb interrupt queue
+
+  [ Peng Fan ]
+  * imx: mx27 move GPIO_PORTx to gpio.h
+  * i2c: mxc: refactor i2c driver and support dm
+
+  [ Przemyslaw Marczak ]
+  * exynos5: fix build break by adding CONFIG_POWER
+  * exynos4-common: remove the unsued CONFIG_CMD_PMIC
+  * lib: Kconfig: add entry for errno_str() function
+  * dm: pmic: add implementation of driver model pmic uclass
+  * dm: regulator: add implementation of driver model regulator uclass
+  * dm: pmic: add pmic command
+  * dm: regulator: add regulator command
+  * pmic: max77686 set the same compatible as in the kernel
+  * dm: pmic: add max77686 pmic driver
+  * dm: regulator: add max77686 regulator driver
+  * dm: regulator: add fixed voltage regulator driver
+  * doc: driver-model: pmic and regulator uclass documentation
+  * dm: board:samsung: power_init_board: add requirement of CONFIG_DM_PMIC
+  * odroid: dts: add 'voltage-regulators' description to max77686 node
+  * odroid: enable driver model pmic/regulator API and MAX77686 drivers
+  * dm: pmic: code cleanup of PMIC uclass driver
+  * dm: regulator: uclass driver code cleanup
+  * common: cmd pmic: command cleanup
+  * common: cmd regulator: command cleanup
+  * doc: driver-model: pmic-framework.txt - cleanup
+  * sandbox: i2c: search child emul dev and check its uclass id
+  * sandbox: add: sandbox PMIC device drivers: I2C emul, pmic, regulator
+  * test: dm: add sandbox PMIC framework tests
+  * test: dm: test.dts - move to sandbox dts directory
+  * sandbox: dts: add sandbox_pmic.dtsi and include it to sandbox.dts and test.dts
+  * sandbox: defconfig: enable support of sandbox PMIC drivers
+
+  [ Nikolay Dimitrov ]
+  * arm: mx6: Clamp MMDC and DDR3 clocks for timing calculations
+
+  [ Ulises Cardenas ]
+  * Fix mxc_hab documenation
+
+  [ Fabio Estevam ]
+  * mx6cuboxi: Add HDMI output support
+  * mx6cuboxi: Add USB host support
+  * mx6cuboxi: Allow HDMI and USB keyboard to be stdout/stdin
+  * logos: Add Solidrun's logo
+  * mx6cuboxi: Fix Ethernet PHY detection problem
+  * mx6cuboxi: Pull down PAD_ENET_RXD0/RXD1
+
+  [ Stefan Roese ]
+  * arm: mx6: tqma6: Fix USB and add other filesystems
+  * arm: mx6: tqma6: Update to optionally configure an alternative SPI setup
+
+  [ Fabio Estevam ]
+  * mx6cuboxi: Skip usb initialization when booting without HDMI
+
+  [ Brecht Neyrinck ]
+  * bugfix i.mx6 pwm: prevent overflow of period_c * duty_ns
+
+  [ Ulises Cardenas ]
+  * imx: dek_blob: Add explicit include for mapmem
+
+  [ Tim Harvey ]
+  * imx: ventana: fix boot to SD
+
+  [ Fabio Estevam ]
+  * hummingboard: Remove mx6solo specific support
+  * mx6cuboxi: Mention Cubox-i in the README
+  * warp: README: Fix typo
+
+  [ Soeren Moch ]
+  * tbs2910: support for usb otg host mode
+  * tbs2910: only enable vga output for stdout/stderr when hdmi detected
+  * tbs2910: use default CONFIG_SYS_PBSIZE
+  * tbs2910: add CONFIG_SUPPORT_EMMC_BOOT
+
+  [ Fabio Estevam ]
+  * mx6: Set shared override bit in PL310 AUX_CTRL register
+
+  [ Nikolay Dimitrov ]
+  * arm: mx6: ddr3: Remove dead code
+
+  [ Tim Harvey ]
+  * imx: ventana: set dtype env var to boot media
+  * imx: ventana: display SPL boot device
+  * imx: ventana: config: enable gpio command
+  * imx: ventana: config: enable driver model
+  * imx: ventana: register gpio's with gpio_request
+  * imx: ventana: enable DM_SERIAL
+  * imx: ventana: config: enable Thermal support
+  * imx: ventana: fix pcie reset for GW522x
+  * imx: ventana: default msata/pci mux to pci before PCI enumeration
+  * imx: ventana: split out common functions between SPL and uboot
+  * imx: ventana: move GSC boot watchdog disable function to gsc.c
+  * imx: ventana: detect pmic using i2c probe instead of board model
+  * imx: ventana: use common uart and i2c setup functions in SPL
+  * imx: ventana: add gpio setup to SPL
+  * imx: ventana: add GSC boot watchdog disable to SPL
+  * imx: ventana: use stack relocation
+
+  [ Jagan Teki ]
+  * MAINTAINERS, git-mailrc: Update Jagan's name and e-mail
+
+  [ Masahiro Yamada ]
+  * arc: gitignore: ignore ARC DTBs
+
+  [ Minkyu Kang ]
+  * exynos: clock: clean up checkpatch issues
+
+  [ Tim Harvey ]
+  * env_nand: use nand_spl_load_image for readenv if SPL
+  * imx: ventana: config: use MMC SPL RAW support
+  * imx: ventana: (cosmetic) clean up size defines for improved readability
+  * imx: ventana: add pmic_setup to SPL
+
+  [ Fabio Estevam ]
+  * hummingboard: Remove unused directory
+
+  [ Nikolay Dimitrov ]
+  * imx: riotboard, marsboard: Enable thermal support
+  * imx: riotboard: Enable thermal DM support
+  * imx: marsboard: Enable thermal DM support
+
+  [ Peng Fan ]
+  * imx: mx6sx enable SION for i2c pin mux
+  * pmic: pfuze100 fix typo
+
+  [ Prabhakar Kushwaha ]
+  * arm/imx-common: Fix warning 'get_reset_cause' defined but not used
+
+  [ Tim Harvey ]
+  * arm: mx6: ddr: set fast-exit on DDR3 if pd_fast_exit specified
+  * mx6: add OTP bank1 registers
+  * imx: mx6: add get_cpu_speed_grade_hz func to return MHz speed grade from OTP
+  * imx: mx6: display max cpu frequency in print_cpuinfo()
+  * imx: mx6: add get_cpu_temp_grade to obtain cpu temperature grade from OTP
+  * imx: mx6: add display of CPU temperature grade in print_cpuinfo()
+  * thermal: imx_thermal: use CPU temperature grade for trip points
+
+  [ Paul Kocialkowski ]
+  * sunxi: Pass serial number through ATAG
+
+  [ Hans de Goede ]
+  * sunxi: Set SYS_MALLOC_CLEAR_ON_INIT to n
+  * console: Fix pre-console flushing via cfb_console being very slow
+
+  [ Laurent Itti ]
+  * sunxi: add support for UART2 on A23/A33
+
+  [ Hans de Goede ]
+  * sunxi: Fix dram initialization not working on some a33 devices
+  * sunxi: Make DRAM_ODT_EN Kconfig setting a bool
+  * sunxi: video: Fix lvds panel support for sun6i+
+  * sunxi: Add ga10h v1.1 defconfig
+
+  [ Paul Kocialkowski ]
+  * sunxi: VBUS detection function fixup in g_dnl_board_usb_cable_connected
+  * sunxi: Cache line size definition
+
+  [ Shengzhou Liu ]
+  * net/phy: Add support for realtek RTL8211F
+
+  [ Joe Hershberger ]
+  * net: Update hardware MAC address if it changes in env
+
+  [ Shengzhou Liu ]
+  * net/phy: refactor RTL8211F initialization
+
+  [ Michal Simek ]
+  * net: phy: Add support for all targets which requires MANUAL_RELOC
+
+  [ Joe Hershberger ]
+  * net: Implement random ethaddr fallback in eth.c
+  * net: Remove all references to CONFIG_ETHADDR and friends
+  * net: Remove all calls to net_random_ethaddr()
+
+  [ Alison Wang ]
+  * arm: ls102xa: Adjust the load address of U-Boot for NOR boot
+
+  [ York Sun ]
+  * driver/ddr/fsl: Remove deskew_cntrl register
+  * arm/ls1021a: Remove ccsr_ddr from immap_ls102xa.h
+
+  [ Masahiro Yamada ]
+  * README.scrapyard: add entries for dead board, T4240EMU and sc3
+
+  [ Joe Hershberger ]
+  * sandbox: Cleanup order and extra defines in defconfig
+  * sandbox: Use defconfig to enable features
+  * sandbox: Enable some ENV commands
+  * env: Fix return values in env_attr_lookup()
+  * env: Simplify the reverse_strstr() interface
+  * env: Allow env_attr_walk to pass a priv * to callback
+  * env: Add regex support to env_attrs
+  * env: Distinguish finer between source of env change
+  * net: Apply default format rules to all ethaddr
+  * net: Use env callbacks for net variables
+  * net: Add default flags for common net env vars
+  * net: Remove duplicate bootfile syncing functionality
+  * net: Handle ethaddr changes as an env callback
+  * test: Generalize the unit test framework
+  * test: Add a common unit test command
+  * test: dm: Move the dm tests over to the ut command
+  * test: dm: Move the time test over to the ut command
+  * test: Move the unit tests to their own menu
+  * test: dm: Don't bail on all tests if one test fails
+  * test: dm: eth: Handle failed test env cleanup
+  * test: Return values from the asserts compatible with cmds
+  * test: dm: Recover the driver model tree after tests
+  * test: env: Add test framework for env
+  * test: env: Add test for verifying env attrs
+  * test: env: Add a test of the new regex behavior for attrs
+  * sandbox: Enable env unit tests
+
+  [ Fabio Estevam ]
+  * wandboard: Switch to SPL support
+
+  [ Tim Harvey ]
+  * imx: ventana: config: enable Falcon mode
+
+  [ Stephen Warren ]
+  * nand: fix buffer alignment in new verification feature
+
+  [ Raghav Dogra ]
+  * nand/elbc: Memory leak fix
+
+  [ Peng Fan ]
+  * mtd:mxs:nand calculate ecc strength dynamically
+
+  [ Jörg Krause ]
+  * mtd: nand: mxs: Replace magic number for bits per ECC level with macro
+  * tools: mxsboot: Calculate ECC strength dynamically
+
+  [ Stefan Agner ]
+  * mtd: vf610_nfc: remove caching of page in buffer
+  * mtd: vf610_nfc: remove read on SEQIN
+  * mtd: vf610_nfc: allow bitflips in an empty page
+  * mtd: vf610_nfc: implement OOB only read
+  * mtd: vf610_nfc: use in-band bad block table
+  * mtd: vf610_nfc: add Freescale NFC controller configs to Kconfig
+  * mtd: vf610_nfc: add 32-error correction option for HW ECC
+  * mtd: vf610_nfc: enable ONFI detection
+
+  [ Michal Simek ]
+  * zynq: Use system timer implementation instead of our
+
+  [ Masahiro Yamada ]
+  * ARM: zynq: add separate configuration for ZC702 and ZC706
+  * ARM: zynq: add default ps7_init_gpl.c/h for Zed, MicroZed, ZC70x
+
+  [ Axel Lin ]
+  * pwm: imx: Prevent NULL pointer dereference
+  * pwm: imx: Remove unreachable code
+
+  [ Peng Fan ]
+  * imx: dma: correct MXS_DMA_ALIGNMENT
+
+  [ Heiko Schocher ]
+  * arm, imx6, i2c: add I2C4 for MX6DL
+  * i2c, mxc: rework i2c base address names for different SoCs
+  * arm, imx6: add support for aristainetos2 board
+
+  [ Tim Harvey ]
+  * thermal: imx_thermal: increase critical temperature threshold
+  * imx: ventana: update MMC env configuration
+  * imx: ventana: update README for micro-SD boot medium
+  * imx: ventana: update README with Falcon mode documentation
+  * spl: spl_mmc: fix mmc Falcon mode regression
+
+  [ Peter Robinson ]
+  * novena: standardise mx6_common.h include
+  * imx6: move all standard includes to mx6_common.h
+  * imx6: move generic imx6 options to mx6_common.h
+  * imx6: move standard ATAG configs to mx6_common.h
+  * imx6: move MXC_GPIO define to mx6_common.h
+  * imx6: centralise common boot options in mx6_common.h
+  * imx6: move generic miscellaneous and overwrite options
+  * imx6: standardise filesystem and boot options
+  * imx6: generic MMC config options to mx6_common
+  * mx6: standardise CONFIG_CMD_CACHE
+
+  [ Masahiro Yamada ]
+  * tools: moveconfig: a tool to move CONFIGs from headers to defconfigs
+
+  [ Joe Hershberger ]
+  * moveconfig: Always run savedefconfig on the moved config
+  * moveconfig: Ignore duplicate configs when moving
+  * moveconfig: Add a parameter to accept a list to build
+  * moveconfig: Add a switch to only cleanup headers
+  * moveconfig: Cleanup headers in arch and board
+  * moveconfig: Output a list of failed boards
+  * moveconfig: Print a message for missing compiler
+  * moveconfig: Add a switch to enable printing errors
+  * moveconfig: Print status about the processed defconfigs
+
+  [ Stefano Babic ]
+  * imx: drop warning: unused variable 'max_freq'
+
+  [ Tom Rini ]
+  * Revert "Revert "stm32f4: fix serial output""
+
+  [ Tuomas Tynkkynen ]
+  * pxe: Fix crash if 'sysboot' is run without args
+  * menu: Return an error code if Ctrl-C is pressed
+
+  [ Lokesh Vutla ]
+  * ARM: BeagleBoard-x15: Rev A2x5: Change UART3 mux
+
+  [ Ryan Harkin ]
+  * vexpress64: specify CONFIG_SYS_FLASH_CFI_WIDTH
+
+  [ Tim Harvey ]
+  * env_mmc: add error message to pass to set_default_env
+  * pci: display header for bus scan
+
+  [ Chris Packham ]
+  * Makefile: Add U_BOOT_TZ and include in version
+
+  [ Linus Walleij ]
+  * vexpress64: fix various memory issues
+
+  [ Ricardo Ribalda ]
+  * doc/README.generic-board: Trivial spell check
+
+  [ Stefano Babic ]
+  * Revert "imx: drop warning: unused variable 'max_freq'"
+
+  [ Tim Harvey ]
+  * pci: imx: display message if no pcie link
+
+  [ Fabio Estevam ]
+  * warp: Adjust CONFIG_SYS_DFU_DATA_BUF_SIZE
+  * warp: Fix CONFIG_SYS_FSL_ESDHC_ADDR
+  * warp: Enable CONFIG_SUPPORT_EMMC_BOOT
+  * warp: Add fuse command support
+  * warp: Fix the 'saveenv' command
+
+  [ Ricardo Ribalda ]
+  * ppc: xilinx-ppc: Move to generic board support
+
+  [ Evgeniy Dushistov ]
+  * beagle-xm: gpio_63 fix wrong pin initialization
+
+  [ Linus Walleij ]
+  * vexpress64: let Juno wait for root device
+
+  [ Masahiro Yamada ]
+  * include: introduce include/linux/io.h as a wrapper of asm/io.h
+
+  [ Thomas Petazzoni ]
+  * tools: use pkg-config when available to get SSL flags
+
+  [ Masahiro Yamada ]
+  * powerpc: gitignore: ignore PowerPC DTBs
+
+  [ Karl Apsite ]
+  * mkimage will now report information about loadable
+  * add boot_get_loadables() to load listed images
+  * Combine bootm_find_<thing> functions together
+  * add test for two 'loadables'
+
+  [ Paul Kocialkowski ]
+  * spl: spl_mmc: Error and count distinction
+
+  [ Andrew Bradford ]
+  * meminfo cmd: Enable printing >=4GiB SDRAM sizes
+
+  [ Masahiro Yamada ]
+  * kbuild: define DO_DEPS_ONLY for u-boot.cfg to fix build error
+
+  [ Linus Walleij ]
+  * vexpress64: use uncompressed kernel by default
+
+  [ Marek Vasut ]
+  * ARM: bcm283x: Repair wdog.h
+  * ARM: bcm283x: Reorder timer.h
+  * ARM: bcm283x: Switch to generic timer
+
+  [ Matt Porter ]
+  * image: fix build when CONFIG_NR_DRAM_BANKS is disabled on ARM
+  * common/cmd_boot: keep ARM v7M in thumb mode during do_go_exec()
+  * ARMv7M: add STM32F1 support
+  * gpio: stm32: add stm32f1 support
+
+  [ Tang Yuantian ]
+  * fsl/sata: Replace sprintf() with snprintf()
+
+  [ Joe Hershberger ]
+  * net: Fix a warning added by 76ec988
+
+  [ Heiko Schocher ]
+  * am33xx, spl, siemens: enable debug uart output again
+
+  [ Hannes Schmelzer ]
+  * cosmetic: change Author/MAINTAINER Name from Petermaier to Schmelzer
+
+  [ Hans de Goede ]
+  * usb: Remove unused variable in usb_setup_descriptor()
+
+  [ Siva Durga Prasad Paladugu ]
+  * ci_udc: Update the ci_udc driver to support bulk transfers
+
+  [ Peter Griffin ]
+  * usb: dwc2: Add support for v3 snpsid value
+
+  [ Hans de Goede ]
+  * usb: kbd: Fix key repeat not always working
+  * sunxi: Use axp221 sid on a33
+  * sunxi: Remove support for building "old-fashioned" fel binaries
+  * sunxi: Update sunxi-common.h to deal with different DRAM base addr on sun9i
+  * sunxi: Update sunxi-common.h to deal with different A1-SRAM base addr on sun9i
+  * sun9i: Basic sun9i (A80) support
+  * sun9i: Add Merrii_A80_Optimus board / defconfig file
+
+  [ Daniel Kochmański ]
+  * sunxi/nand: change BLOCK_SIZE in mksunxiboot to match NAND block size
+
+  [ Roy Spliet ]
+  * sunxi: Add DMA definitions
+  * sunxi: Match sun4i, sun6i, sun9i CCI definitions for NAND and DMA
+
+  [ Daniel Kochmański ]
+  * sunxi/nand: Add support to the SPL for loading u-boot from internal NAND memory
+
+  [ Chen-Yu Tsai ]
+  * ARM: sunxi: Document registers in PSCI code
+  * ARM: sunxi: Make PSCI code sun7i specific
+  * ARM: sunxi: Add sun6i specific PSCI implementation
+  * ARM: sunxi: Enable PSCI for sun6i
+  * ARM: sunxi: Share sun6i PSCI backend with sun8i
+  * ARM: sunxi: Enable PSCI for sun8i
+
+  [ Masahiro Yamada ]
+  * ARM: UniPhier: replace <asm/io.h> with <linux/io.h>
+  * ARM: UniPhier: update the vendor name of UniPhier in Kconfig
+  * ARM: UniPhier: use 32 bit register access for debug UART setting
+  * ARM: UniPhier: remove unnecessary cache coherency code
+  * ARM: UniPhier: remove meaningless CONFIG_SPL_BUILD ifdefs
+  * ARM: UniPhier: move CONFIG_SYS_TEXT_BASE to Kconfig
+  * ARM: UniPhier: set MACH_PH1_PRO4 as default SoC
+  * ARM: UniPhier: enable CONFIG_NET_RANDOM_ETHADDR
+  * ARM: UniPhier: update DDR PHY register map for PH1-Pro5
+  * ARM: UniPhier: fix pin mux setting for USB port 2 of PH1-sLD8
+  * ARM: UniPhier: add pin mux setting for NAND CS1 of PH1-Pro4
+
+  [ Mitsuhiro Kimura ]
+  * arm: rmobile: alt: Add ethernet function B support
+
+  [ Nobuhiro Iwamatsu ]
+  * arm: rmobile: lager: Update to QoS revision 0.973
+  * arm: rmobile: koelsch: Update to QoS revision 0.411
+  * arm: rmobile: gose: Update to QoS revision 0.311
+  * arm: rmobile: alt: Update to QoS revision 0.31 and 0.321
+
+  [ Stefan Wahren ]
+  * mxs: Do not disable bo detection when DC-DC is already enabled
+
+  [ Tim Harvey ]
+  * imx: ventana: various board-specific GPIO config updates
+  * imx: ventana: make model env var automatic and non-overridable
+  * imx: ventana: make fdt_file1 and fdt_file2 automatic and non-overridable
+  * imx: ventana: hang if board model could not be determined
+  * imx: ventana: skip mtdparts fixup if no flash
+
+  [ Markus Niebel ]
+  * arm: mx6: tqma6: fix spelling error in condition
+  * arm: mx6: tqma6: use default CONFIG_SYS_PBSIZE
+
+  [ Masahiro Yamada ]
+  * sparc: fix build error on gr_ep2s60 board
+  * blackfin: fix build error on bct-brettl2 board
+
+  [ Joe Hershberger ]
+  * Move setexpr to Kconfig
+  * net: Move the CMD_NET config to defconfigs
+
+  [ Michal Simek ]
+  * net: Fix NET_RANDOM_ETHADDR dependencies
+
+  [ Lars Poeschel ]
+  * ARM: phytec: pcm051: Remove unneeded CONFIG_USE_IRQ
+  * configs: remove CONFIG_NET_MULTI
+
+  [ Hannes Schmelzer ]
+  * board/BuR/common: fix netconsole
+
+  [ Bin Meng ]
+  * pci: Move pci_hose_phys_to_bus() to pci_common.c
+  * x86: Support QEMU x86 targets
+  * x86: Make QEMU the default vendor
+  * x86: Set CONFIG_NR_DRAM_BANKS to 8 and move it to x86-common.h
+  * x86: Change coreboot default build configuration to QEMU
+  * x86: Update README.x86 for QEMU support
+  * x86: Remove DECLARE_GLOBAL_DATA_PTR in board files
+  * video: Kconfig: Make VESA driver avaiable for non-x86 boards
+  * x86: Move FRAMEBUFFER_SET_VESA_MODE etc to video Kconfig
+  * x86: qemu: Add graphics support
+  * pci: Allow debug message output in pci_auto.c
+  * pci: Do not skip legacy IDE device configuration
+  * cmd_ide: Eliminate build warnings in atapi_inquiry()
+  * x86: Add CONFIG_LBA48 and remove CONFIG_ATAPI in x86-common.h
+  * x86: qemu: Add ATA/SATA support
+  * x86: Refactor PIRQ routing support
+  * x86: Document irq router device tree bindings
+  * x86: quark: Implement PIRQ routing
+  * x86: Do sanity test on pirq table before writing
+
+  [ Andrew Bradford ]
+  * x86: fsp_support: Correct high mem comment typo
+
+  [ Bin Meng ]
+  * x86: qemu: Make host bridge (b.d.f=0.0.0) visible
+  * x86: qemu: Turn on legacy segments decode
+  * x86: qemu: Enable legacy IDE I/O ports decode
+  * x86: qemu: Adjust VGA initialization
+  * tools: ifdtool: Do not write region while its size is negative
+  * x86: kconfig: Make FSP_TEMP_RAM_ADDR depend on HAVE_FSP
+  * x86: coreboot: Fix cosmetic issues
+  * x86: qemu: Create separate i440fx and q35 device trees
+  * x86: coreboot: Control I/O port 0xb2 writing via device tree
+  * x86: qemu: Implement PIRQ routing
+
+  [ Andrew Bradford ]
+  * x86: baytrail: pci region 3 is not always mapped to end of ram
+
+  [ Gabriel Huau ]
+  * x86: gpio: add pinctrl support from the device tree
+  * x86: minnowmax: initialize the pin-muxing from device tree
+
+  [ Simon Glass ]
+  * sandbox: Tidy up terminal restore
+  * dm: pci: Allow PCI bus numbering aliases
+  * dm: Sort the uclass IDs after the tegra/PMIC addition
+  * sandbox: dts: Sort the test.dts file a little
+  * sandbox: dts: Sort the sandbox.dts file
+  * sandbox: dts: Add the real-time-clock test nodes back in
+  * sandbox: Compile test device tree when CONFIG_UT_DM is defined
+
+  [ Masahiro Yamada ]
+  * gpio: fix typos in GPIO header
+
+  [ Hans de Goede ]
+  * sunxi: mmc: Enable pull-up on card-detect gpio pin
+  * sunxi: usb_phy: Swap check for disconnect threshold
+  * sunxi: Add new Mele_A1000G_quad defconfig
+  * sunxi: gpio: Add "allwinner,sun8i-a33-pinctrl"
+  * sunxi: Sync dts files with the linux kernel
+  * sunxi: Rename Astar_MID756 to Et_q8_v1_6 to match kernel dts name
+
+  [ Paul Kocialkowski ]
+  * fdt: Pass the device serial number through devicetree
+  * fdt: Documentation for a few support functions aside their prototypes
+
+  [ Hans de Goede ]
+  * sunxi: Add a proper dts file for the ga10h a33 based tablet
+  * sunxi: Select CONFIG_CMD_NET and CONFIG_CMD_SETEXPR by default
+  * image-fit: Fix compiler warning in fit_conf_print()
+
+  [ Nikhil Badola ]
+  * drivers: usb: fsl: Return if USB_MAX_CONTROLLER_COUNT is incorrect
+
+  [ Fabio Estevam ]
+  * wandboard: Add board revision detection support
+  * mx6_common: Fix LOADADDR and SYS_TEXT_BASE for MX6SL and MX6SX
+
+  [ Bhuvanchandra DV ]
+  * dm: gpio: uclass: Add flag to control sequence numbering
+  * dm: gpio: vf610: Add GPIO driver support
+  * colibri_vf: Add pinmux entries for GPIOs
+  * colibri_vf: Enable GPIO support
+  * arm: vf610: Add clock support for DSPI
+  * arm: vf610: Add iomux support for DSPI
+  * vf610: dts: Add device tree support
+  * colibri-vf: Enable SPI support
+  * colibri_vf: Add separate defconfig for device tree support
+
+  [ Sanchayan Maity ]
+  * usb: ehci-vf: Add weak function for board specific initialisation
+  * colibri_vf: Enable board specific USB initialisation for USB pen gpio
+
+  [ Christian Gmeiner ]
+  * ot1200: setup i2c bus in board_early_init_f(..)
+  * ot1200: setup i2c bus 1 in setup_iomux_i2c()
+
+  [ Stefano Babic ]
+  * imx: drop warning: unused variable 'max_freq'
+
+  [ Lukasz Majewski ]
+  * arm: exynos: USB3 PHY base definition for Exynos5 SoCs
+  * samsung: usb: phy: Support for DWC3 PHY
+
+  [ Joonyoung Shim ]
+  * smdk5420: board: add functions required to enable USB DWC3
+
+  [ Inha Song ]
+  * smdk5420: board: add functions to init dfu environment settings
+  * usb: f_mass_storage: sleep_thread: decrease the interval for check ctrlc()
+
+  [ Przemyslaw Marczak ]
+  * odroid-xu3: config: enable DFU/THOR/UMS by add configs and environment
+  * samsung: common: add example boot scripts
+
+  [ Stefan Roese ]
+  * Kconfig: Enable usage of escape char '\' in string values
+  * autoboot.c: Remove CONFIG_AUTOBOOT_STOP_STR2 and CONFIG_AUTOBOOT_DELAY_STR2
+  * autoboot.c: Move config options to Kconfig
+  * autoboot.c: Add feature to stop autobooting via SHA256 encrypted password
+
+  [ Adam YH Lee ]
+  * pepper: Implement Board Detection mechanism
+
+  [ Tom Rini ]
+  * Prepare v2015.07-rc2
+
+  [ Chris Kuethe ]
+  * patch - arm - define SYS_CACHELINE_SIZE for mx5
+
+  [ Marek Vasut ]
+  * imx6: novena: Reinstate missing CONFIG_FAT_WRITE
+
+  [ Soeren Moch ]
+  * tbs2910: add thermal support
+  * tbs2910: add PRE_CONSOLE_BUFFER support
+
+  [ Simon Glass ]
+  * tegra: cros_ec: Add tegra support for Chrome OS EC
+  * tegra: spi: Drop the claim_bus() method to correct delays
+  * dm: tegra: cros_ec: Enable Chrome OS EC on Nyan-big
+  * tegra: spi: Support slow SPI rates
+  * tegra: clock: Support enabling external clocks
+  * tegra: clock: Adjust PLL access to avoid a warning
+  * tegra: Introduce SRAM repair on tegra124
+  * tegra: Add missing tegra124 peripherals
+  * tegra: Increase maximum arguments to 32
+  * tegra: lcd: Tidy up clock init
+  * tegra: Allow board-specific init
+  * tegra: nyan-big: Add additional clock and kernel init
+  * tegra: config: Allow Chrome OS environment settings to be included
+  * tegra: Replace 'Norrin' with 'Nyan-big' and fix typo
+  * tegra: config: nyan-big: Add options required by Chrome OS boot
+
+  [ Przemyslaw Marczak ]
+  * odroid: dts: cleanup of MAX77686 regulators
+
+  [ Andreas Bießmann ]
+  * atngw100: convert to generic board
+  * avr32: delete non generic board favr-32-ezkit
+  * avr32: delete non generic board hammerhead
+  * avr32: delete non generic board mimc200
+  * avr32: delete non generic board's atstk100{3, 4, 6}
+  * avr32: take maintainership for atstk1002
+  * avr32: delete ancient board.c
+
+  [ Hans de Goede ]
+  * sunxi: Request macpwr gpio before using it
+
+  [ Bernhard Nortmann ]
+  * sunxi: Enable CONFIG_SYS_64BIT_LBA when AHCI is used
+
+  [ Simon Glass ]
+  * dm: i2c: Add compatibility functions for dm_i2c_reg_read/write()
+  * dm: tegra: usb: Move USB to driver model
+  * dm: usb: Implement usb_detect_change() for driver model
+  * arm: spl: Add an API to detect when U-Boot is started from SPL
+  * arm: Allow cleanup_before_linux() without disabling caches
+  * sandbox: Add an implementation for cleanup_before_linux_select()
+  * Remove typedefs from bmp_layout.h
+  * lcd: Support colour lookup table on 16bpp display in BMP images
+  * dm: ns16550: Support CONFIG_SYS_NS16550_MEM32 with driver model
+  * fdt: arm: Drop device tree padding
+  * dts: Disable device tree for SPL on all boards
+  * dm: serial: Don't support CONFIG_CONS_INDEX with device tree
+  * Add a simple version of memalign()
+  * Remove SPL undefine of CONFIG_OF_CONTROL
+  * sandbox: Move CONFIG_SANDBOX_SERIAL to Kconfig
+  * dm: usb: tegra: Drop legacy USB code
+
+  [ Masahiro Yamada ]
+  * README.scrapyard: add entries for dead AVR32 boards
+  * blackfin: fix undefined reference to srand and rand
+
+  [ Hannes Schmelzer ]
+  * common/cmd_bdinfo: show gd->board_type
+
+  [ Pali Rohár ]
+  * Nokia RX-51: Fix calculating return address in save_boot_params
+
+  [ Masahiro Yamada ]
+  * kconfiglib: sync with the latest in Kconfiglib project
+
+  [ Lokesh Vutla ]
+  * ARM: DRA7: DDR3: Add support for HW leveling
+  * ARM: BeagleBoard-X15: Enable HW leveling
+  * ARM: DRA7-evm: Enable HW leveling
+  * ARM: DRA72-evm: Enable HW leveling
+  * ARM: DRA7: Add is_dra72x cpu check definition
+  * ARM: DRA7: Update DDR IO configuration
+  * ARM: DRA7: Update DDR IO registers
+  * ARM: DRA7xx: EMIF: Fix DLL_CALIB_CTRL register
+  * ARM: DRA7: Make do_set_mux32() generic
+  * ARM: DRA7: Add pinctrl register definitions
+  * ARM: DRA7: Add support for virtual mode configuration
+  * ARM: DRA7: Add support for IO delay configuration
+  * ARM: DRA7: Add support for manual mode configuration
+  * ARM: DRA7-evm: Enable IO delay recalibration sequence
+
+  [ Nishanth Menon ]
+  * ARM: DRA7-evm: Add mux data
+
+  [ Lokesh Vutla ]
+  * ARM: DRA7: CPSW: Remove IO delay hack
+  * ARM: BeagleBoard-x15: Enable IO delay recalibration sequence
+  * ARM: BeagleBoard-x15: Add mux data
+
+  [ Rob Herring ]
+  * ARM: highbank: add missing SCU register setup for reset
+
+  [ Mark Langsdorf ]
+  * ARM: highbank: add reset support for Calxeda Midway machine
+  * cmd_scsi: use lbaint_t for LBA values instead of u32
+  * ahci: support LBA48 data reads for 2+TB drives
+  * ahci: extend data io wait to 10s
+
+  [ Kevin Smith ]
+  * tools/kwbimage.c: Correct header size for SPI boot
+
+  [ Stefan Roese ]
+  * arm: mvebu: Disable L2 cache before enabling d-cache
+
+  [ Kevin Smith ]
+  * arm: mvebu: Update CBAR with SOC regs base
+
+  [ Stefan Roese ]
+  * tools/kwboot: Add parameters to set delay and timeout via cmdline
+
+  [ Fabio Estevam ]
+  * mx6cuboxi: Fix boot of hummingboard dual-lite
+
+  [ Mark Langsdorf ]
+  * highbank: add custom ahci_link_up function
+
+  [ Roger Quadros ]
+  * configs: am43xx_evm: Enable NAND
+  * am335x_evm: am44xx_evm: dra7xx_evm: nand: Fix file-system partition name
+  * am335x_evm: nand: Fix boot from NAND
+
+  [ Tom Rini ]
+  * am43xx_evm: Enable NAND boot
+
+  [ Lokesh Vutla ]
+  * ARM: BeagleBoard-x15: Enable i2c5 clocks
+
+  [ Tom Rini ]
+  * am33xx: Re-enable SW levelling for DDR2
+
+  [ Lokesh Vutla ]
+  * ARM: AM43x: Fix MAX_RAM_BANK_SIZE
+
+  [ Masahiro Yamada ]
+  * avr32: move CONFIG_SYS_GENERIC_BOARD to Kconfig
+
+  [ Lokesh Vutla ]
+  * ARM: DRA7: emif: Fix DDR init sequence during warm reset
+
+  [ Yegor Yefremov ]
+  * board: add support for Vision System's Baltos Industrial PC
+
+  [ Tom Rini ]
+  * omap5: Exclude more environment from SPL builds
+
+  [ Hans de Goede ]
+  * sunxi: musb: Do not fully reset the controler from sunxi_musb_disable
+  * sunxi: musb: Remove unused sunxi_musb_exit method
+  * sun6i: cpu_reset: Do not return from cpu_reset()
+
+  [ Karsten Merker ]
+  * MSI_Primo81_defconfig: enable USB OTG port and keyboard support
+
+  [ Jeroen Hofstee ]
+  * omap_gpmc: move prefetch out of CONFIG_NAND_OMAP_ELM
+  * mtd: OMAP: Enable GPMC prefetch mode for 16 bit access
+  * boards: tam3517-common: enable gpmc prefetch mode
+
+  [ Cooper Jr., Franklin ]
+  * ti: am335x/am437x/omap5 devices: Fix breakage when CONFIG_CMD_NET is not used
+
+  [ Hannes Petermaier ]
+  * board/BuR/common: support timer5 for pwm-backlight
+  * board/BuR/tseries: remove lpj= from environment-variable
+
+  [ Tom Rini ]
+  * mmc_write.c: Make mmc_berase do 32bit safe 64bit math
+
+  [ Łukasz Majewski ]
+  * fix: samsung: common: autoboot.cmd: Correct itbcfg definition
+
+  [ Peter Robinson ]
+  * tools/env/fw_env.h: Correct include order
+
+  [ Paul Kocialkowski ]
+  * spl: spl_mmc: Minor cosmetics
+  * spl: spl_mmc: MMC boot mode provisions checks
+
+  [ Tom Rini ]
+  * CPCI4052: Remove CONFIG_SYS_LONGHELP
+
+  [ Hans de Goede ]
+  * usb.h: Always declare usb function prototypes
+  * usb: ehci: Properly deal with data toggle for interrupt endpoints
+  * usb: kbd: Disable idle input reports when we do not need them
+
+  [ Vitaly Andrianov ]
+  * keystone2: use correct EFUSE_BOOTROM fileds to configure speed
+
+  [ Paul Kocialkowski ]
+  * common: cmd_part: Proper alignment
+  * common: cmd_part: start and size sub-commands introduction
+
+  [ Heiko Schocher ]
+  * arm, am33xx: update for siemens am335x based boards
+
+  [ Guillaume GARDET ]
+  * ti: armv7: enable EXT support in SPL (using ti_armv7_common.h)
+  * ti: omap4: remove CONFIG_SPL_EXT_SUPPORT from ti_omap4_common.h since it is now in ti_armv7_common.h
+
+  [ Nishanth Menon ]
+  * ARM: DRA7: Change configuration to prevent DDR reset control from EMIF
+
+  [ Tom Rini ]
+  * am43xx: Update CONFIG_SPL_TEXT_BASE
+
+  [ Mugunthan V N ]
+  * am43xx_evm: add usb host boot support
+  * am43xx_evm: add eth boot support
+
+  [ Lokesh Vutla ]
+  * ARM: BeagleBoard-X15: Enable VTT regulator
+
+  [ Chris Packham ]
+  * README: Describe CONFIG_SYS_NO_FLASH
+
+  [ Heiko Schocher ]
+  * siemens,am33x,rastaban: add rastaban config
+  * siemens,am33x,thuban: rename dxr2 to thuban
+
+  [ Marek Vasut ]
+  * mmc: bcm2835_sdhci: Restore original delay behavior
+
+  [ Joe Hershberger ]
+  * mtd: spi: Add the SPI_FLASH config to Kconfig
+  * common: Fix comment for saveenv in Kconfig
+  * common: Add the CMD_ENV_EXISTS config to Kconfig
+  * a3m071: Add needed dependency on LIB_RAND
+  * Move default y configs out of arch/board Kconfig
+  * Move defaults from config_cmd_default.h to Kconfig
+
+  [ Markus Niebel ]
+  * arm: imx6: tqma6: add kconfig to board header
+  * arm: mx6: tqma6: CPU type selection via Kconfig
+  * arm: imx6: tqma6: implement IMX_CONFIG with Kconfig
+  * arm: imx6: tqma6: boot device selection via Kconfig
+  * arm: imx6: tqma6: implement KConfig baseboard selection
+
+  [ Peng Fan ]
+  * imx: mx6 correct is_soc_rev usage
+  * imx: mx6 correct get_cpu_rev
+  * imx: mx6 introuduce macro is_mx6dqp
+
+  [ Peter Robinson ]
+  * Drop duplicate CONFIG_SYS_NO_FLASH from mx6_common
+  * mx6cuboxi: drop options that are duplicated in mx6_common
+
+  [ Ian Campbell ]
+  * Revert "sunxi/nand: Add support to the SPL for loading u-boot from internal NAND memory"
+
+  [ Kevin Smith ]
+  * mv-common.h: Include support for device trees
+  * db-88f6820-gp.h: Load data blobs into lower memory
+
+  [ Haikun Wang ]
+  * dm: sf: Add Atmel DataFlash spi flash driver
+  * dm: ls1021aqds: dts: Use "spi_dataflash" driver instead of "spi_flash_std" for DSPI flash
+  * arm: ls102xa: Enable Driver Model SPI for ls1021aqds
+  * arm: ls102xa: Enable Driver Model SPI for ls1021atwr
+  * defconfig: ls1021a: Add OF_CONTROL and DM support
+
+  [ Daniel Schwierzeck ]
+  * mtd, spi: Add MTD layer driver
+
+  [ Heiko Schocher ]
+  * mtd, nand: Move common functions from cmd_nand.c to common place
+  * spi, sf: Use offset and size in sf cmd from mtdpartition
+  * mtd, spi: Check if flash pointer is used
+
+  [ Haikun Wang ]
+  * sf: update sst25wf040b flash params
+
+  [ Tom Rini ]
+  * Prepare v2015.07-rc3
+
+  [ Alexey Brodkin ]
+  * arc: implement slave cores kick-start for Linux kernel
+  * arc: significant cache rework
+  * board: axs103 - add maintainer information
+
+  [ Jagan Teki ]
+  * spi: Zap andes_spi driver
+  * spi: Zap ftssp010_spi driver
+  * spi: Zap oc_tiny_spi driver
+  * spi: xilinx_spi: Move header code to driver
+  * spi: xilinx_spi: Driver clean-up
+  * spi: davinci_spi: Move header code to driver
+  * spi: davinci_spi: Driver cleanup
+  * spi/sf: Minor cleanups
+  * dm: spi: zynq_spi: Convert to driver model
+  * zynq: Kconfig: Enable dm spi and spi_flash
+  * dts: zynq: Add zynq spi controller nodes
+  * spi: zynq_spi: Add fdt support in driver
+  * dts: zynq: Enable spi1 for zc770_xm010 board
+  * dm: spi: xilinx_spi: Convert to driver model
+  * spi: xilinx_spi: Add asm/io.h include file
+  * spi: Kconfig: Add Zynq SPI controller entry
+  * defconfig: Add CONFIG_OF_CONTROL in zynq_picozed
+  * zynq: defconfig: Move CONFIG_OF_* to Kconfig
+  * sf: dataflash: Rename to CONFIG_SPI_FLASH_DATAFLASH
+  * README: Add CONFIG_SPI_FLASH_DATAFLASH description
+  * sf: Add Kconfig menu entry
+  * common: Add CMD_SF Kconfig entry
+  * sf: Kconfig: Update SPI_FLASH entry
+  * sf: Kconfig: Add SPI_FLASH_MTD entry
+  * sf: Kconfig: Add SPI_FLASH_DATAFLASH entry
+
+  [ Masahiro Yamada ]
+  * ARM: UniPhier: drop special CONFIG_AUTOBOOT_ settings
+  * ARM: dts: UniPhier: sync device trees with the Linux kernel
+  * ARM: dts: UniPhier: re-license device tree files under GPLv2+/X11
+  * ARM: UniPhier: add IDs for PH1-Pro5, ProXstream2, PH1-LD6b
+
+  [ Jagan Teki ]
+  * spi: Add Kconfig menu entry
+  * spi: Kconfig: Add XILINX_SPI entry
+  * spi: Kconfig: Add TI_QSPI entry
+  * spi: Makefile: Use object file alphabetic order
+  * spi: Kconfig: Show dm-spi drivers if DM_SPI set
+  * spi: Kconfig: Add FSL_DSPI entry
+  * spi: Kconfig: Add FSL_ESPI entry
+  * spi: Kconfig: Add FSL_QSPI entry
+  * spi: Kconfig: Add EXYNOS_SPI entry
+  * spi: Kconfig: Add ICH_SPI entry
+  * spi: Kconfig: Add TEGRA114_SPI entry
+  * spi: Kconfig: Add TEGRA20_SFLASH entry
+  * spi: Kconfig: Add TEGRA20_SLINK entry
+  * README: Remove CONFIG_SPI_FLASH_MTD help text
+  * defconfig: Move CONFIG_SPI_FLASH_BAR from configs
+  * sf: Kconfig: Add SPI_FLASH_BAR entry
+  * README: Remove CONFIG_SPI_FLASH_BAR help text
+  * README: Remove CONFIG_SPI_FLASH_DATAFLASH help text
+
+  [ Angelo Dureghello ]
+  * spi: cf_qspi: fix clamp macro type check compilation warnings
+
+  [ Tony Wu ]
+  * MIPS: fix missing semicolon in cacheops.h
+
+  [ Daniel Schwierzeck ]
+  * MIPS: change 'extern inline' to 'static inline'
+
+  [ Sanchayan Maity ]
+  * colibri_vf: Increase console IO buffer size to 1024
+
+  [ Chen-Yu Tsai ]
+  * sunxi: hardware-feature-specific function index defines for PORT F UART0
+  * sunxi: rsb: Enable R_PIO clock before configuring external pins
+  * sunxi: Add support for UART0 in PB pin group on A33
+  * sunxi: Sync sun8i dts files with the linux kernel
+  * sunxi: Add Sinlinx SinA33 defconfig
+
+  [ Axel Lin ]
+  * gpio: lpc32xx: Use priv_data instead of platdata
+
+  [ Pavel Machek ]
+  * armv7: better comment in start.S
+
+  [ Simon Glass ]
+  * arm: Add ENTRY/ENDPROC to private libgcc functions
+  * Revert "break build if it would produce broken binary"
+
+  [ Siva Durga Prasad Paladugu ]
+  * arm: dcc: Add uart dcc support for armv8
+
+  [ Albert ARIBAUD \(3ADEV\) ]
+  * cairo: add missing MAINTAINERS file
+
+  [ Lokesh Vutla ]
+  * board: am43xx: Add maintainer information
+
+  [ Masahiro Yamada ]
+  * ARM: disable HAVE_PRIVATE_LIBGCC for ARM64
+
+  [ Yegor Yefremov ]
+  * board: baltos - add maintainer information
+
+  [ Mugunthan V N ]
+  * ARM: DRA72x: fix io delay calibration for ethernet
+
+  [ Hans de Goede ]
+  * sunxi: Adjust Ippo_q8h_v1_2_a33_1024x600 dts filename to match the upstream kernel
+
+  [ Bin Meng ]
+  * net: designware: Program MAC address to hardware after soft reset
+
+  [ Joe Hershberger ]
+  * Allow CONFIG_REGEX to be disabled when CONFIG_NET
+  * blackfin: Fix build regression due to image size
+
+  [ Masahiro Yamada ]
+  * README.distro: fix typos
+
+  [ Simon Glass ]
+  * ti: Add SPDX license identifier to omap.h
+
+  [ Prabhakar Kushwaha ]
+  * Makefile:Add GCC flag -fno-delete-null-pointer-checks
+
+  [ Roger Quadros ]
+  * ARM: DRA7-evm: prevent DCAN1 _wait_target_disable failure in kernel
+  * ARM: beagle_x15: prevent DCAN1 _wait_target_disable failure in kernel
+
+  [ Yegor Yefremov ]
+  * arm: convert am3517_crane and am3517_evm to generic boards
+  * arm: baltos: enable CMD_NET and FIT support in defconfig
+  * arm: baltos: drop I2C speed to 1000 Hz
+  * arm: baltos: fix NAND boot
+
+  [ Egli, Samuel ]
+  * siemens,am33x: adjust mtd partition
+
+  [ Antonio Borneo ]
+  * stm32f4: fix MAINTAINERS file
+  * stm32f4: fix minor typo in comment
+  * stm32f4: fix gpio description in comment
+
+  [ Michael Scherban ]
+  * keystone2: config: update default mtd
+
+  [ Yegor Yefremov ]
+  * arm: baltos: change USB ports functions
+
+  [ Tang Yuantian ]
+  * ahci: Fix compiling warnings under 64bit platforms
+
+  [ Minkyu Kang ]
+  * arm: adds the status info for odroid-xu3
+
+  [ Simon Glass ]
+  * exynos: i2c: Correct bug in pinmux selection
+
+  [ Stefan Roese ]
+  * arm: mvebu: db-88f6820-gp: Add MAINTAINERS file
+  * mmc: sdhci: Use timer based timeout detection in sdhci_send_command()
+  * mmc: sdhci.c: Add config option to use a fixed buffer for transfers
+  * arm: mvebu: Add SDIO/SDHCI support for Armada A38x
+  * arm: mvebu: db-88f6820-gp: Add MMC/SDIO support
+  * block: ahci: Don't enable port interrupts
+  * arm: mvebu: Add SATA/SCSI (AHCI) support for Armada A38x
+  * arm: mvebu: db-88f6820-gp.h: Add SATA/SCSI (AHCI) support
+  * usb: Add EHCI support for Armada 38x (mvebu)
+  * arm: mvebu: db-88f6820-gp: Add USB/EHCI support
+
+  [ Masahiro Yamada ]
+  * mtd: fix false positive "Offset exceeds device limit" error
+
+  [ Andre Przywara ]
+  * scsi: fix compiler warning with DEBUG and 48bit LBAs
+
+  [ Tom Rini ]
+  * Prepare v2015.07
+
+  [ Sean Cross ]
+  * debian: Add debian build files
+  * novena: Support SPL loading from external MMC
+  * novena: SPL: Add support for ddr3 calibration
+  * novena: video: add lcddet command
+  * novena: video: Force backlight to be a GPIO
+  * novena: Power on PCIe port if configured
+  * configs: novena: Add production config scripts
+  * configs: novena: Add rfkill GPIO to PCI definition
+  * novena: Configure PCIe rfkill and reset lines
+  * board: novena: Allow for CONFIG_PCI to be disabled
+  * configs: novena: Disable PCI
+  * board: novena: Attempt to fix gigabit Ethernet
+  * board: kosagi: Disable PCIe clock when PCI is not configured
+  * board: novena: Add lidbootblock feature
+  * configs: novena: Enable lidbootblock support
+  * novena: Enable feature flag fixup of dtb
+  * debian: update to v2014.10-novena-rc16
+  * board: novena: Correct spacing, fdt node paths
+  * debian: Update to 2014.10-novena-rc17
+  * debian: Update to 2014.10-novena-r2-rc17
+  * board: novena: Replace constant with feature_rootsrc_sata
+  * novena: video: Enable DeSSC on eDP chip
+  * debian: Only use four threads when building
+  * debian: Update package to v2014.10.r3-novena
+  * board: novena: Fix REF_STATE checking
+  * novena: video: Limit valid clkcnt ranges for it6251
+  * Revert "novena: video: Limit valid clkcnt ranges for it6251"
+  * Revert "novena: video: Enable DeSSC on eDP chip"
+  * fixup: Add default SPD file
+  * board: kosagi: Use canned SPD when it can't be read
+  * configs: novena: Enable CONFIG_DDR_SPD
+  * debian: Install SPL as part of postinst
+  * debian: Update package to 2014.10.r4-novena
+
+  [ Jookia ]
+  * novena: Add syslinux boot support.
+  * novena: Move LCD removal code to ft_board_setup.
+  * novena: Initialize SATA automatically.
+  * novena: Move SATA boot logic to u-boot.
+  * novena: Add console bootarg using the device tree.
+  * novena: Move finalhook to before booting.
+  * novena: Use video and USB keyboard as input.
+
+  [ Sean Cross ]
+  * novena: Re-import uEnv.txt before running finalhook
+  * configs: novena: Fix typo in root filesystem choice
+  * debian: Update to 2014.10.r5-novena.1
+  * novena: Rename sata_boot to sata_root
+  * debian: Update to 2014.10.r6-novena
+  * board: kosagi: prefer LCD over HDMI
+  * debian: Update to 2014.10.r7-novena.1
+
+  [ Kelly Lauren-Summer Becker-Neuding ]
+  * Changed changelog format
+
+ -- Bhupesh Sharma <bhupesh.sharma@freescale.com>  Sun, 06 Sep 2015 01:05:39 -0700
+
 u-boot-novena (2014.10.r7-novena.1) unstable; urgency=medium
 
   * Fix booting with HDMI monitor attached.

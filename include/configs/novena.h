@@ -32,10 +32,10 @@
 
 #define CONFIG_DDR_SPD
 
-#include "configs/mx6_common.h"
+#include "mx6_common.h"
 #include <asm/arch/imx-regs.h>
 #include <asm/imx-common/gpio.h>
-#include <config_cmd_default.h>
+#include <config_defaults.h>
 
 /* U-Boot Commands */
 #define CONFIG_CMD_ASKENV
