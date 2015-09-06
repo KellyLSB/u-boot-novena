@@ -68,16 +68,16 @@
 
 /* U-Boot general configurations */
 #define CONFIG_SYS_LONGHELP
-#define CONFIG_SYS_CBSIZE	1024		/* Console I/O buffer size */
+#define CONFIG_SYS_CBSIZE	1024	/* Console I/O buffer size */
 #define CONFIG_SYS_PBSIZE	\
 	(CONFIG_SYS_CBSIZE + sizeof(CONFIG_SYS_PROMPT) + 16)
-						/* Print buffer size */
+									/* Print buffer size */
 #define CONFIG_SYS_MAXARGS	32		/* Max number of command args */
 #define CONFIG_SYS_BARGSIZE	CONFIG_SYS_CBSIZE
-						/* Boot argument buffer size */
-#define CONFIG_VERSION_VARIABLE			/* U-BOOT version */
-#define CONFIG_AUTO_COMPLETE			/* Command auto complete */
-#define CONFIG_CMDLINE_EDITING			/* Command history etc */
+									/* Boot argument buffer size */
+#define CONFIG_VERSION_VARIABLE		/* U-BOOT version */
+#define CONFIG_AUTO_COMPLETE		/* Command auto complete */
+#define CONFIG_CMDLINE_EDITING		/* Command history etc */
 #define CONFIG_SYS_HUSH_PARSER
 
 /* U-Boot environment */
@@ -101,17 +101,17 @@
 #endif
 
 /* Booting Linux */
-#define CONFIG_BOOTDELAY		0
-#define CONFIG_BOOTFILE			"fitImage"
-#define CONFIG_BOOTARGS			""
+#define CONFIG_BOOTDELAY		3
+#define CONFIG_BOOTFILE			"zImage"
+#define CONFIG_BOOTARGS			"console=ttymxc1,115200n8"
 #define CONFIG_BOOTCOMMAND		"run novena_boot"
 #define CONFIG_LOADADDR			0x18000000
-#define CONFIG_SYS_LOAD_ADDR		CONFIG_LOADADDR
+#define CONFIG_SYS_LOAD_ADDR	CONFIG_LOADADDR
 #define CONFIG_HOSTNAME			novena
 
 /* Physical Memory Map */
-#define CONFIG_NR_DRAM_BANKS		1
-#define PHYS_SDRAM			MMDC0_ARB_BASE_ADDR
+#define CONFIG_NR_DRAM_BANKS	1
+#define PHYS_SDRAM				MMDC0_ARB_BASE_ADDR
 #define PHYS_SDRAM_SIZE			0xF0000000
 
 #define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM
@@ -229,6 +229,7 @@
 #define CONFIG_USB_MAX_CONTROLLER_COUNT 2
 #define CONFIG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
 #define CONFIG_MXC_USB_FLAGS		0
+
 /* Gadget part */
 #define CONFIG_CI_UDC
 #define CONFIG_USBD_HS
@@ -267,7 +268,7 @@
 	"bootdev=/dev/mmcblk0p1\0"					\
 	"rootdev=/dev/mmcblk0p2\0"					\
 	"netdev=eth0\0"							\
-	"fdtfile=imx6q-novena.dtb\0"					\
+	"fdtfile=novena.dtb\0"					\
 	"kernel_addr_r=0x18000000\0"					\
 	"fdt_addr_r=0x11ff0000\0"					\
 	"ramdisk_addr_r=0x10ff0000\0"					\
@@ -394,7 +395,7 @@
 			"${initrd_addr_r} "				\
 			"${fdt_addr_r} ; "				\
 		"\0"							\
-	"update_sd_spl_filename=SPL\0"					\
+	"update_sd_spl_filename=u-boot.spl\0"					\
 	"update_sd_uboot_filename=u-boot.img\0"				\
 	"update_sd_firmware="	/* Update the SD firmware partition */	\
 		"if mmc rescan ; then "					\
