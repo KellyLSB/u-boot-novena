@@ -15,6 +15,10 @@
 #define CONFIG_BOARD_LATE_INIT
 #define CONFIG_MISC_INIT_R
 #define CONFIG_FIT
+#define CONFIG_FIT_VERBOSE
+#define CONFIG_FIT_SIGNATURE
+#define CONFIG_RSA
+#define CONFIG_OF_CONTROL
 #define CONFIG_DISPLAY_BOARDINFO
 #define CONFIG_DISPLAY_CPUINFO
 #define CONFIG_DOS_PARTITION
@@ -103,7 +107,7 @@
 
 /* Booting Linux */
 #define CONFIG_BOOTDELAY		5
-#define CONFIG_BOOTFILE			"zImage"
+#define CONFIG_BOOTFILE			"fitImage"
 #define CONFIG_BOOTARGS			"console=ttymxc1,115200n8"
 #define CONFIG_BOOTCOMMAND		"run init_novena"
 #define CONFIG_LOADADDR			0x18000000
@@ -265,138 +269,25 @@
 /* Extra U-Boot environment. */
 #define CONFIG_EXTRA_ENV_SETTINGS										\
 	BOOTENV																\
-	"bootargs=\0"														\
-																		\
-	"bootenv_file=uEnv.txt\0"											\
+	"fdtcontroladdr=0x11ff0000\0"										\
 	"bootenv_high=0xffffffff\0"											\
 	"bootenv_addr_r=0x18000000\0"										\
-																		\
-																		\
 	"stdin=serial,usbkbd\0"												\
 	"stdout=serial,vga\0"												\
 	"stderr=serial,vga\0"												\
-																		\
-	"fdt_file=novena.dtb\0"												\
 	"fdt_high=0xffffffff\0"												\
 	"fdt_addr_r=0x11ff0000\0"											\
-																		\
-	"script_file=\0"													\
 	"script_high=0xffffffff\0"											\
 	"script_addr_r=0x10aa0000\0"										\
-																		\
-	"kernel_file=zImage\0"												\
 	"kernel_high=0xffffffff\0"											\
-	"kernel_addr_r=0x18000000\0"										\
-																		\
-	"initrd_file=initramfs.img\0"										\
+	"kernel_addr_r=0x12000000\0"										\
 	"initrd_high=0xffffffff\0"											\
 	"initrd_addr_r=0x10ff0000\0"										\
-																		\
-	"pxe_hostname=\0"													\
 	"pxe_high=0xffffffff\0"												\
 	"pxe_addr_r=0x10550000\0"											\
-																		\
-	"boot_dev=/dev/mmcblk0p1\0"											\
-	"bootargs=init=/lib/systemd/systemd rootwait rw\0"					\
-	"bootargs_debug=nohlt panic=1\0"									\
-																		\
-	"root_dev=/dev/mmcblk0p2\0"											\
-	"root_fstype=btrfs\0"												\
-	"root_flags=subvol=debian/jessie\0"									\
-																		\
-	"console_dev=ttymxc1\0"												\
-	"console_baudrate=115200\0"											\
-																		\
-	"network_dev=eth0\0"												\
-	"network_ip=\0"														\
-	"network_server=\0"													\
-	"network_gateway=\0"												\
-	"network_netmask=\0"												\
-	"network_hostname=\0"												\
-																		\
-	"nfs_dev=/dev/nfs\0"												\
-	"nfs_server=\0"														\
-	"nfs_root_path=\0"													\
-	"nfs_version=v3\0"													\
-	"nfs_protocol=tcp\0"												\
-																		\
-																		\
-	"load_bootenv="														\
-		"if fatload mmc 0:1 ${bootenv_addr_r} ${bootenv_file}; then "	\
-			"echo Importing environment from ${bootenv_file} ... ; "	\
-			"if env import -t -r ${bootenv_addr_r} ${filesize}; then "	\
-				"echo ... Done!; "										\
-			"else echo ... Failed!; "									\
-		"fi\0"															\
-																		\
-	"load_mmc="															\
-		"mmc rescan; "													\
-		"if fatload mmc 0:1 ${fdt_addr_r} ${fdt_file}; then "			\
-			"echo Loaded FDT Configuration from ${fdt_file} ... ; "		\
-		"fi; "															\
-		"if fatload mmc 0:1 ${script_addr_r} ${script_file}; then "		\
-			"echo Loaded Boot Script from ${script_file} ... ; "		\
-		"fi; "															\
-		"if fatload mmc 0:1 ${kernel_addr_r} ${kernel_file}; then "		\
-			"echo Loaded Kernel Image from ${kernel_file} ... ; "		\
-		"fi; "															\
-		"if fatload mmc 0:1 ${initrd_addr_r} ${initrd_file}; then "		\
-			"echo Loaded Initramdisk from ${initrd_file} ... ; "		\
-		"fi\0"															\
-																		\
-	"load_tftp="														\
-		"tftp ${fdt_addr_r} ${pxe_hostname}/${fdt_file}; "				\
-		"tftp ${script_addr_r} ${pxe_hostname}/${script_file}; "		\
-		"tftp ${kernel_addr_r} ${pxe_hostname}/${kernel_file}; "		\
-		"tftp ${initrd_addr_r} ${pxe_hostname}/${initrd_file}\0"		\
-																		\
-	"add_console="														\
-		"setenv bootargs ${bootargs} "								\
-		"console=${console_dev},${console_baudrate}\0"					\
-																		\
-	"add_ip="															\
-		"setenv bootargs ${bootargs} "								\
-			"ip=${network_ip}:${network_server}:"						\
-			"${network_gateway}:${network_netmask}:"					\
-			"${network_hostname}:${network_dev}:off\0"					\
-																		\
-	"add_nfs="															\
-		"setenv bootargs ${bootargs} root=${nfs_dev} "				\
-			"nfsroot=${nfs_server}:${nfs_root_path},"					\
-			"${nfs_version},${nfs_protocol}\0"							\
-																		\
-	"add_mmc="															\
-		"setenv bootargs ${bootargs} root=${root_dev} "				\
-			"rootfstype=${root_fstype} rootflags=${root_flags}\0"		\
-																		\
-	"add_debug="														\
-		"run add_console; "												\
-		"setenv bootargs ${bootargs} ${bootargs_debug}\0"			\
-																		\
-	"boot_mmc="															\
-		"run load_mmc add_mmc; "										\
-		"fdt addr ${fdt_addr_r}; "										\
-		"bootz ${kernel_addr_r} ${initrd_addr_r} ${fdt_addr_r}\0"		\
-																		\
-	"boot_nfs="															\
-		"run load_nfs add_ip add_nfs; "									\
-		"fdt addr ${fdt_addr_r}; "										\
-		"bootz ${kernel_addr_r} ${initrd_addr_r} ${fdt_addr_r}\0"		\
-																		\
-	"boot_tftp_mmc="													\
-		"run load_tftp add_mmc; "										\
-		"fdt addr ${fdt_addr_r}; "										\
-		"bootz ${kernel_addr_r} ${initrd_addr_r} ${fdt_addr_r}\0"		\
-																		\
-	"boot_tftp_nfs="													\
-		"run load_tftp add_ip add_nfs ; "								\
-		"fdt addr ${fdt_addr_r}; "										\
-		"bootz ${kernel_addr_r} ${initrd_addr_r} ${fdt_addr_r}\0"		\
-																		\
+	"baudrate=115200\0"													\
 																		\
 	"init_novena="														\
-		"run load_bootenv; "											\
-																		\
 		"if lcddet; then "												\
 			"echo IT6251 bridge chip detected; "						\
 			"setenv keep_lcd true; "									\
@@ -410,20 +301,8 @@
 		"fi; "															\
 																		\
 		"if gpio input 110; then " /* Test recovery button */  			\
-			"echo Press Control-C to enter U-Boot shell, "				\
-				"or wait to enter recovery mode; "						\
-			"if sleep 2; then true; else exit; fi; "					\
 			"echo Entering recovery mode ... ; "						\
 			"setenv recovery 1; "										\
-			"setenv fdt_file ${fdt_file}.recovery; "					\
-			"setenv script_file ${script_file}.recovery; "				\
-			"setenv kernel_file ${kernel_file}.recovery; "				\
-			"setenv initrd_file ${initrd_file}.recovery; "				\
-			"setenv bootargs ${bootargs} recovery verbose; "			\
-		"else; "														\
-			"echo Hold recovery button to boot to "						\
-			"recovery, or to enter U-Boot shell.; "						\
-			"setenv bootargs ${bootargs} verbose; "						\
 		"fi; "															\
 																		\
 		"if run video; then "											\
@@ -432,19 +311,8 @@
 			"setenv bootargs ${bootargs} console=ttymxc1,${baudrate}; "	\
 		"fi; "															\
 																		\
-		"run scan_dev_for_boot add_debug; "								\
-		"run boot_mmc;\0"												\
-																		\
-	"update_sd_spl_filename=u-boot.spl\0"								\
-	"update_sd_uboot_filename=u-boot.img\0"								\
-	"update_sd_firmware="	/* Update the SD firmware partition */		\
-		"if mmc rescan ; then "											\
-		"if dhcp ${update_sd_spl_filename} ; then "						\
-		"mmc write ${loadaddr} 2 0x200 ; "								\
-		"fi ; "															\
-		"if dhcp ${update_sd_uboot_filename} ; then "					\
-		"fatwrite mmc 0:1 ${loadaddr} u-boot.img ${filesize} ; "		\
-		"fi ; "															\
-		"fi\0"															\
+		"run scan_dev_for_boot; "										\
+		"fatload mmc 0:1 ${loadaddr} kernel.itb; "						\
+		"bootm start ${loadaddr}"
 
 #endif				/* __CONFIG_H */
