@@ -474,7 +474,7 @@ int ft_board_setup(void *blob, bd_t *bd)
 		}
 	}
 
-	if (getenv("rec")) {
+	if (getenv("recovery")) {
 		puts("Detected recovery mode, leaving everything enabled\n");
 		return 0;
 	}

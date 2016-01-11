@@ -29,7 +29,7 @@ override_dh_auto_build-arch:
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(BUILD_DIR)/etc/kernel/postinst.d
 	$(MAKE) O=$(BUILD_DIR) novena_config
-	$(MAKE) O=$(BUILD_DIR) -j4
+	$(MAKE) O=$(BUILD_DIR) DEVICE_TREE=$(SOURCE_DIR)/dts/imx6q-novena.dtb -j4
 	chmod 0644 $(BUILD_DIR)/u-boot.img
 	install -m 644 $(BUILD_DIR)/SPL $(BUILD_DIR)/u-boot.spl
 	install -m 755 $(BUILD_DIR)/../novena-kernel-install-postinst \

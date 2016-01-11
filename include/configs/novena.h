@@ -16,8 +16,7 @@
 #define CONFIG_MISC_INIT_R
 #define CONFIG_FIT
 #define CONFIG_FIT_VERBOSE
-#define CONFIG_FIT_SIGNATURE
-#define CONFIG_RSA
+/*#define CONFIG_FIT_SIGNATURE*/
 #define CONFIG_OF_CONTROL
 #define CONFIG_DISPLAY_BOARDINFO
 #define CONFIG_DISPLAY_CPUINFO
@@ -30,18 +29,22 @@
 #define CONFIG_REGEX
 #define CONFIG_SYS_GENERIC_BOARD
 #define CONFIG_SYS_NO_FLASH
+#define CONFIG_DDR_SPD
 
 #define CONFIG_NOVENA_LID_FEATURE
 #define CONFIG_NOVENA_LID_GPIO		IMX_GPIO_NR(4, 12)
 
-#define CONFIG_DDR_SPD
-#include <config_distro_defaults.h>
-#include "mx6_common.h"
-#include "configs/mx6_common.h"
-#include <asm/arch/imx-regs.h>
+/* Load MX6 Configs */
+#include <configs/mx6_common.h>
+#include <configs/imx6_spl.h>			/* common IMX6 SPL configuration */
+#include <asm/arch-mx6/imx-regs.h>
 #include <asm/imx-common/gpio.h>
+
+/* Load Defaults */
 #include <config_defaults.h>
-#include <config_cmd_default.h>
+#include <config_distro_defaults.h>
+#include <config_distro_bootcmd.h>
+/*#include <config_cmd_all.h>*/
 
 /* U-Boot Commands */
 #define CONFIG_CMD_ASKENV
@@ -67,21 +70,22 @@
 #define CONFIG_CMD_SETEXPR
 #define CONFIG_CMD_TIME
 #define CONFIG_CMD_USB
+#define CONFIG_CMD_BOOTMENU
 #define CONFIG_VIDEO
 #define CONFIG_MENU
+#define CONFIG_MENU_SHOW
+#define CONFIG_AUTOBOOT_KEYED
 
 /* U-Boot general configurations */
 #define CONFIG_SYS_LONGHELP
-#define CONFIG_SYS_CBSIZE	1024	/* Console I/O buffer size */
+#define CONFIG_SYS_CBSIZE	1024													/* Console I/O buffer size */
 #define CONFIG_SYS_PBSIZE	\
-	(CONFIG_SYS_CBSIZE + sizeof(CONFIG_SYS_PROMPT) + 16)
-									/* Print buffer size */
-#define CONFIG_SYS_MAXARGS	32		/* Max number of command args */
-#define CONFIG_SYS_BARGSIZE	CONFIG_SYS_CBSIZE
-									/* Boot argument buffer size */
-#define CONFIG_VERSION_VARIABLE		/* U-BOOT version */
-#define CONFIG_AUTO_COMPLETE		/* Command auto complete */
-#define CONFIG_CMDLINE_EDITING		/* Command history etc */
+	(CONFIG_SYS_CBSIZE + sizeof(CONFIG_SYS_PROMPT) + 16) 	/* Print buffer size */
+#define CONFIG_SYS_MAXARGS	32 													/* Max number of command args */
+#define CONFIG_SYS_BARGSIZE	CONFIG_SYS_CBSIZE 					/* Boot argument buffer size */
+#define CONFIG_VERSION_VARIABLE													/* U-BOOT version */
+#define CONFIG_AUTO_COMPLETE 														/* Command auto complete */
+#define CONFIG_CMDLINE_EDITING 													/* Command history etc */
 #define CONFIG_SYS_HUSH_PARSER
 
 /* U-Boot environment */
@@ -95,31 +99,31 @@
  * http://homepage.ntlworld.com./jonathan.deboynepollard/FGA/disc-partition-alignment.html
  */
 #ifdef CONFIG_CMD_MMC
-#define CONFIG_ENV_IS_IN_MMC
-#define CONFIG_SYS_MMC_ENV_DEV		0
-#define CONFIG_ENV_OFFSET		(512 * 1024)
-#define CONFIG_ENV_SIZE_REDUND		CONFIG_ENV_SIZE
-#define CONFIG_ENV_OFFSET_REDUND	\
+	#define CONFIG_ENV_IS_IN_MMC
+	#define CONFIG_SYS_MMC_ENV_DEV 0
+	#define CONFIG_ENV_OFFSET	(512 * 1024)
+	#define CONFIG_ENV_SIZE_REDUND CONFIG_ENV_SIZE
+	#define CONFIG_ENV_OFFSET_REDUND \
 		(CONFIG_ENV_OFFSET + CONFIG_ENV_SIZE)
 #else
-#define CONFIG_ENV_IS_NOWHERE
+	#define CONFIG_ENV_IS_NOWHERE
 #endif
 
 /* Booting Linux */
-#define CONFIG_BOOTDELAY		5
-#define CONFIG_BOOTFILE			"fitImage"
-#define CONFIG_BOOTARGS			"console=ttymxc1,115200n8"
-#define CONFIG_BOOTCOMMAND		"run init_novena"
-#define CONFIG_LOADADDR			0x18000000
-#define CONFIG_SYS_LOAD_ADDR	CONFIG_LOADADDR
-#define CONFIG_HOSTNAME			novena
+#define CONFIG_BOOTDELAY      15
+#define CONFIG_BOOTFILE				"fitImage"
+#define CONFIG_BOOTARGS										\
+	"init=/lib/systemd/systemd " 						\
+	"rootwait ro console=ttymxc1,115200n8"
+#define CONFIG_LOADADDR				0x18000000
+#define CONFIG_SYS_LOAD_ADDR 	CONFIG_LOADADDR
+#define CONFIG_HOSTNAME				novena
 
 /* Physical Memory Map */
-#define CONFIG_NR_DRAM_BANKS	1
-#define PHYS_SDRAM				MMDC0_ARB_BASE_ADDR
-#define PHYS_SDRAM_SIZE			0xF0000000
-
-#define CONFIG_SYS_SDRAM_BASE		PHYS_SDRAM
+#define CONFIG_NR_DRAM_BANKS      1
+#define PHYS_SDRAM				        MMDC0_ARB_BASE_ADDR
+#define PHYS_SDRAM_SIZE			      0xF0000000
+#define CONFIG_SYS_SDRAM_BASE		  PHYS_SDRAM
 #define CONFIG_SYS_INIT_RAM_ADDR	IRAM_BASE_ADDR
 #define CONFIG_SYS_INIT_RAM_SIZE	IRAM_SIZE
 
@@ -130,16 +134,12 @@
 
 #define CONFIG_SYS_MEMTEST_START	0x10000000
 #define CONFIG_SYS_MEMTEST_END		0x20000000
-
-#define CONFIG_SYS_MALLOC_LEN		(64 * 1024 * 1024)
+#define CONFIG_SYS_MALLOC_LEN		  (64 * 1024 * 1024)
 #define CONFIG_SYS_MALLOC_F_LEN		(1 << 10)
 
 /* SPL */
 #define CONFIG_SPL_FAT_SUPPORT
 #define CONFIG_SPL_MMC_SUPPORT
-#include "configs/imx6_spl.h"			/* common IMX6 SPL configuration */
-#include "imx6_spl.h"			/* common IMX6 SPL configuration */
-
 
 #define CONFIG_CMDLINE_TAG
 #define CONFIG_SETUP_MEMORY_TAGS
@@ -150,14 +150,14 @@
 #ifdef CONFIG_CMD_NET
 #define CONFIG_FEC_MXC
 #define CONFIG_MII
-#define IMX_FEC_BASE			ENET_BASE_ADDR
-#define CONFIG_FEC_XCV_TYPE		RGMII
-#define CONFIG_ETHPRIME			"FEC"
+#define IMX_FEC_BASE 							ENET_BASE_ADDR
+#define CONFIG_FEC_XCV_TYPE				RGMII
+#define CONFIG_ETHPRIME 					"FEC"
 #define CONFIG_FEC_MXC_PHYADDR		0x7
 #define CONFIG_PHYLIB
 #define CONFIG_PHY_MICREL
 #define CONFIG_PHY_MICREL_KSZ9021
-#define CONFIG_ARP_TIMEOUT		200UL
+#define CONFIG_ARP_TIMEOUT				200UL
 #endif
 
 /* I2C */
@@ -166,12 +166,12 @@
 #define CONFIG_SYS_I2C_MXC_I2C3		/* enable I2C bus 3 */
 #define CONFIG_I2C_MULTI_BUS
 #define CONFIG_I2C_MXC
-#define CONFIG_SYS_I2C_SPEED		100000
+#define CONFIG_SYS_I2C_SPEED			100000
 
 /* I2C EEPROM */
 #ifdef CONFIG_CMD_EEPROM
 #define CONFIG_SYS_I2C_EEPROM_ADDR_LEN	2
-#define CONFIG_SYS_SPD_BUS_NUM		2
+#define CONFIG_SYS_SPD_BUS_NUM					2
 #endif
 
 /* MMC Configs */
@@ -219,9 +219,9 @@
 
 /* UART */
 #define CONFIG_MXC_UART
-#define CONFIG_MXC_UART_BASE		UART2_BASE
-#define CONFIG_BAUDRATE			115200
-#define CONFIG_CONS_INDEX		1
+#define CONFIG_MXC_UART_BASE 	UART2_BASE
+#define CONFIG_BAUDRATE				115200
+#define CONFIG_CONS_INDEX			1
 
 /* USB Configs */
 #ifdef CONFIG_CMD_USB
@@ -264,55 +264,96 @@
 #endif
 
 #define BOOT_TARGET_DEVICES(func)
-#include "config_distro_bootcmd.h"
+
+#define CONFIG_PREBOOT \
+	"run init_novena;"
 
 /* Extra U-Boot environment. */
 #define CONFIG_EXTRA_ENV_SETTINGS										\
-	BOOTENV																\
-	"fdtcontroladdr=0x11ff0000\0"										\
-	"bootenv_high=0xffffffff\0"											\
-	"bootenv_addr_r=0x18000000\0"										\
-	"stdin=serial,usbkbd\0"												\
-	"stdout=serial,vga\0"												\
-	"stderr=serial,vga\0"												\
-	"fdt_high=0xffffffff\0"												\
-	"fdt_addr_r=0x11ff0000\0"											\
-	"script_high=0xffffffff\0"											\
-	"script_addr_r=0x10aa0000\0"										\
-	"kernel_high=0xffffffff\0"											\
-	"kernel_addr_r=0x12000000\0"										\
-	"initrd_high=0xffffffff\0"											\
-	"initrd_addr_r=0x10ff0000\0"										\
-	"pxe_high=0xffffffff\0"												\
-	"pxe_addr_r=0x10550000\0"											\
-	"baudrate=115200\0"													\
-																		\
-	"init_novena="														\
-		"if lcddet; then "												\
-			"echo IT6251 bridge chip detected; "						\
-			"setenv keep_lcd true; "									\
-			"setenv video true; "										\
-		"elif hdmidet; then "											\
+	BOOTENV																						\
+	"fdtcontroladdr=0x11ff0000\0"											\
+	"bootenv_high=0xffffffff\0"												\
+	"bootenv_addr_r=0x18000000\0"											\
+	"stdin=serial,usbkbd\0"														\
+	"stdout=serial,vga\0"															\
+	"stderr=serial,vga\0"															\
+	"fdt_high=0xffffffff\0"														\
+	"fdt_addr_r=0x11ff0000\0"													\
+	"script_high=0xffffffff\0"												\
+	"script_addr_r=0x10aa0000\0"											\
+	"kernel_high=0xffffffff\0"												\
+	"kernel_addr_r=0x12000000\0"											\
+	"initrd_high=0xffffffff\0"												\
+	"initrd_addr_r=0x10ff0000\0"											\
+	"pxe_high=0xffffffff\0"														\
+	"pxe_addr_r=0x10550000\0"													\
+	"baudrate=115200\0"																\
+																										\
+	"menucmd=bootmenu\0"															\
+	"bootmenu_0=Boot fitImage="												\
+		"run boot_fitImage;\0"													\
+	"bootmenu_1=Boot zImage="													\
+		"run boot_zImage;\0"														\
+	"bootmenu_2=Boot uImage="													\
+		"run boot_uImage;\0"														\
+	"bootmenu_3=Set Recovery="												\
+		"run recovery_set;\0" 													\
+	"bootmenu_4=Boot PXE="														\
+		"run boot_pxe;\0"																\
+	"bootmenu_5=Auto Boot="														\
+		"run scan_dev_for_boot_part;\0"									\
+	"bootmenu_delay=15\0"															\
+																										\
+	"init_novena="																		\
+		"if lcddet; then " 															\
+			"echo IT6251 bridge chip detected; "					\
+			"setenv keep_lcd true; "											\
+			"setenv video true; "													\
+		"elif hdmidet; then "														\
 			"echo HDMI monitor detected; "								\
-			"setenv video true; "										\
-		"else; "														\
-			"echo No video detected, using serial port; "				\
-			"setenv video false; "										\
-		"fi; "															\
-																		\
-		"if gpio input 110; then " /* Test recovery button */  			\
-			"echo Entering recovery mode ... ; "						\
-			"setenv recovery 1; "										\
-		"fi; "															\
-																		\
-		"if run video; then "											\
-			"setenv bootargs ${bootagrs} console=tty0; "				\
-		"else; "														\
-			"setenv bootargs ${bootargs} console=ttymxc1,${baudrate}; "	\
-		"fi; "															\
-																		\
-		"run scan_dev_for_boot; "										\
-		"fatload mmc 0:1 ${loadaddr} kernel.itb; "						\
-		"bootm start ${loadaddr}"
+			"setenv video true; "													\
+		"else; "																				\
+			"echo No video detected, using serial port; "	\
+			"setenv video false; "												\
+		"fi; "																					\
+																										\
+		"if gpio input 110; then "   										\
+			"echo Entering recovery mode ... ; "					\
+			"run recovery_set; " 													\
+		"fi; "																					\
+																										\
+		"if run video; then "														\
+			"setenv bootargs ${bootagrs} console=tty0; "	\
+		"fi;\0"																					\
+																										\
+	"boot_fitImage="																	\
+		"setenv bootfile=fitImage; "										\
+		"fatload ${devtype} ${devnum}:${bootpart} "     \
+			"${loadaddr} ${bootfile}${recovery}; "				\
+		"bootm start ${loadaddr};\0"										\
+																										\
+	"boot_zImage="																		\
+		"setenv bootfile=zImage; "											\
+		"fatload ${devtype} ${devnum}:${bootpart} "     \
+			"${kernel_addr_r} ${bootfile}${recovery}; "		\
+		"fatload ${devtype} ${devnum}:${bootpart} "     \
+			"${fdt_addr_r} ${fdtfile}${recovery}; "				\
+		"fdt addr ${fdt_addr_r}; "											\
+		"bootz ${kernel_addr_r} "												\
+			"${initrd_addr_r} "														\
+			"${fdt_addr_r};\0"														\
+																										\
+	"boot_uImage="																		\
+		"echo Not Implemented Yet...;\0"								\
+																										\
+	"recovery_set="																		\
+		"setenv recovery .recovery; "										\
+		"setenv bootmenu_3=Set Recovery="								\
+			"run recovery_unset;\0"												\
+																										\
+	"recovery_unset="																	\
+		"setenv recovery 0; "														\
+		"setenv bootmenu_3=Unset Recovery="							\
+			"run recovery_set;\0"
 
 #endif				/* __CONFIG_H */
